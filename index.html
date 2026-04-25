@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Soul Blueprint | Brianna Bomi</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+</head>
+<body>
+
+<!-- SCREEN 1: WELCOME -->
+<div class="screen welcome active" id="s-welcome">
+  <div>
+    <div class="welcome-badge">Brianna Bomi &mdash; Sovereign Arc</div>
+    <h1>Your Soul<br><em>Blueprint</em></h1>
+    <div class="hook">Not what your mind wants. Not what your fear will tolerate. What your soul is actually asking for.</div>
+    <p>This experience weaves together five ancient systems (astrology, human design, numerology, gene keys, and ikigai) to decode why your soul incarnated and how to build a life that honors that knowing.</p>
+    <p>You'll need your date of birth, time of birth (if you know it), and about 10 minutes of honesty with yourself.</p>
+    <button class="btn" onclick="goTo('s-birth')">Begin Your Blueprint</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: BIRTH INFO -->
+<div class="screen" id="s-birth">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 1 of 7</div>
+      <h2>Your Cosmic Coordinates</h2>
+      <p>The moment you arrived carries information your mind has never been taught to read.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:16%"></div></div>
+    <div class="form-group">
+      <label>Full Birth Name</label>
+      <input type="text" id="birthName" placeholder="As it appears on your birth certificate">
+      <div class="hint">Used to calculate your Destiny Number. First, middle, and last name.</div>
+    </div>
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="date" id="birthDate">
+    </div>
+    <div class="form-group">
+      <label>Time of Birth</label>
+      <input type="time" id="birthTime" value="12:00">
+      <div class="hint">If you don't know your exact time, leave at noon. Your Gene Key and Incarnation Cross will be approximate.</div>
+    </div>
+    <div class="form-group" style="position:relative">
+      <label>Birth Location</label>
+      <input type="text" id="birthPlace" placeholder="Start typing your city..." autocomplete="off">
+      <div class="hint">Used to calculate your exact timezone for accurate chart placement.</div>
+      <div id="locDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--accent);border-top:none;max-height:200px;overflow-y:auto;z-index:50"></div>
+      <input type="hidden" id="birthLat">
+      <input type="hidden" id="birthLng">
+      <input type="hidden" id="birthTz">
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-welcome')">&larr; Back</button>
+      <button class="btn" onclick="calculateAndProceed()">Calculate My Blueprint</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: PROCESSING -->
+<div class="screen" id="s-processing1">
+  <div class="processing">
+    <div class="spinner"></div>
+    <h2>Decoding your cosmic coordinates&hellip;</h2>
+    <p id="processingMsg">Reading the position of the Sun at your birth</p>
+  </div>
+</div>
+
+<!-- SCREEN 4-7: IKIGAI QUESTIONS -->
+<div class="screen" id="s-ikigai1">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 2 of 7 &mdash; Ikigai</div>
+      <h2>What You Love</h2>
+      <p>Before your mind edits the answer, what does your body light up for? Not what you think you should love. What actually makes time disappear.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:33%"></div></div>
+    <div class="form-group">
+      <label>What activities make you lose track of time?</label>
+      <textarea id="ik-love-1" placeholder="Be specific. Name the thing, not the category."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What topics could you talk about for hours without getting bored?</label>
+      <textarea id="ik-love-2" placeholder="The things you research at 2am because you want to, not because you have to."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What makes you feel most alive and energized?</label>
+      <textarea id="ik-love-3" placeholder="Notice where you feel it in your body as you answer."></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-birth')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai2')">Continue</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai2">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 3 of 7 &mdash; Ikigai</div>
+      <h2>What You're Good At</h2>
+      <p>Not what you wish you were good at. The skills that live in your hands, your voice, your nervous system. The ones people already come to you for.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:50%"></div></div>
+    <div class="form-group">
+      <label>What skills have you mastered or are naturally talented at?</label>
+      <textarea id="ik-good-1" placeholder="Include the ones you dismiss as 'easy' — those are usually the gifts."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What do people come to you for advice or help with?</label>
+      <textarea id="ik-good-2" placeholder="The texts, the calls, the 'you're the only person I'd ask about this.'"></textarea>
+    </div>
+    <div class="form-group">
+      <label>What achievements are you most proud of?</label>
+      <textarea id="ik-good-3" placeholder="Not the ones that looked good on paper — the ones that felt real in your body."></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai1')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai3')">Continue</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai3">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 4 of 7 &mdash; Ikigai</div>
+      <h2>What the World Needs</h2>
+      <p>Your soul didn't incarnate to be comfortable. It came to solve something. What problem makes your chest tight because you know it doesn't have to be this way?</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:66%"></div></div>
+    <div class="form-group">
+      <label>What problems in the world do you feel passionate about solving?</label>
+      <textarea id="ik-world-1" placeholder="The injustice, the gap, the broken thing you can't stop seeing."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What change do you want to see in your community or the world?</label>
+      <textarea id="ik-world-2" placeholder="If you had unlimited resources and zero fear — what would you build?"></textarea>
+    </div>
+    <div class="form-group">
+      <label>What do you believe would make the world a better place?</label>
+      <textarea id="ik-world-3" placeholder="Name the thing your soul keeps circling back to."></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai2')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai4')">Continue</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai4">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 5 of 7 &mdash; Ikigai</div>
+      <h2>What You Can Be Paid For</h2>
+      <p>Purpose without infrastructure is a journal entry. Your soul came here to build something that sustains itself. And sustains you.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:83%"></div></div>
+    <div class="form-group">
+      <label>What services or products could you offer that people would pay for?</label>
+      <textarea id="ik-paid-1" placeholder="Don't filter for what's 'realistic.' Name what's true."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What expertise or knowledge do you have that others find valuable?</label>
+      <textarea id="ik-paid-2" placeholder="The thing where people say 'you should charge for this.'"></textarea>
+    </div>
+    <div class="form-group">
+      <label>What career or business opportunities align with your skills and passions?</label>
+      <textarea id="ik-paid-3" placeholder="If money were handled — what would you spend your days doing?"></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai3')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-email')">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: EMAIL CAPTURE -->
+<div class="screen" id="s-email">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 6 of 6</div>
+      <h2>One Last Thing</h2>
+      <p>Your Soul Blueprint is ready to be woven. Where should I send it so you can return to it when you need it most?</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:95%"></div></div>
+    <div class="form-group">
+      <label>Your Email</label>
+      <input type="email" id="userEmail" placeholder="you@example.com">
+      <div class="hint">Your full Soul Blueprint will be delivered to your inbox and displayed here immediately.</div>
+    </div>
+    <div class="form-group">
+      <label>Your First Name</label>
+      <input type="text" id="userFirstName" placeholder="How should I address you in the report?">
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai4')">&larr; Back</button>
+      <button class="btn" onclick="captureEmailAndGenerate()">Generate My Soul Blueprint</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: PROCESSING 2 -->
+<div class="screen" id="s-processing2">
+  <div class="processing">
+    <div class="spinner"></div>
+    <h2>Weaving your Soul Blueprint&hellip;</h2>
+    <p id="processingMsg2">Synthesizing five ancient systems into one portrait</p>
+  </div>
+</div>
+
+<!-- SCREEN: REPORT -->
+<div class="screen" id="s-report">
+  <button class="btn btn-sm print-btn" onclick="window.print()">Save / Print</button>
+  <div class="report" id="reportContent"></div>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>

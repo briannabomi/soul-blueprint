@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#c9956b;--accent2:#d4a574;--text:#e8e0d8;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.7}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white);letter-spacing:0.02em}
+.screen{display:none;min-height:100vh;padding:2rem;max-width:720px;margin:0 auto;animation:fadeIn 0.8s ease}
+.screen.active{display:flex;flex-direction:column;justify-content:center}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.welcome-badge{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.welcome h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.15;margin-bottom:1.5rem}
+.welcome h1 em{color:var(--accent);font-style:italic}
+.welcome p{color:var(--muted);font-size:0.95rem;max-width:520px;margin-bottom:2rem}
+.welcome .hook{color:var(--text);font-size:1.05rem;border-left:2px solid var(--accent);padding-left:1.2rem;margin:2rem 0;font-style:italic;font-family:'Cormorant Garamond',serif}
+.btn{background:var(--accent);color:var(--bg);border:none;padding:0.9rem 2.4rem;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.3s;border-radius:2px}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--glow)}
+.btn-sm{padding:0.6rem 1.6rem;font-size:0.75rem}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1px solid #333;color:var(--text);padding:0.8rem 1rem;font-size:0.95rem;font-family:'Inter',sans-serif;border-radius:2px;transition:border-color 0.3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+.form-group textarea{min-height:80px;resize:vertical;line-height:1.6}
+.form-group .hint{font-size:0.78rem;color:var(--muted);margin-top:0.3rem}
+.step-header{margin-bottom:2rem}
+.step-header .phase{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.step-header h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:0.8rem}
+.step-header p{color:var(--muted);font-size:0.9rem}
+.progress-bar{width:100%;height:2px;background:#333;margin:2rem 0;border-radius:1px;overflow:hidden}
+.progress-bar .fill{height:100%;background:var(--accent);transition:width 0.6s ease}
+.processing{text-align:center;padding:4rem 2rem}
+.processing .spinner{width:48px;height:48px;border:2px solid #333;border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 2rem}
+.processing p{color:var(--muted);font-size:0.85rem;animation:pulse 2s ease infinite}
+.processing h2{margin-bottom:1rem}
+.nav-row{display:flex;gap:1rem;margin-top:2rem;justify-content:space-between}
+.report{padding:3rem 2rem;max-width:780px;margin:0 auto}
+.report-header{text-align:center;padding:3rem 0;border-bottom:1px solid #333;margin-bottom:3rem}
+.report-header .brand{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.report-header h1{font-size:clamp(2rem,5vw,3rem);margin-bottom:0.5rem}
+.report-header .name{font-size:1.3rem;color:var(--accent);font-family:'Cormorant Garamond',serif;font-style:italic}
+.report-section{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid #222}
+.report-section h2{font-size:1.6rem;margin-bottom:0.3rem}
+.report-section h3{font-size:1.25rem;margin-bottom:0.3rem;margin-top:1.8rem}
+.report-section .subtitle{color:var(--accent);font-size:0.85rem;margin-bottom:1.2rem;font-family:'Cormorant Garamond',serif;font-style:italic}
+.report-section p{margin-bottom:0.8rem;font-size:0.92rem}
+.report-section .insight{background:var(--card);padding:1.2rem 1.5rem;border-left:2px solid var(--accent);margin:1.2rem 0;font-size:0.9rem}
+.report-section .reframe{color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;margin:1.5rem 0}
+.report-section .glossary{font-size:0.82rem;color:var(--muted);font-style:italic;margin:-0.4rem 0 1rem 0;padding-left:0.5rem;border-left:1px solid #444}
+.coord-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.coord-card{background:var(--card);padding:1rem 1.2rem;border-radius:3px}
+.coord-card .label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.coord-card .value{font-size:1.1rem;color:var(--white);font-family:'Cormorant Garamond',serif}
+.coord-card .gloss{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;font-style:italic;line-height:1.4}
+.gene-key-spectrum{display:flex;align-items:center;gap:0.5rem;margin:1rem 0;padding:1rem;background:var(--card);border-radius:3px}
+.gene-key-spectrum .shadow{color:#8b6060;flex:1;text-align:center;font-size:0.8rem}
+.gene-key-spectrum .arrow{color:var(--muted);font-size:0.7rem}
+.gene-key-spectrum .gift{color:var(--accent);flex:1;text-align:center;font-size:0.8rem;font-weight:500}
+.gene-key-spectrum .arrow2{color:var(--muted);font-size:0.7rem}
+.gene-key-spectrum .siddhi{color:#a0b8a0;flex:1;text-align:center;font-size:0.8rem}
+.ikigai-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.ikigai-card{background:var(--card);padding:1rem;border-radius:3px}
+.ikigai-card h4{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--accent);margin-bottom:0.5rem}
+.ikigai-card p{font-size:0.82rem;color:var(--muted)}
+.cta-box{background:linear-gradient(135deg,var(--card),#1f1a15);border:1px solid var(--accent);padding:2rem;text-align:center;margin:2rem 0;border-radius:3px}
+.cta-box h3{font-size:1.4rem;margin-bottom:0.8rem}
+.cta-box p{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem}
+.print-btn{position:fixed;top:1rem;right:1rem;z-index:100}
+.essence-block{background:var(--card);border:1px solid #333;border-radius:3px;padding:1.5rem;margin:1.2rem 0}
+.essence-block h4{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:1rem;margin-bottom:0.6rem}
+.essence-block .quote{font-size:0.82rem;color:var(--muted);padding:0.4rem 0 0.4rem 1rem;border-left:1px solid var(--accent);margin:0.4rem 0;font-style:italic}
+.essence-block .quote .attr{color:var(--accent);font-size:0.72rem;font-style:normal;text-transform:uppercase;letter-spacing:0.08em}
+.essence-block p{font-size:0.88rem;margin-bottom:0.5rem}
+.pillar-card{background:var(--card);border-left:3px solid var(--accent);padding:1.2rem 1.5rem;margin:1rem 0;border-radius:0 3px 3px 0}
+.pillar-card h4{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.05rem;margin-bottom:0.5rem}
+.pillar-card p{font-size:0.85rem;margin-bottom:0.4rem}
+.template-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.template-card{background:var(--card);padding:1rem;border-radius:3px;font-size:0.82rem}
+.template-card h5{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:0.9rem;margin-bottom:0.5rem}
+.template-card .overlap{color:var(--text);margin-bottom:0.3rem}
+.template-card .diverge{color:var(--muted)}
+.purpose-statement{background:linear-gradient(135deg,var(--card),#1f1a15);border:1px solid var(--accent);padding:1.5rem;text-align:center;margin:1.5rem 0;border-radius:3px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);font-style:italic;line-height:1.5}
+.hd-type-card{background:var(--card);padding:1.5rem;border:1px solid var(--accent);border-radius:3px;text-align:center;margin:1.2rem 0}
+.hd-type-card .type-name{font-size:1.6rem;font-family:'Cormorant Garamond',serif;color:var(--accent);margin-bottom:0.5rem}
+.hd-type-card .type-detail{font-size:0.82rem;color:var(--muted);margin-bottom:0.3rem}
+.test-results{background:#1a1a1a;border:1px solid #333;padding:1rem;margin:1rem 0;font-family:monospace;font-size:0.75rem;color:var(--muted);max-height:300px;overflow-y:auto;border-radius:3px}
+.test-results .pass{color:#6a9a6a}
+.test-results .fail{color:#9a6a6a}
+@media print{.print-btn,.btn,.nav-row{display:none!important}.screen{display:block!important;padding:1rem}.report{max-width:100%}body{background:#fff;color:#222}.report-section .insight{border-left-color:#999}}
+.loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
+.loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
+.loc-item .loc-country{color:var(--muted);font-size:0.75rem}
+@media(max-width:600px){.coord-grid,.ikigai-grid,.template-compare{grid-template-columns:1fr}.screen{padding:1.5rem}}

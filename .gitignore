@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Old monolith files (kept locally as backups)
+soul-blueprint.html
+soul-blueprint copy.html
+soul-blueprint-skill/
+
+# PDF asset (too large for git — host separately if needed)
+*.pdf
+
+# Node / Netlify
+node_modules/
+.netlify/
