@@ -144,7 +144,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
     <div class="form-group" style="position:relative">
       <label>Birth Location</label>
       <input type="text" id="birthPlace" placeholder="Start typing your city..." autocomplete="off">
-      <div class="hint">City and country where you were born.</div>
+      <div class="hint">Start typing your city and select it from the dropdown</div>
       <div id="locDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--accent);border-top:none;max-height:200px;overflow-y:auto;z-index:50"></div>
       <input type="hidden" id="birthLat">
       <input type="hidden" id="birthLng">
@@ -966,6 +966,18 @@ const DRIVE_LABELS = {
   liberating: 'a refusal to let yourself or anyone else be smaller than they actually are'
 };
 
+// Short verb phrases designed to embed cleanly inside a sentence
+const IKIGAI_VERBS = {
+  guiding: 'guide others into clarity',
+  creating: 'build what doesn\'t exist yet',
+  healing: 'heal what others have given up on',
+  connecting: 'bring people together',
+  understanding: 'decode the patterns others miss',
+  expressing: 'give form to what lives inside you',
+  structuring: 'create order where there is none',
+  liberating: 'set people free from what keeps them small'
+};
+
 const TENSION_READS = {
   'guiding-structuring': 'You want to guide people into their own knowing, but your paid work asks you to build systems. The resolution: build systems that guide.',
   'creating-structuring': 'Your creative impulse resists the container your livelihood requires. The resolution is not to choose. It is to create within structure.',
@@ -1157,6 +1169,8 @@ function generateReport() {
     paid: [v('ik-paid-1')]
   };
 
+  STATE.synthesisPromise = fetchSynthesis();
+
   goTo('s-processing2');
 
   const msgs2 = [
@@ -1167,11 +1181,70 @@ function generateReport() {
   ];
   let i = 0;
   const msgEl2 = document.getElementById('processingMsg2');
-  const interval2 = setInterval(() => {
-    i++;
-    if (i < msgs2.length) { msgEl2.textContent = msgs2[i]; }
-    else { clearInterval(interval2); renderReport(); goTo('s-report'); }
-  }, 800);
+  const animDone = new Promise(function(resolve) {
+    const interval2 = setInterval(function() {
+      i++;
+      if (i < msgs2.length) { msgEl2.textContent = msgs2[i]; }
+      else { clearInterval(interval2); resolve(); }
+    }, 800);
+  });
+
+  Promise.all([animDone, STATE.synthesisPromise]).then(function() {
+    renderReport();
+    goTo('s-report');
+  });
+}
+
+function fetchSynthesis() {
+  const s = STATE;
+  const skippedArr = s.skippedSections || [];
+  const skipped = { love: skippedArr.indexOf('love') !== -1, good: skippedArr.indexOf('good') !== -1, world: skippedArr.indexOf('world') !== -1, paid: skippedArr.indexOf('paid') !== -1 };
+  const lp = LIFE_PATH[s.lifePath];
+  const gk = GENE_KEYS[s.geneKey];
+
+  if (!lp || !gk) {
+    return Promise.resolve();
+  }
+
+  const joinAnswers = function(arr, isSkipped) {
+    if (isSkipped) return '';
+    return (arr || []).filter(function(x) { return x; }).join(' ').trim();
+  };
+
+  const body = {
+    ikigai: {
+      love: joinAnswers(s.ikigai.love, skipped.love),
+      good: joinAnswers(s.ikigai.good, skipped.good),
+      world: joinAnswers(s.ikigai.world, skipped.world),
+      paid: joinAnswers(s.ikigai.paid, skipped.paid)
+    },
+    lifePath: { name: lp.name, purpose: lp.purpose },
+    geneKey: { gift: gk.gift, shadow: gk.shadow, theme: gk.theme }
+  };
+
+  const timeout = new Promise(function(resolve) {
+    setTimeout(function() { resolve({ __timeout: true }); }, 20000);
+  });
+
+  const request = fetch('/.netlify/functions/synthesize', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  }).then(function(r) {
+    if (!r.ok) throw new Error('synthesis HTTP ' + r.status);
+    return r.json();
+  });
+
+  return Promise.race([request, timeout]).then(function(data) {
+    if (data && !data.__timeout) {
+      STATE.synthesizedPurpose = data.soulPurpose || null;
+      STATE.synthesizedIkigai = data.ikigaiSynthesis || null;
+    } else {
+      console.log('Synthesis timed out — using fallback templates');
+    }
+  }).catch(function(err) {
+    console.log('Synthesis failed, using fallback templates:', err && err.message);
+  });
 }
 
 function v(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
@@ -1415,28 +1488,30 @@ function renderReport() {
 
       <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
       ${(function() {
-        var parts = [];
-        var love = s.ikigai.love.filter(function(x){return x;}).join(' ').toLowerCase();
-        var good = s.ikigai.good.filter(function(x){return x;}).join(' ').toLowerCase();
-        var world = s.ikigai.world.filter(function(x){return x;}).join(' ').toLowerCase();
-        var paid = s.ikigai.paid.filter(function(x){return x;}).join(' ').toLowerCase();
-        var hasLove = love.length > 0 && !skipped.love;
-        var hasGood = good.length > 0 && !skipped.good;
-        var hasWorld = world.length > 0 && !skipped.world;
-        var hasPaid = paid.length > 0 && !skipped.paid;
+        var hasLove = s.ikigai.love.filter(function(x){return x;}).length > 0 && !skipped.love;
+        var hasGood = s.ikigai.good.filter(function(x){return x;}).length > 0 && !skipped.good;
+        var hasWorld = s.ikigai.world.filter(function(x){return x;}).length > 0 && !skipped.world;
+        var hasPaid = s.ikigai.paid.filter(function(x){return x;}).length > 0 && !skipped.paid;
+        var hasAny = hasLove || hasGood || hasWorld || hasPaid;
 
-        var loveDrive = ikigaiAnalysis.primaries.love ? DRIVE_LABELS[ikigaiAnalysis.primaries.love] : '';
-        var goodDrive = ikigaiAnalysis.primaries.good ? DRIVE_LABELS[ikigaiAnalysis.primaries.good] : '';
-        var worldDrive = ikigaiAnalysis.primaries.world ? DRIVE_LABELS[ikigaiAnalysis.primaries.world] : '';
-
-        var ikigaiStatement = '';
-        if (hasLove && hasGood && hasWorld) {
-          var loveShort = loveDrive || 'what lights you up';
-          var goodShort = goodDrive || 'your natural skills';
-          var worldShort = worldDrive || 'what the world needs from you';
-          ikigaiStatement = 'Using ' + goodShort + ' in service of ' + worldShort + ', powered by ' + loveShort + '.';
-        } else if (ikigaiAnalysis.crossSignal.length > 0) {
-          ikigaiStatement = 'The place where ' + DRIVE_LABELS[ikigaiAnalysis.crossSignal[0]] + ' meets what the world actually needs from you.';
+        var ikigaiStatement;
+        if (s.synthesizedIkigai) {
+          ikigaiStatement = s.synthesizedIkigai;
+        } else if (hasAny) {
+          var mainDrive = ikigaiAnalysis.crossSignal[0] ||
+                          ikigaiAnalysis.primaries.world ||
+                          ikigaiAnalysis.primaries.good ||
+                          ikigaiAnalysis.primaries.love ||
+                          ikigaiAnalysis.primaries.paid;
+          if (mainDrive) {
+            var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
+            var gkGift = gk.gift.toLowerCase();
+            ikigaiStatement = 'Your soul\'s unique expression is to ' + IKIGAI_VERBS[mainDrive] +
+                              ', channeling your gift of ' + gkGift +
+                              ' in service of your soul\'s purpose ' + lpPurposeFirst + '.';
+          } else {
+            ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+          }
         } else {
           ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
         }
@@ -1461,18 +1536,10 @@ function renderReport() {
 
       <p style="color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;margin:1.5rem 0 0.5rem">What is your soul's purpose?</p>
       <div class="purpose-statement">${(function() {
-        var lpPurpose = lp.purpose.split('.')[0].toLowerCase();
-        var nnGrowth = nn.purpose.split('.')[0].toLowerCase();
+        if (s.synthesizedPurpose) return s.synthesizedPurpose;
+        var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
         var gkGift = gk.gift.toLowerCase();
-        var threadLabel = '';
-        if (essenceData.threads.length > 0) {
-          threadLabel = essenceData.SIMPLE_LABELS[essenceData.threads[0].driveKey] || essenceData.threads[0].driveKey;
-        }
-        var statement = 'Your soul came here to ' + lpPurpose + ', growing through ' + nnGrowth + ', wielding ' + gkGift + ' as its instrument';
-        if (threadLabel) {
-          statement += ' — in service of ' + threadLabel;
-        }
-        return statement + '.';
+        return 'You are here ' + lpPurposeFirst + ', and to share your gift of ' + gkGift + '.';
       })()}</div>
 
       <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. You are so close to it that it feels normal. The people around you can see it. You are the last to name it.' : 'There is a part of you that you cannot yet see clearly because you are standing inside it. It feels so normal that it looks like air. The people around you can see it. You are the last to name it.'}</p>
