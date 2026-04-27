@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#c9956b;--accent2:#d4a574;--text:#e8e0d8;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15)}
-html{font-size:20px}
+html{font-size:18px}
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.7}
 h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white);letter-spacing:0.02em}
@@ -295,7 +295,6 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 
 <!-- SCREEN: REPORT -->
 <div class="screen" id="s-report">
-  <button class="btn btn-sm print-btn" onclick="window.print()">Save / Print</button>
   <div class="report" id="reportContent"></div>
 </div>
 
@@ -1020,10 +1019,100 @@ function analyzeIkigai(ikigai) {
 }
 
 // ============================================================
-// ESSENCE EXTRACTION ENGINE (removed — no longer used in report)
+// ESSENCE EXTRACTION ENGINE
 // ============================================================
+function extractEssence(ikigai) {
+  const quadrantLabels = { love: 'Love', good: 'Skill', world: 'World-Need', paid: 'Paid' };
+  const allAnswers = [];
+  const allText = [];
 
-// ============================================================
+  Object.entries(ikigai).forEach(([q, answers]) => {
+    answers.forEach((a, i) => {
+      if (a && a.trim()) {
+        allAnswers.push({ text: a.trim(), quadrant: quadrantLabels[q], index: i });
+        allText.push(a.trim().toLowerCase());
+      }
+    });
+  });
+
+  const fullText = allText.join(' ');
+
+  function findQuotes(keywords, maxQuotes) {
+    const quotes = [];
+    allAnswers.forEach(a => {
+      const lower = a.text.toLowerCase();
+      for (const kw of keywords) {
+        if (lower.includes(kw) && quotes.length < (maxQuotes || 3)) {
+          const snippet = a.text.length > 120 ? a.text.substring(0, 120) + '...' : a.text;
+          quotes.push({ text: snippet, quadrant: a.quadrant });
+          break;
+        }
+      }
+    });
+    return quotes;
+  }
+
+  const drivesByQuadrant = {};
+  Object.entries(ikigai).forEach(([q, answers]) => {
+    const drives = detectDrives(answers);
+    drives.forEach(([d, count]) => {
+      if (!drivesByQuadrant[d]) drivesByQuadrant[d] = { quadrants: [], totalCount: 0 };
+      drivesByQuadrant[d].quadrants.push(quadrantLabels[q]);
+      drivesByQuadrant[d].totalCount += count;
+    });
+  });
+
+  const crossQuadrantDrives = Object.entries(drivesByQuadrant)
+    .filter(([_, info]) => info.quadrants.length >= 2)
+    .sort((a, b) => b[1].totalCount - a[1].totalCount);
+
+  const SIMPLE_LABELS = {
+    guiding: 'guides others toward what they cannot yet see',
+    creating: 'builds what did not exist before',
+    healing: 'restores what has been broken',
+    connecting: 'weaves people into something stronger',
+    understanding: 'sees the patterns others walk past',
+    expressing: 'makes the invisible visible',
+    structuring: 'turns chaos into something that works',
+    liberating: 'refuses to let anyone stay small'
+  };
+
+  const threads = crossQuadrantDrives.slice(0, 2).map(([drive, info]) => {
+    return { driveKey: drive };
+  });
+
+  const allDrivesRanked = Object.entries(drivesByQuadrant).sort((a,b) => b[1].totalCount - a[1].totalCount);
+  const SURFACE_STORIES = {
+    guiding: 'I help people',
+    creating: 'I\'m a creative person',
+    healing: 'I care about people\'s wellbeing',
+    connecting: 'I\'m a people person',
+    understanding: 'I\'m analytical and curious',
+    expressing: 'I need to express myself',
+    structuring: 'I like things organized',
+    liberating: 'I value freedom and authenticity'
+  };
+  const DEEPER_MOTIVES = {
+    guiding: 'A need to externalize your own unprocessed knowing by installing it in someone else. The act of guiding is how you complete your own understanding. You are not just teaching — you are metabolizing.',
+    creating: 'A nervous system that uses creation as its primary regulation tool. Building is not your preference; it is your homeostasis mechanism. When you stop creating, your system dysregulates.',
+    healing: 'An early pattern of attunement to others\' pain states that your nervous system learned to treat as its own responsibility. The transformative impulse is real, but it is also a protector trying to stabilize your own field by stabilizing everyone else\'s.',
+    connecting: 'A deep belief, often pre-verbal, that you do not fully exist unless you are being witnessed by another. Connection is not your want — it is the mechanism by which you experience your own reality.',
+    understanding: 'A survival strategy that became a superpower. At some point, understanding the pattern meant staying safe. Now the pattern-recognition runs continuously, even when safety is not at stake.',
+    expressing: 'An interior pressure that requires external discharge. What looks like a desire for attention is actually a metabolic process — insight or emotion enters, and if it does not exit through expression, it creates somatic backup.',
+    structuring: 'A nervous system that cannot rest in disorder. What looks like preference for organization is actually a form of somatic self-regulation. You build structure because your body requires it to function.',
+    liberating: 'A cellular memory of constraint that your system is perpetually solving for, even when the original constraint is long past. The freedom drive is real, but it is also running from something that may need to be faced rather than fled.'
+  };
+
+  const coreDrives = allDrivesRanked.slice(0, 2).map(([drive, info]) => {
+    return {
+      surface: SURFACE_STORIES[drive] || 'I do this well',
+      deeper: DEEPER_MOTIVES[drive] || 'A pattern that runs beneath your conscious self-concept.',
+      driveKey: drive
+    };
+  });
+
+  return { threads, coreDrives, SIMPLE_LABELS };
+}
 
 // ============================================================
 // CAREER/INDUSTRY DATA
@@ -1100,6 +1189,7 @@ function renderReport() {
   const combo = COMBO[s.lifePath] ? COMBO[s.lifePath][s.destinyNum] : '';
   const firstName = (s.firstName || s.name.split(' ')[0]);
   const ikigaiAnalysis = analyzeIkigai(s.ikigai);
+  const essenceData = extractEssence(s.ikigai);
   const lpCareers = LP_CAREERS[s.lifePath] || [];
   const lpIndustries = LP_INDUSTRIES[s.lifePath] || [];
 
@@ -1293,6 +1383,66 @@ function renderReport() {
         </div>
       </div>
 
+      <div style="text-align:center;margin:2rem 0">
+        <svg viewBox="0 0 400 400" width="360" height="360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <defs>
+            <style>
+              .venn-circle{fill:none;stroke-width:1.5;opacity:0.85}
+              .venn-label{font-family:'Cormorant Garamond',serif;font-size:11px;fill:var(--white,#f5f0eb);text-anchor:middle}
+              .venn-center{font-family:'Cormorant Garamond',serif;font-size:13px;fill:var(--accent,#c9956b);text-anchor:middle;font-weight:600}
+              .venn-overlap{font-family:'Inter',sans-serif;font-size:7.5px;fill:var(--muted,#8a8078);text-anchor:middle}
+            </style>
+          </defs>
+          <circle cx="165" cy="160" r="110" class="venn-circle" stroke="var(--accent,#c9956b)" fill="rgba(201,149,107,0.06)"/>
+          <circle cx="235" cy="160" r="110" class="venn-circle" stroke="var(--accent2,#d4a574)" fill="rgba(212,165,116,0.06)"/>
+          <circle cx="165" cy="240" r="110" class="venn-circle" stroke="var(--muted,#8a8078)" fill="rgba(138,128,120,0.06)"/>
+          <circle cx="235" cy="240" r="110" class="venn-circle" stroke="var(--white,#f5f0eb)" fill="rgba(245,240,235,0.04)"/>
+          <text x="110" y="105" class="venn-label">What You Love</text>
+          <text x="290" y="105" class="venn-label">What You're</text>
+          <text x="290" y="118" class="venn-label">Good At</text>
+          <text x="110" y="310" class="venn-label">What the</text>
+          <text x="110" y="323" class="venn-label">World Needs</text>
+          <text x="290" y="310" class="venn-label">What You Can</text>
+          <text x="290" y="323" class="venn-label">Be Paid For</text>
+          <text x="200" y="140" class="venn-overlap">Passion</text>
+          <text x="140" y="200" class="venn-overlap">Mission</text>
+          <text x="260" y="200" class="venn-overlap">Profession</text>
+          <text x="200" y="265" class="venn-overlap">Vocation</text>
+          <text x="200" y="196" class="venn-center">IKIGAI</text>
+          <text x="200" y="210" class="venn-center" style="font-size:9px;font-weight:400">reason for being</text>
+        </svg>
+      </div>
+
+      <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
+      ${(function() {
+        var parts = [];
+        var love = s.ikigai.love.filter(function(x){return x;}).join(' ').toLowerCase();
+        var good = s.ikigai.good.filter(function(x){return x;}).join(' ').toLowerCase();
+        var world = s.ikigai.world.filter(function(x){return x;}).join(' ').toLowerCase();
+        var paid = s.ikigai.paid.filter(function(x){return x;}).join(' ').toLowerCase();
+        var hasLove = love.length > 0 && !skipped.love;
+        var hasGood = good.length > 0 && !skipped.good;
+        var hasWorld = world.length > 0 && !skipped.world;
+        var hasPaid = paid.length > 0 && !skipped.paid;
+
+        var loveDrive = ikigaiAnalysis.primaries.love ? DRIVE_LABELS[ikigaiAnalysis.primaries.love] : '';
+        var goodDrive = ikigaiAnalysis.primaries.good ? DRIVE_LABELS[ikigaiAnalysis.primaries.good] : '';
+        var worldDrive = ikigaiAnalysis.primaries.world ? DRIVE_LABELS[ikigaiAnalysis.primaries.world] : '';
+
+        var ikigaiStatement = '';
+        if (hasLove && hasGood && hasWorld) {
+          var loveShort = loveDrive || 'what lights you up';
+          var goodShort = goodDrive || 'your natural skills';
+          var worldShort = worldDrive || 'what the world needs from you';
+          ikigaiStatement = 'Using ' + goodShort + ' in service of ' + worldShort + ', powered by ' + loveShort + '.';
+        } else if (ikigaiAnalysis.crossSignal.length > 0) {
+          ikigaiStatement = 'The place where ' + DRIVE_LABELS[ikigaiAnalysis.crossSignal[0]] + ' meets what the world actually needs from you.';
+        } else {
+          ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+        }
+        return '<div class="purpose-statement" style="margin:1rem auto;max-width:600px;text-align:center">' + ikigaiStatement + '</div>';
+      })()}
+
       ${ikigaiAnalysis.crossSignal.length > 0 ? '<div class="insight"><strong>The signal across your answers:</strong> ' + (ikigaiAnalysis.crossSignal.length >= 2 ? 'Two drives keep showing up across your answers: <em>' + ikigaiAnalysis.crossSignal[0] + '</em> and <em>' + ikigaiAnalysis.crossSignal[1] + '</em>. These aren\'t choices you made deliberately. They chose you. They\'re the shape your thinking naturally takes when no one is watching.' : 'One drive runs through everything: <em>' + ikigaiAnalysis.crossSignal[0] + '</em>. This is not a preference. It\'s the shape your thinking naturally takes when no one is watching.') + '</div>' : ''}
 
       ${ikigaiAnalysis.tensions.length > 0 ? '<p style="margin-top:1rem"><strong>The productive tension:</strong> ' + (function() { const t = ikigaiAnalysis.tensions[0]; const key = t.from + '-' + t.to; return TENSION_READS[key] || TENSION_READS[t.to + '-' + t.from] || 'What you love (' + t.from + ') and what sustains you (' + t.to + ') pull in different directions. That tension is not a problem to solve. It\'s the creative friction that keeps you from settling into half of yourself.'; })() + '</p>' : ''}
@@ -1303,26 +1453,46 @@ function renderReport() {
     <!-- SECTION 7: SYNTHESIS -->
     <div class="report-section">
       <h2>The Synthesis</h2>
-      <div class="subtitle">What your five systems say when you stop reading them separately</div>
+      <div class="subtitle">What all five systems are saying together</div>
+      <div class="reframe">Five different maps. One territory.</div>
 
-      <div class="purpose-statement">${firstName}, you are ${lp.name.toLowerCase().replace('the ','')} who ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}, and the thing that gets in your way is ${gk.shadow.toLowerCase()}.</div>
+      <p>${firstName}, here is what emerges when we read your blueprint as a single story:</p>
+      <p>Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> tells us your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}. Your <strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that mission: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. Your <strong>North Node in ${s.nnSign}</strong> points to where your soul is growing: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. Your <strong>Gene Key ${s.geneKey}</strong> maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>. And your <strong>${s.hdType}</strong> design tells your body how to move through all of it: ${s.hdStrategy.toLowerCase()}. One thread. Five confirmations.</p>
 
-      <h3 style="margin-top:1.5rem">Why You're Here</h3>
-      <p>${lp.purpose.split('.')[0]}. Not in theory. In practice. ${dn.charAt(0).toUpperCase() + dn.slice(1).split('.')[0]}. That's the method. ${nn.purpose.charAt(0).toUpperCase() + nn.purpose.slice(1).split('.')[0]} — that's the edge you're still learning. If you don't live this, you stay competent but misaligned. Busy but off-center. Good at things that don't actually matter to you.</p>
+      <p style="color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;margin:1.5rem 0 0.5rem">What is your soul's purpose?</p>
+      <div class="purpose-statement">${(function() {
+        var lpPurpose = lp.purpose.split('.')[0].toLowerCase();
+        var nnGrowth = nn.purpose.split('.')[0].toLowerCase();
+        var gkGift = gk.gift.toLowerCase();
+        var threadLabel = '';
+        if (essenceData.threads.length > 0) {
+          threadLabel = essenceData.SIMPLE_LABELS[essenceData.threads[0].driveKey] || essenceData.threads[0].driveKey;
+        }
+        var statement = 'Your soul came here to ' + lpPurpose + ', growing through ' + nnGrowth + ', wielding ' + gkGift + ' as its instrument';
+        if (threadLabel) {
+          statement += ' — in service of ' + threadLabel;
+        }
+        return statement + '.';
+      })()}</div>
 
-      <h3 style="margin-top:1.5rem">What You Actually Do</h3>
-      <p>You're a ${s.hdType}. That means ${s.hdStrategy.charAt(0).toLowerCase() + s.hdStrategy.slice(1)}${s.hdStrategy.endsWith('.') ? '' : '.'} Your authority is ${s.hdAuthority}. In plain terms: ${s.hdType === 'Generator' || s.hdType === 'Manifesting Generator' ? 'you work by responding to what lights you up, not by chasing things down' : s.hdType === 'Projector' ? 'you work by being recognized and invited, not by pushing' : s.hdType === 'Manifestor' ? 'you work by initiating and informing, not by waiting for permission' : 'you work by waiting for clarity, not by forcing decisions'}. When you operate correctly, people notice. When you don't, you burn out.</p>
-      <p style="margin-top:0.8rem">The roles where this works: ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? combo + '.' : ''} These aren't suggestions. They're the jobs that fit the shape you already are.</p>
+      <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. You are so close to it that it feels normal. The people around you can see it. You are the last to name it.' : 'There is a part of you that you cannot yet see clearly because you are standing inside it. It feels so normal that it looks like air. The people around you can see it. You are the last to name it.'}</p>
 
-      <h3 style="margin-top:1.5rem">Your Gene Key + Life's Work</h3>
-      <p><strong>Gene Key ${s.geneKey}:</strong> ${gk.theme.split('.')[0]}.</p>
-      <p style="margin-top:0.8rem">Here's how it works. At your worst, you fall into <strong>${gk.shadow.toLowerCase()}</strong>. That's the shadow — not a flaw, just the compressed version of your gift. When you catch it and stay with it instead of reacting, it becomes <strong>${gk.gift.toLowerCase()}</strong>. That's your operating state. The thing people actually experience when they're around you. And at its highest, this becomes <strong>${gk.siddhi.toLowerCase()}</strong> — which is less something you do and more something that moves through you when you stop trying.</p>
-      ${s.geneKey !== s.gkPurpose ? '<p style="margin-top:0.8rem">Your Purpose Key (Gene Key ' + s.gkPurpose + ') adds another layer: ' + gkP.theme.split('.')[0].toLowerCase() + '. The Life Work key is what you do. The Purpose key is who you are when you are not doing anything.</p>' : ''}
+      <p>${(function() {
+        var hasBuild = essenceData.coreDrives.some(function(d) { return ['structuring','creating'].indexOf(d.driveKey) !== -1; });
+        var hasHeal = essenceData.coreDrives.some(function(d) { return ['healing','connecting','liberating'].indexOf(d.driveKey) !== -1; });
+        var hasCreate = essenceData.coreDrives.some(function(d) { return ['creating','expressing'].indexOf(d.driveKey) !== -1; });
+        var hasGuide = essenceData.coreDrives.some(function(d) { return ['guiding','structuring','understanding'].indexOf(d.driveKey) !== -1; });
 
-      <h3 style="margin-top:1.5rem">The Pattern</h3>
-      <p>Five systems. Here's what repeats:</p>
-      <p style="margin-top:0.8rem">Your Life Path says ${lp.purpose.split('.')[0].toLowerCase()}. Your North Node says ${nn.purpose.split('.')[0].toLowerCase()}. Your Gene Key says ${gk.theme.split('.')[0].toLowerCase()}. Your ${cross.title} cross says ${cross.themes.split('.')[0].toLowerCase()}. ${ikigaiAnalysis.crossSignal.length > 0 ? 'And your ikigai answers keep coming back to ' + DRIVE_LABELS[ikigaiAnalysis.crossSignal[0]] + '.' : ''}</p>
-      <p style="margin-top:0.8rem">That's not five different things. That's one thing said five ways. ${firstName}, you're a ${lp.name.toLowerCase().replace('the ','') + ' who ' + nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. The tension between ${gk.shadow.toLowerCase()} and ${gk.gift.toLowerCase()} is the engine. It's not something to fix. It's the friction that keeps you honest.</p>
+        if (hasHeal) return 'Your purpose most resembles the helper-transformer path. You do orient toward what is broken and you do feel the pull to restore it. But your version is not self-sacrificing. ' + (hasBuild ? 'It is powered by a structural engine that most helpers lack. You do not just hold space. You see what is actually wrong and build something to address it.' : hasCreate ? 'It runs through a creative channel that most transformers never access. You do not just hold space. You make things that carry the transformation forward without you in the room.' : 'It is diagnostic, not devotional. You name the fracture before you address it.');
+        if (hasCreate) return 'Your purpose most resembles the creative-artist path. You do need to make things, and suppressing that need produces real distress. But your creativity is not self-referential. ' + (hasGuide ? 'It is in service of transmission. You create as a vehicle for something else: understanding, recognition, reorganization.' : 'It has a function beyond aesthetics. What you build carries information. The art is a vessel, not the destination.');
+        if (hasBuild) return 'Your purpose most resembles the builder-founder path. You do build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the container your soul\'s work requires. The business is the vehicle, not the destination.';
+        return 'Your purpose most resembles the high-achiever path. You have genuine capacity for output and follow-through. But your version of achievement is not about metrics or recognition. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would leave you productive but hollow.';
+      })()}</p>
+
+      <h3 style="margin-top:2rem">Professions & Industries Aligned With Your Blueprint</h3>
+      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? 'Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.' : ''}</p>
+      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}${nn.careers ? '. Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
+      <div class="insight">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</div>
     </div>
 
     <!-- SECTION 9: NEXT STEP -->

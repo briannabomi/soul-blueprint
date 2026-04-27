@@ -1289,7 +1289,7 @@ function sendToSubscribe(email, firstName) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      email: email,
+      email_address: email,
       first_name: firstName || '',
       fields: {
         life_path: String(STATE.lifePath || ''),
