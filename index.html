@@ -170,8 +170,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 <div class="screen" id="s-ikigai1">
   <div>
     <div class="step-header">
-      <div class="phase">Step 2 of 6 &mdash; What you love</div>
-      <h2>What do you love doing?</h2>
+      <div class="phase">Step 2 of 6 &mdash; Ikigai</div>
+      <h2>What You Love</h2>
       <p>Not what looks good on paper. What you'd do on a free Saturday with no one watching.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:33%"></div></div>
@@ -194,8 +194,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 <div class="screen" id="s-ikigai2">
   <div>
     <div class="step-header">
-      <div class="phase">Step 3 of 6 &mdash; What you're good at</div>
-      <h2>What are you genuinely skilled at?</h2>
+      <div class="phase">Step 3 of 6 &mdash; Ikigai</div>
+      <h2>What You're Good At</h2>
       <p>The things that feel easy to you but hard for other people. The stuff friends ask you for help with.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:50%"></div></div>
@@ -218,8 +218,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 <div class="screen" id="s-ikigai3">
   <div>
     <div class="step-header">
-      <div class="phase">Step 4 of 6 &mdash; What the world needs from you</div>
-      <h2>What problem do you want to solve?</h2>
+      <div class="phase">Step 4 of 6 &mdash; Ikigai</div>
+      <h2>What the World Needs</h2>
       <p>The thing that frustrates you because you know it could be different. Not the whole world, your corner of it.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:66%"></div></div>
@@ -242,18 +242,14 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 <div class="screen" id="s-ikigai4">
   <div>
     <div class="step-header">
-      <div class="phase">Step 5 of 6 &mdash; What you can be paid for</div>
-      <h2>What would people pay you to do?</h2>
-      <p>Purpose without infrastructure is a journal entry. What's the version of your work that sustains you financially?</p>
+      <div class="phase">Step 5 of 6 &mdash; Ikigai</div>
+      <h2>What You Can Be Paid For</h2>
+      <p>Purpose without infrastructure is a journal entry. AND when you're in alignment with your soul, money always comes.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:83%"></div></div>
     <div class="form-group">
-      <label>What services, products, or expertise could people pay you for?</label>
-      <textarea id="ik-paid-1" placeholder="e.g., Coaching, consulting, design, teaching, building software, writing, speaking..."></textarea>
-    </div>
-    <div class="form-group">
       <label>What do people already tell you that you should charge for?</label>
-      <textarea id="ik-paid-2" placeholder="The thing where someone says 'you're so good at this, why aren't you doing this for a living?'"></textarea>
+      <textarea id="ik-paid-1" placeholder="The thing where someone says 'you're so good at this, why aren't you doing this for a living?'"></textarea>
     </div>
     <div class="nav-row">
       <button class="btn-outline btn-sm" onclick="goTo('s-ikigai3')">&larr; Back</button>
@@ -268,8 +264,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
   <div>
     <div class="step-header">
       <div class="phase">Step 6 of 6 &mdash; Almost done</div>
-      <h2>Where should we send your blueprint?</h2>
-      <p>Your results will show on the next screen. We'll also email you a copy so you can come back to it.</p>
+      <h2>Where do we send your Soul Blueprint?</h2>
+      <p>Your results will show on the next screen. We'll also email you a copy. Plus an AI prompt that turns your blueprint into a weekly compass.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:95%"></div></div>
     <div class="form-group">
@@ -1069,7 +1065,7 @@ function generateReport() {
     love: [v('ik-love-1'), v('ik-love-2')],
     good: [v('ik-good-1'), v('ik-good-2')],
     world: [v('ik-world-1'), v('ik-world-2')],
-    paid: [v('ik-paid-1'), v('ik-paid-2')]
+    paid: [v('ik-paid-1')]
   };
 
   goTo('s-processing2');
@@ -1089,7 +1085,7 @@ function generateReport() {
   }, 800);
 }
 
-function v(id) { return document.getElementById(id).value.trim(); }
+function v(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
 
 function renderReport() {
   const s = STATE;
@@ -1307,22 +1303,26 @@ function renderReport() {
     <!-- SECTION 7: SYNTHESIS -->
     <div class="report-section">
       <h2>The Synthesis</h2>
-      <div class="subtitle">What all five systems are saying together</div>
-      <div class="reframe">Five different maps. One territory.</div>
+      <div class="subtitle">What your five systems say when you stop reading them separately</div>
 
-      <p>${firstName}, here is what emerges when we read your blueprint as a single story:</p>
-      <p>Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> tells us your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}. Your <strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that mission: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. Your <strong>North Node in ${s.nnSign}</strong> points to where your soul is growing: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. Your <strong>Gene Key ${s.geneKey}</strong> maps your growth edge, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>. And your <strong>${s.hdType}</strong> design tells your body how to move through all of it: ${s.hdStrategy.toLowerCase()}. One thread. Five confirmations.</p>
+      <div class="purpose-statement">${firstName}, you are ${lp.name.toLowerCase().replace('the ','')} who ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}, and the thing that gets in your way is ${gk.shadow.toLowerCase()}.</div>
 
-      <div class="purpose-statement">A ${lp.name} whose growth edge is ${s.nnSign}, moving from ${gk.shadow.toLowerCase()} into ${gk.gift.toLowerCase()}.</div>
+      <h3 style="margin-top:1.5rem">Why You're Here</h3>
+      <p>${lp.purpose.split('.')[0]}. Not in theory. In practice. ${dn.charAt(0).toUpperCase() + dn.slice(1).split('.')[0]}. That's the method. ${nn.purpose.charAt(0).toUpperCase() + nn.purpose.slice(1).split('.')[0]} — that's the edge you're still learning. If you don't live this, you stay competent but misaligned. Busy but off-center. Good at things that don't actually matter to you.</p>
 
-      <p>Your five systems converge on a pattern: you're here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}, and you're learning to do it through ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. That's not an accident. It's a throughline.</p>
+      <h3 style="margin-top:1.5rem">What You Actually Do</h3>
+      <p>You're a ${s.hdType}. That means ${s.hdStrategy.charAt(0).toLowerCase() + s.hdStrategy.slice(1)}${s.hdStrategy.endsWith('.') ? '' : '.'} Your authority is ${s.hdAuthority}. In plain terms: ${s.hdType === 'Generator' || s.hdType === 'Manifesting Generator' ? 'you work by responding to what lights you up, not by chasing things down' : s.hdType === 'Projector' ? 'you work by being recognized and invited, not by pushing' : s.hdType === 'Manifestor' ? 'you work by initiating and informing, not by waiting for permission' : 'you work by waiting for clarity, not by forcing decisions'}. When you operate correctly, people notice. When you don't, you burn out.</p>
+      <p style="margin-top:0.8rem">The roles where this works: ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? combo + '.' : ''} These aren't suggestions. They're the jobs that fit the shape you already are.</p>
 
-      <h3 style="margin-top:2rem">Where This Blueprint Fits in the Real World</h3>
-      <div class="subtitle">Purpose without infrastructure is a journal entry</div>
-      <p>Based on your blueprint, here are the roles and industries where you'd naturally thrive:</p>
-      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? 'Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.' : ''}</p>
-      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}${nn.careers ? '. Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
-      <div class="insight">These aren't prescriptions, they're structural alignments. You didn't come here to be told what job to get. You came here to recognize the container that already fits.</div>
+      <h3 style="margin-top:1.5rem">Your Gene Key + Life's Work</h3>
+      <p><strong>Gene Key ${s.geneKey}:</strong> ${gk.theme.split('.')[0]}.</p>
+      <p style="margin-top:0.8rem">Here's how it works. At your worst, you fall into <strong>${gk.shadow.toLowerCase()}</strong>. That's the shadow — not a flaw, just the compressed version of your gift. When you catch it and stay with it instead of reacting, it becomes <strong>${gk.gift.toLowerCase()}</strong>. That's your operating state. The thing people actually experience when they're around you. And at its highest, this becomes <strong>${gk.siddhi.toLowerCase()}</strong> — which is less something you do and more something that moves through you when you stop trying.</p>
+      ${s.geneKey !== s.gkPurpose ? '<p style="margin-top:0.8rem">Your Purpose Key (Gene Key ' + s.gkPurpose + ') adds another layer: ' + gkP.theme.split('.')[0].toLowerCase() + '. The Life Work key is what you do. The Purpose key is who you are when you are not doing anything.</p>' : ''}
+
+      <h3 style="margin-top:1.5rem">The Pattern</h3>
+      <p>Five systems. Here's what repeats:</p>
+      <p style="margin-top:0.8rem">Your Life Path says ${lp.purpose.split('.')[0].toLowerCase()}. Your North Node says ${nn.purpose.split('.')[0].toLowerCase()}. Your Gene Key says ${gk.theme.split('.')[0].toLowerCase()}. Your ${cross.title} cross says ${cross.themes.split('.')[0].toLowerCase()}. ${ikigaiAnalysis.crossSignal.length > 0 ? 'And your ikigai answers keep coming back to ' + DRIVE_LABELS[ikigaiAnalysis.crossSignal[0]] + '.' : ''}</p>
+      <p style="margin-top:0.8rem">That's not five different things. That's one thing said five ways. ${firstName}, you're a ${lp.name.toLowerCase().replace('the ','') + ' who ' + nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. The tension between ${gk.shadow.toLowerCase()} and ${gk.gift.toLowerCase()} is the engine. It's not something to fix. It's the friction that keeps you honest.</p>
     </div>
 
     <!-- SECTION 9: NEXT STEP -->

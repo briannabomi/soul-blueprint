@@ -73,6 +73,8 @@ You'll need your date of birth, time of birth (if you know it) and 8 minutes to 
 
 **PHASE LABEL:** Step 1 of 6 — Your Details
 
+**PROGRESS BAR:** 16%
+
 **HEADLINE:** Your Birth Data
 
 **SUBHEAD:**
@@ -80,10 +82,9 @@ Everything here is calculated from when and where you were born. The more accura
 
 **FORM FIELDS (same):**
 
-
 **CTA BUTTON:** Calculate My Blueprint
 
-**PROGRESS BAR:** 16%
+
 
 ---
 
@@ -102,9 +103,11 @@ Everything here is calculated from when and where you were born. The more accura
 
 ### SCREEN 4: Ikigai — What You Love
 
-**PHASE LABEL:** Step 2 of 6 — What you love
+**PHASE LABEL:** Step 2 of 6 — IKIGAI
 
-**HEADLINE:** What do you love doing?
+**PROGRESS BAR:** 33%
+
+**HEADLINE:** What You Love
 
 **SUBHEAD:**
 Not what looks good on paper. What you'd do on a free Saturday with no one watching.
@@ -119,15 +122,17 @@ Not what looks good on paper. What you'd do on a free Saturday with no one watch
 
 **SKIP OPTION:** Small text link below the Continue button: "Not sure? You can skip this section."
 
-**PROGRESS BAR:** 33%
+
 
 ---
 
 ### SCREEN 5: Ikigai — What You're Good At
 
-**PHASE LABEL:** Step 3 of 6 — What you're good at
+**PHASE LABEL:** Step 3 of 6 — IKIGAI
 
-**HEADLINE:** What are you genuinely skilled at?
+**PROGRESS BAR:** 50%
+
+**HEADLINE:** What You're Good At
 
 **SUBHEAD:**
 The things that feel easy to you but hard for other people. The stuff friends ask you for help with.
@@ -142,15 +147,17 @@ The things that feel easy to you but hard for other people. The stuff friends as
 
 **SKIP OPTION:** "Not sure? You can skip this section."
 
-**PROGRESS BAR:** 50%
+
 
 ---
 
 ### SCREEN 6: Ikigai — What the World Needs
 
-**PHASE LABEL:** Step 4 of 6 — What the world needs from you
+**PHASE LABEL:** Step 4 of 6 — IKIGAI
 
-**HEADLINE:** What problem do you want to solve?
+**PROGRESS BAR:** 66%
+
+**HEADLINE:** What the World Needs
 
 **SUBHEAD:**
 The thing that frustrates you because you know it could be different. Not the whole world, your corner of it.
@@ -165,30 +172,28 @@ The thing that frustrates you because you know it could be different. Not the wh
 
 **SKIP OPTION:** "Not sure? You can skip this section."
 
-**PROGRESS BAR:** 66%
+
 
 ---
 
 ### SCREEN 7: Ikigai — What You Can Be Paid For
 
-**PHASE LABEL:** Step 5 of 6 — What you can be paid for
+**PHASE LABEL:** Step 5 of 6 — IKIGAI
 
-**HEADLINE:** What would people pay you to do?
+**PROGRESS BAR:** 83%
+
+**HEADLINE:** What You Can Be Paid For
 
 **SUBHEAD:**
-Purpose without infrastructure is a journal entry. What's the version of your work that sustains you financially?
+Purpose without infrastructure is a journal entry. AND when you're in alignment with your soul, money always comes.
 
-**QUESTIONS (reduced to 2):**
+**QUESTIONS (reduced to 1):**
 
-**Q1:** What services, products, or expertise could people pay you for?
-*Placeholder:* "e.g., Coaching, consulting, design, teaching, building software, writing, speaking..."
-
-**Q2:** What do people already tell you that you should charge for?
+**Q1:** What do people already tell you that you should charge for?
 *Placeholder:* "The thing where someone says 'you're so good at this, why aren't you doing this for a living?'"
 
 **SKIP OPTION:** "Not sure? You can skip this section."
 
-**PROGRESS BAR:** 83%
 
 ---
 
@@ -196,10 +201,12 @@ Purpose without infrastructure is a journal entry. What's the version of your wo
 
 **PHASE LABEL:** Step 6 of 6 — Almost done
 
-**HEADLINE:** Where should we send your blueprint?
+**PROGRESS BAR:** 95%
+
+**HEADLINE:** Where do we send your Soul Blueprint?
 
 **SUBHEAD:**
-Your results will show on the next screen. We'll also email you a copy so you can come back to it.
+Your results will show on the next screen. We'll also email you a copy. Plus an AI prompt that turns your blueprint into a weekly compass.
 
 **FORM FIELDS:**
 
@@ -208,7 +215,7 @@ Your results will show on the next screen. We'll also email you a copy so you ca
 
 **CTA BUTTON:** Show Me My Blueprint
 
-**PROGRESS BAR:** 95%
+
 
 ---
 
