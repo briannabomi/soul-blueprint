@@ -26,7 +26,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Invalid JSON" }) };
   }
 
-  const { email_address, first_name, fields } = payload;
+  const { email_address, first_name, fields, resultUrl } = payload;
   if (!email_address || !email_address.includes("@")) {
     console.error("[subscribe] Invalid or missing email_address:", email_address);
     return { statusCode: 400, body: JSON.stringify({ error: "Valid email_address required" }) };
@@ -43,10 +43,14 @@ exports.handler = async (event) => {
 
   try {
     // ── Step 1: Create subscriber ──
+    const mergedFields = {
+      ...(fields || {}),
+      ...(resultUrl ? { soul_blueprint_url: resultUrl } : {})
+    };
     const createBody = {
       email_address,
       first_name: first_name || "",
-      fields: fields || {}
+      fields: mergedFields
     };
     console.log("[subscribe] Step 1 — POST /v4/subscribers, body:", JSON.stringify({ ...createBody, email_address: "REDACTED" }));
 

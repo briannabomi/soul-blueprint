@@ -601,6 +601,18 @@ const DRIVE_LABELS = {
   liberating: 'a refusal to let yourself or anyone else be smaller than they actually are'
 };
 
+// Short verb phrases designed to embed cleanly inside a sentence
+const IKIGAI_VERBS = {
+  guiding: 'guide others into clarity',
+  creating: 'build what doesn\'t exist yet',
+  healing: 'heal what others have given up on',
+  connecting: 'bring people together',
+  understanding: 'decode the patterns others miss',
+  expressing: 'give form to what lives inside you',
+  structuring: 'create order where there is none',
+  liberating: 'set people free from what keeps them small'
+};
+
 const TENSION_READS = {
   'guiding-structuring': 'You want to guide people into their own knowing, but your paid work asks you to build systems. The resolution: build systems that guide.',
   'creating-structuring': 'Your creative impulse resists the container your livelihood requires. The resolution is not to choose. It is to create within structure.',
