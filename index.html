@@ -1234,10 +1234,18 @@ function fetchSynthesis() {
     return r.json();
   });
 
+  // Reject AI responses that contain raw instructions instead of real synthesis
+  function isValidSynthesis(text) {
+    if (!text || typeof text !== 'string') return false;
+    var bad = ['send me', 'provide the', 'haven\'t provided', 'I can\'t generate', 'I need you to', 'please provide', 'four inputs'];
+    var lower = text.toLowerCase();
+    return !bad.some(function(phrase) { return lower.indexOf(phrase) !== -1; });
+  }
+
   return Promise.race([request, timeout]).then(function(data) {
     if (data && !data.__timeout) {
-      STATE.synthesizedPurpose = data.soulPurpose || null;
-      STATE.synthesizedIkigai = data.ikigaiSynthesis || null;
+      STATE.synthesizedPurpose = isValidSynthesis(data.soulPurpose) ? data.soulPurpose : null;
+      STATE.synthesizedIkigai = isValidSynthesis(data.ikigaiSynthesis) ? data.ikigaiSynthesis : null;
     } else {
       console.log('Synthesis timed out — using fallback templates');
     }
