@@ -13,25 +13,28 @@ exports.handler = async (event) => {
   }
 
   // ── ENV VAR DIAGNOSTICS ──────────────────────────────────
-  const KIT_API_KEY = process.env.KIT_API_KEY;
-  const KIT_API_SECRET = process.env.KIT_API_SECRET;
+  const KIT_API_KEY = process.env.KIT_API_KEY || process.env.KIT_API_SECRET;
   const KIT_TAG_ID = process.env.KIT_TAG_ID;
 
-  console.log("[subscribe] ENV CHECK — KIT_API_KEY:", KIT_API_KEY ? `set (${KIT_API_KEY.length} chars)` : "MISSING");
-  console.log("[subscribe] ENV CHECK — KIT_API_SECRET:", KIT_API_SECRET ? `set (${KIT_API_SECRET.length} chars)` : "not set (will use KIT_API_KEY)");
+  const keyPrefix = KIT_API_KEY ? KIT_API_KEY.substring(0, 6) : "N/A";
+  const keyLength = KIT_API_KEY ? KIT_API_KEY.length : 0;
+  console.log("[subscribe] ENV CHECK — API key prefix:", keyPrefix, "| length:", keyLength);
   console.log("[subscribe] ENV CHECK — KIT_TAG_ID:", KIT_TAG_ID || "MISSING");
 
-  // Accept either KIT_API_SECRET (preferred for write ops) or KIT_API_KEY
-  const apiCredential = KIT_API_SECRET || KIT_API_KEY;
-
-  if (!apiCredential) {
-    console.error("[subscribe] FATAL: Neither KIT_API_SECRET nor KIT_API_KEY is set");
+  if (!KIT_API_KEY) {
+    console.error("[subscribe] FATAL: No API key found (checked KIT_API_KEY and KIT_API_SECRET)");
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ success: false, error: "Server misconfigured: missing API credentials" })
+      body: JSON.stringify({ success: false, error: "Server misconfigured: missing API key" })
     };
   }
+
+  // Kit v4 keys start with "kit_" — warn if format looks wrong
+  if (!KIT_API_KEY.startsWith("kit_")) {
+    console.warn("[subscribe] WARNING: API key does not start with 'kit_' — this may be a v3 key or incorrect value. Kit v4 keys look like: kit_xxxxxxxx");
+  }
+
   if (!KIT_TAG_ID) {
     console.error("[subscribe] FATAL: KIT_TAG_ID not set");
     return {
@@ -57,22 +60,15 @@ exports.handler = async (event) => {
   }
 
   // ── AUTH HEADERS ─────────────────────────────────────────
-  // Kit v4 supports two auth methods:
-  //   1. Authorization: Bearer <api_secret>  (full write access — PREFERRED)
-  //   2. X-Kit-Api-Key: <api_key>            (limited, may not create subscribers)
-  // We try Bearer first if KIT_API_SECRET is set; otherwise fall back to X-Kit-Api-Key.
+  // Kit v4 API authenticates via X-Kit-Api-Key header.
+  // Key must be a v4 API key (starts with "kit_").
+  // Get yours at: https://app.kit.com/account/edit#api_key
   const kitHeaders = {
     "Content-Type": "application/json",
-    "Accept": "application/json"
+    "Accept": "application/json",
+    "X-Kit-Api-Key": KIT_API_KEY
   };
-
-  if (KIT_API_SECRET) {
-    kitHeaders["Authorization"] = `Bearer ${KIT_API_SECRET}`;
-    console.log("[subscribe] Using Authorization: Bearer (API secret)");
-  } else {
-    kitHeaders["X-Kit-Api-Key"] = KIT_API_KEY;
-    console.log("[subscribe] Using X-Kit-Api-Key (public key — may lack write permission)");
-  }
+  console.log("[subscribe] Auth header set: X-Kit-Api-Key");
 
   try {
     // ── STEP 1: CREATE SUBSCRIBER ────────────────────────────

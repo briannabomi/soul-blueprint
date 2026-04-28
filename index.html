@@ -1615,49 +1615,61 @@ function captureEmailAndGenerate() {
 }
 
 function sendToKit(email, firstName) {
+  var payload = {
+    email_address: email,
+    first_name: firstName || '',
+    fields: {
+      life_path: String(STATE.lifePath || ''),
+      north_node: STATE.nnSign || '',
+      gene_key: String(STATE.geneKey || ''),
+      sun_sign: STATE.sunSign || ''
+    }
+  };
+
+  console.log('Sending to Kit:', JSON.stringify(payload, null, 2));
+
   try {
     fetch('/.netlify/functions/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email_address: email,
-        first_name: firstName || '',
-        fields: {
-          life_path: String(STATE.lifePath || ''),
-          north_node: STATE.nnSign || '',
-          gene_key: String(STATE.geneKey || ''),
-          sun_sign: STATE.sunSign || '',
-          purpose_sentence: STATE.synthesizedPurpose || '',
-          ikigai_synthesis: STATE.synthesizedIkigai || ''
-        }
-      })
+      body: JSON.stringify(payload)
     })
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
+    .then(function(r) {
+      console.log('Kit response status:', r.status);
+      return r.text();
+    })
+    .then(function(text) {
+      console.log('Kit response body:', text);
+      var d;
+      try { d = JSON.parse(text); } catch(e) {
+        console.error('Kit returned non-JSON:', text);
+        showKitError('Unexpected server response. Check console for details.');
+        return;
+      }
       if (d.success) {
-        console.log('Kit subscription success:', d);
+        console.log('Kit subscription confirmed — subscriberId:', d.subscriberId, 'tagged:', d.tagged);
       } else {
-        console.error('Kit subscription failed:', JSON.stringify(d));
-        showKitError();
+        console.error('Kit subscription FAILED:', JSON.stringify(d));
+        showKitError(d.error || 'Subscription failed. Your report is still saved.');
       }
     })
     .catch(function(e) {
-      console.error('Kit subscription error:', e);
-      showKitError();
+      console.error('Kit network error:', e);
+      showKitError('Network error — could not reach subscription service.');
     });
   } catch (e) {
     console.error('Kit send crashed:', e);
   }
 }
 
-function showKitError() {
-  var existing = document.getElementById('kitErrorNotice');
-  if (existing) return;
-  var notice = document.createElement('div');
-  notice.id = 'kitErrorNotice';
-  notice.style.cssText = 'background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;';
-  notice.textContent = "We couldn’t send the email, but your results are here.";
-  var report = document.getElementById('reportContent');
+function showKitError(msg) {
+  var existing = document.getElementById(‘kitErrorNotice’);
+  if (existing) { existing.textContent = msg || existing.textContent; return; }
+  var notice = document.createElement(‘div’);
+  notice.id = ‘kitErrorNotice’;
+  notice.style.cssText = ‘background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;’;
+  notice.textContent = msg || "We couldn’t subscribe your email, but your report is still here.";
+  var report = document.getElementById(‘reportContent’);
   if (report && report.parentNode) {
     report.parentNode.insertBefore(notice, report);
   }
