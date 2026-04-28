@@ -1604,10 +1604,8 @@ function skipEmail() {
 }
 
 function saveReportAndNotifyKit() {
-  // Grab the rendered report HTML
   var reportHTML = document.getElementById('reportContent').innerHTML;
 
-  // Build the report data to persist
   var reportData = {
     name: STATE.name,
     firstName: STATE.firstName || STATE.name.split(' ')[0],
@@ -1639,25 +1637,40 @@ function saveReportAndNotifyKit() {
   })
   .then(function(r) { return r.json(); })
   .then(function(d) {
-    var resultUrl = '';
     if (d.reportId) {
-      resultUrl = window.location.origin + '/results?id=' + d.reportId;
+      var resultUrl = window.location.origin + '/results?id=' + d.reportId;
       console.log('Report saved:', resultUrl);
+      // Only subscribe to Kit once we have a valid report URL
+      if (STATE.email) {
+        sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
+      }
     } else {
-      console.log('Save report returned no reportId:', d);
-    }
-    // Always send to Kit whether or not report saved
-    if (STATE.email) {
-      sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
+      // save-report returned a response but no reportId (e.g. 500 with JSON body)
+      console.error('save-report failed:', d.error, d.detail);
+      showReportSaveError();
     }
   })
   .catch(function(e) {
-    console.log('Save report error (non-blocking):', e);
-    // Still try to send to Kit without a results URL
-    if (STATE.email) {
-      sendToConvertKit(STATE.email, STATE.firstName || '', '');
-    }
+    // Network error or non-JSON response
+    console.error('save-report error:', e);
+    showReportSaveError();
   });
+}
+
+function showReportSaveError() {
+  // Show a small, non-intrusive message on the report page
+  var existing = document.getElementById('reportSaveNotice');
+  if (existing) return; // already showing
+  var notice = document.createElement('div');
+  notice.id = 'reportSaveNotice';
+  notice.style.cssText = 'background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:1rem 1.5rem;margin:1.5rem auto;max-width:600px;border-radius:4px;font-size:0.88rem;text-align:center;';
+  notice.innerHTML = 'Your blueprint is displayed below, but we couldn’t save a shareable link right now. '
+    + 'Use the <strong>Print / Save as PDF</strong> button to keep a copy. '
+    + 'If you entered your email, please try again later to receive it by email.';
+  var report = document.getElementById('reportContent');
+  if (report && report.parentNode) {
+    report.parentNode.insertBefore(notice, report);
+  }
 }
 
 function sendToConvertKit(email, firstName, resultUrl) {
@@ -1667,7 +1680,7 @@ function sendToConvertKit(email, firstName, resultUrl) {
     body: JSON.stringify({
       email_address: email,
       first_name: firstName || '',
-      resultUrl: resultUrl || '',
+      resultUrl: resultUrl,
       fields: {
         life_path: String(STATE.lifePath || ''),
         north_node: STATE.nnSign || '',
@@ -1676,9 +1689,15 @@ function sendToConvertKit(email, firstName, resultUrl) {
       }
     })
   })
-  .then(r => r.json())
-  .then(d => console.log('Kit tag subscription:', d))
-  .catch(e => console.log('Kit error (non-blocking):', e));
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.success) {
+      console.log('Kit subscription success:', d);
+    } else {
+      console.error('Kit subscription failed:', d);
+    }
+  })
+  .catch(function(e) { console.error('Kit subscription error:', e); });
 }
 
 // ============================================================
