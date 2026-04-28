@@ -1192,6 +1192,7 @@ function generateReport() {
   Promise.all([animDone, STATE.synthesisPromise]).then(function() {
     renderReport();
     goTo('s-report');
+    saveReportAndNotifyKit();
   });
 }
 
@@ -1594,7 +1595,6 @@ function captureEmailAndGenerate() {
   }
   STATE.email = email;
   if (firstName) STATE.firstName = firstName;
-  sendToConvertKit(email, firstName);
   generateReport();
 }
 
@@ -1603,13 +1603,68 @@ function skipEmail() {
   generateReport();
 }
 
-function sendToConvertKit(email, firstName) {
+function saveReportAndNotifyKit() {
+  // Grab the rendered report HTML
+  var reportHTML = document.getElementById('reportContent').innerHTML;
+
+  // Build the report data to persist
+  var reportData = {
+    name: STATE.name,
+    firstName: STATE.firstName || STATE.name.split(' ')[0],
+    dateStr: STATE.dateStr,
+    timeStr: STATE.timeStr,
+    place: STATE.place || '',
+    sunSign: STATE.sunSign,
+    sunDeg: STATE.sunDeg,
+    nnSign: STATE.nnSign,
+    snSign: STATE.snSign,
+    lifePath: STATE.lifePath,
+    destinyNum: STATE.destinyNum,
+    hdType: STATE.hdType,
+    hdStrategy: STATE.hdStrategy,
+    hdAuthority: STATE.hdAuthority,
+    profile: STATE.profile,
+    crossType: STATE.crossType,
+    geneKey: STATE.geneKey,
+    gkPurpose: STATE.gkPurpose,
+    synthesizedPurpose: STATE.synthesizedPurpose || null,
+    synthesizedIkigai: STATE.synthesizedIkigai || null,
+    reportHTML: reportHTML
+  };
+
+  fetch('/.netlify/functions/save-report', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reportData)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.reportId) {
+      var resultUrl = window.location.origin + '/results?id=' + d.reportId;
+      console.log('Report saved:', resultUrl);
+      // If user provided email, send to Kit with the unique URL
+      if (STATE.email) {
+        sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
+      }
+    }
+  })
+  .catch(function(e) {
+    console.log('Save report error (non-blocking):', e);
+    // Still try to send to Kit without a results URL
+    if (STATE.email) {
+      sendToConvertKit(STATE.email, STATE.firstName || '', '');
+    }
+  });
+}
+
+function sendToConvertKit(email, firstName, resultUrl) {
   fetch('/.netlify/functions/subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email_address: email,
       first_name: firstName || '',
+      resultUrl: resultUrl || '',
       fields: {
         life_path: String(STATE.lifePath || ''),
         north_node: STATE.nnSign || '',
