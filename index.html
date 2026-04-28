@@ -1663,13 +1663,13 @@ function sendToKit(email, firstName) {
 }
 
 function showKitError(msg) {
-  var existing = document.getElementById(‘kitErrorNotice’);
+  var existing = document.getElementById('kitErrorNotice');
   if (existing) { existing.textContent = msg || existing.textContent; return; }
-  var notice = document.createElement(‘div’);
-  notice.id = ‘kitErrorNotice’;
-  notice.style.cssText = ‘background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;’;
+  var notice = document.createElement('div');
+  notice.id = 'kitErrorNotice';
+  notice.style.cssText = 'background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;';
   notice.textContent = msg || "We could not subscribe your email, but your report is still here.";
-  var report = document.getElementById(‘reportContent’);
+  var report = document.getElementById('reportContent');
   if (report && report.parentNode) {
     report.parentNode.insertBefore(notice, report);
   }
