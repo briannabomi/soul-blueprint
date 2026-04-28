@@ -2,6 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
+[context.production]
+  environment = { NODE_VERSION = "18" }
+
 # SPA-style fallback not needed — this is a single static page.
 # If you add client-side routing later, uncomment:
 # [[redirects]]

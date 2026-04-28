@@ -1639,13 +1639,16 @@ function saveReportAndNotifyKit() {
   })
   .then(function(r) { return r.json(); })
   .then(function(d) {
+    var resultUrl = '';
     if (d.reportId) {
-      var resultUrl = window.location.origin + '/results?id=' + d.reportId;
+      resultUrl = window.location.origin + '/results?id=' + d.reportId;
       console.log('Report saved:', resultUrl);
-      // If user provided email, send to Kit with the unique URL
-      if (STATE.email) {
-        sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
-      }
+    } else {
+      console.log('Save report returned no reportId:', d);
+    }
+    // Always send to Kit whether or not report saved
+    if (STATE.email) {
+      sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
     }
   })
   .catch(function(e) {
