@@ -1603,8 +1603,13 @@ function skipEmail() {
 }
 
 function saveReportAndNotifyKit() {
-  var reportHTML = document.getElementById('reportContent').innerHTML;
+  // PRIORITY: Subscribe to Kit immediately — never blocked by save-report
+  if (STATE.email) {
+    sendToConvertKit(STATE.email, STATE.firstName || '', '');
+  }
 
+  // THEN try to save the report (non-blocking, best-effort)
+  var reportHTML = document.getElementById('reportContent').innerHTML;
   var reportData = {
     name: STATE.name,
     firstName: STATE.firstName || STATE.name.split(' ')[0],
@@ -1639,37 +1644,13 @@ function saveReportAndNotifyKit() {
     if (d.reportId) {
       var resultUrl = window.location.origin + '/results?id=' + d.reportId;
       console.log('Report saved:', resultUrl);
-      // Only subscribe to Kit once we have a valid report URL
-      if (STATE.email) {
-        sendToConvertKit(STATE.email, STATE.firstName || '', resultUrl);
-      }
     } else {
-      // save-report returned a response but no reportId (e.g. 500 with JSON body)
-      console.error('save-report failed:', d.error, d.detail);
-      showReportSaveError();
+      console.log('save-report issue (non-blocking):', d.error || d);
     }
   })
   .catch(function(e) {
-    // Network error or non-JSON response
-    console.error('save-report error:', e);
-    showReportSaveError();
+    console.log('save-report error (non-blocking):', e);
   });
-}
-
-function showReportSaveError() {
-  // Show a small, non-intrusive message on the report page
-  var existing = document.getElementById('reportSaveNotice');
-  if (existing) return; // already showing
-  var notice = document.createElement('div');
-  notice.id = 'reportSaveNotice';
-  notice.style.cssText = 'background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:1rem 1.5rem;margin:1.5rem auto;max-width:600px;border-radius:4px;font-size:0.88rem;text-align:center;';
-  notice.innerHTML = 'Your blueprint is displayed below, but we couldn’t save a shareable link right now. '
-    + 'Use the <strong>Print / Save as PDF</strong> button to keep a copy. '
-    + 'If you entered your email, please try again later to receive it by email.';
-  var report = document.getElementById('reportContent');
-  if (report && report.parentNode) {
-    report.parentNode.insertBefore(notice, report);
-  }
 }
 
 function sendToConvertKit(email, firstName, resultUrl) {

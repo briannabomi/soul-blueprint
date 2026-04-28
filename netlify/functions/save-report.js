@@ -1,32 +1,22 @@
 const { getStore } = require("@netlify/blobs");
 const crypto = require("crypto");
 
-module.exports = async (req, context) => {
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" }
-    });
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
   let payload;
   try {
-    payload = await req.json();
+    payload = JSON.parse(event.body);
   } catch {
-    return new Response(JSON.stringify({ error: "Invalid JSON" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" }
-    });
+    return { statusCode: 400, body: JSON.stringify({ error: "Invalid JSON" }) };
   }
 
   if (!payload || typeof payload !== "object") {
-    return new Response(JSON.stringify({ error: "Report data required" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" }
-    });
+    return { statusCode: 400, body: JSON.stringify({ error: "Report data required" }) };
   }
 
-  // Generate a UUID for this report
   let reportId;
   try {
     reportId = crypto.randomUUID();
@@ -45,23 +35,16 @@ module.exports = async (req, context) => {
 
     console.log("[save-report] Saved report:", reportId);
 
-    return new Response(JSON.stringify({ success: true, reportId }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    });
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: true, reportId })
+    };
   } catch (err) {
-    console.error("[save-report] Blob write error:", err.message, err.stack);
-    return new Response(JSON.stringify({
-      success: false,
-      error: "Failed to save report",
-      detail: err.message
-    }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
+    console.error("[save-report] Error:", err.message);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ success: false, error: "Failed to save report", detail: err.message })
+    };
   }
-};
-
-module.exports.config = {
-  path: "/.netlify/functions/save-report"
 };
