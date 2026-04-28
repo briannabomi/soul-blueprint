@@ -280,7 +280,6 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
       <button class="btn-outline btn-sm" onclick="goTo('s-ikigai4')">&larr; Back</button>
       <button class="btn" onclick="captureEmailAndGenerate()">Reveal My Blueprint</button>
     </div>
-    <div style="text-align:center;margin-top:0.8rem"><a href="#" onclick="skipEmail();return false" style="color:var(--muted);font-size:0.78rem;text-decoration:none">Skip &mdash; just show my results</a></div>
   </div>
 </div>
 
@@ -1437,22 +1436,22 @@ function renderReport() {
       <div class="ikigai-grid">
         <div class="ikigai-card">
           <h4>What You Love</h4>
-          <p>${skipped.love ? '<em style="color:var(--muted)">Skipped</em>' : (s.ikigai.love.filter(x=>x).join(' ') || 'Not specified')}</p>
+          <p>${skipped.love ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.love.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
           ${!skipped.love && ikigaiAnalysis.primaries.love ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.love] + '.</p>' : ''}
         </div>
         <div class="ikigai-card">
           <h4>What You\u2019re Good At</h4>
-          <p>${skipped.good ? '<em style="color:var(--muted)">Skipped</em>' : (s.ikigai.good.filter(x=>x).join(' ') || 'Not specified')}</p>
+          <p>${skipped.good ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.good.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
           ${!skipped.good && ikigaiAnalysis.primaries.good ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.good] + '.</p>' : ''}
         </div>
         <div class="ikigai-card">
           <h4>What the World Needs</h4>
-          <p>${skipped.world ? '<em style="color:var(--muted)">Skipped</em>' : (s.ikigai.world.filter(x=>x).join(' ') || 'Not specified')}</p>
+          <p>${skipped.world ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.world.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
           ${!skipped.world && ikigaiAnalysis.primaries.world ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.world] + '.</p>' : ''}
         </div>
         <div class="ikigai-card">
           <h4>What You Can Be Paid For</h4>
-          <p>${skipped.paid ? '<em style="color:var(--muted)">Skipped</em>' : (s.ikigai.paid.filter(x=>x).join(' ') || 'Not specified')}</p>
+          <p>${skipped.paid ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.paid.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
           ${!skipped.paid && ikigaiAnalysis.primaries.paid ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.paid] + '.</p>' : ''}
         </div>
       </div>
