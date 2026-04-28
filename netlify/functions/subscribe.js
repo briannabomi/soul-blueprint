@@ -1,40 +1,34 @@
 exports.handler = async (event) => {
-  // Only allow POST
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  // ── env checks ──
   const KIT_API_KEY = process.env.KIT_API_KEY;
   const KIT_TAG_ID = process.env.KIT_TAG_ID;
 
   if (!KIT_API_KEY) {
-    console.error("[subscribe] KIT_API_KEY not set in environment");
+    console.error("[subscribe] KIT_API_KEY not set");
     return { statusCode: 500, body: JSON.stringify({ error: "Server misconfigured: missing API key" }) };
   }
   if (!KIT_TAG_ID) {
-    console.error("[subscribe] KIT_TAG_ID not set in environment");
+    console.error("[subscribe] KIT_TAG_ID not set");
     return { statusCode: 500, body: JSON.stringify({ error: "Server misconfigured: missing tag ID" }) };
   }
 
-  // ── parse body ──
   let payload;
   try {
     payload = JSON.parse(event.body);
   } catch {
-    console.error("[subscribe] Failed to parse request body");
     return { statusCode: 400, body: JSON.stringify({ error: "Invalid JSON" }) };
   }
 
-  const { email_address, first_name, fields, resultUrl } = payload;
+  const { email_address, first_name, fields } = payload;
   if (!email_address || !email_address.includes("@")) {
-    console.error("[subscribe] Invalid or missing email_address:", email_address);
     return { statusCode: 400, body: JSON.stringify({ error: "Valid email_address required" }) };
   }
 
   console.log("[subscribe] Creating subscriber for:", email_address);
 
-  // ── shared headers for Kit V4 ──
   const kitHeaders = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -42,17 +36,14 @@ exports.handler = async (event) => {
   };
 
   try {
-    // ── Step 1: Create subscriber ──
-    const mergedFields = {
-      ...(fields || {}),
-      ...(resultUrl ? { soul_blueprint_url: resultUrl } : {})
-    };
+    // Step 1: Create subscriber with custom fields
     const createBody = {
       email_address,
       first_name: first_name || "",
-      fields: mergedFields
+      fields: fields || {}
     };
-    console.log("[subscribe] Step 1 — POST /v4/subscribers, body:", JSON.stringify({ ...createBody, email_address: "REDACTED" }));
+
+    console.log("[subscribe] Step 1 — POST /v4/subscribers");
 
     const createRes = await fetch("https://api.kit.com/v4/subscribers", {
       method: "POST",
@@ -63,27 +54,25 @@ exports.handler = async (event) => {
     const createData = await createRes.json();
 
     if (!createRes.ok) {
-      console.error("[subscribe] Step 1 failed — status:", createRes.status, "response:", JSON.stringify(createData));
+      console.error("[subscribe] Step 1 failed:", createRes.status, JSON.stringify(createData));
       return {
         statusCode: createRes.status,
-        body: JSON.stringify({ error: "Kit API error: failed to create subscriber", detail: createData })
+        body: JSON.stringify({ error: "Kit: failed to create subscriber", detail: createData })
       };
     }
 
     const subscriberId = createData.subscriber?.id;
     if (!subscriberId) {
-      console.error("[subscribe] Step 1 succeeded but no subscriber id in response:", JSON.stringify(createData));
+      console.error("[subscribe] No subscriber id in response:", JSON.stringify(createData));
       return {
         statusCode: 502,
-        body: JSON.stringify({ error: "Kit returned success but no subscriber id", detail: createData })
+        body: JSON.stringify({ error: "Kit returned no subscriber id", detail: createData })
       };
     }
 
-    console.log("[subscribe] Step 1 success — subscriber id:", subscriberId);
+    console.log("[subscribe] Subscriber created:", subscriberId);
 
-    // ── Step 2: Tag the subscriber ──
-    console.log("[subscribe] Step 2 — POST /v4/tags/" + KIT_TAG_ID + "/subscribers/" + subscriberId);
-
+    // Step 2: Tag the subscriber
     const tagRes = await fetch(`https://api.kit.com/v4/tags/${KIT_TAG_ID}/subscribers/${subscriberId}`, {
       method: "POST",
       headers: kitHeaders
@@ -92,14 +81,15 @@ exports.handler = async (event) => {
     const tagData = await tagRes.json();
 
     if (!tagRes.ok) {
-      console.error("[subscribe] Step 2 failed — status:", tagRes.status, "response:", JSON.stringify(tagData));
+      console.error("[subscribe] Tagging failed:", tagRes.status, JSON.stringify(tagData));
+      // Subscriber was still created — return partial success
       return {
-        statusCode: tagRes.status,
-        body: JSON.stringify({ error: "Kit API error: failed to tag subscriber", detail: tagData })
+        statusCode: 200,
+        body: JSON.stringify({ success: true, subscriberId, tagError: tagData })
       };
     }
 
-    console.log("[subscribe] Step 2 success — subscriber tagged");
+    console.log("[subscribe] Subscriber tagged");
 
     return {
       statusCode: 200,
@@ -107,7 +97,7 @@ exports.handler = async (event) => {
     };
 
   } catch (err) {
-    console.error("[subscribe] Unexpected error:", err.message);
+    console.error("[subscribe] Error:", err.message);
     return { statusCode: 502, body: JSON.stringify({ error: "Failed to reach Kit", detail: err.message }) };
   }
 };
