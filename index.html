@@ -1647,7 +1647,7 @@ function sendToKit(email, firstName) {
         return;
       }
       if (d.success) {
-        console.log('Kit subscription confirmed — subscriberId:', d.subscriberId, 'tagged:', d.tagged);
+        console.log('Kit subscription confirmed - subscriberId:', d.subscriberId, 'tagged:', d.tagged);
       } else {
         console.error('Kit subscription FAILED:', JSON.stringify(d));
         showKitError(d.error || 'Subscription failed. Your report is still saved.');
@@ -1655,7 +1655,7 @@ function sendToKit(email, firstName) {
     })
     .catch(function(e) {
       console.error('Kit network error:', e);
-      showKitError('Network error — could not reach subscription service.');
+      showKitError('Network error - could not reach subscription service.');
     });
   } catch (e) {
     console.error('Kit send crashed:', e);
@@ -1668,7 +1668,7 @@ function showKitError(msg) {
   var notice = document.createElement(‘div’);
   notice.id = ‘kitErrorNotice’;
   notice.style.cssText = ‘background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;’;
-  notice.textContent = msg || "We couldn’t subscribe your email, but your report is still here.";
+  notice.textContent = msg || "We could not subscribe your email, but your report is still here.";
   var report = document.getElementById(‘reportContent’);
   if (report && report.parentNode) {
     report.parentNode.insertBefore(notice, report);
