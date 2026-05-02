@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Soul Blueprint | Brianna Bomi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e1a;--card:rgba(16,22,40,0.85);--card2:rgba(22,28,48,0.8);--accent:#c9956b;--accent2:#d4a574;--text:#e0dcd6;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15);--midnight:#0d1225;--deep:#111830}
+html{font-size:16.2px}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.85;font-size:0.88rem}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+h1,h2{font-family:'DM Serif Display',serif;font-weight:400;color:var(--white);letter-spacing:0.01em}
+h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);letter-spacing:0.02em}
+.screen{display:none;min-height:100vh;padding:2rem;max-width:720px;margin:0 auto;animation:fadeIn 0.8s ease}
+.screen.active{display:flex;flex-direction:column;justify-content:center}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.welcome-badge{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.welcome h1{font-size:clamp(2.6rem,7vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
+.welcome h1 em{color:var(--accent);font-style:normal}
+.welcome p{color:var(--muted);font-size:0.95rem;max-width:520px;margin-bottom:2rem}
+.welcome .hook{color:var(--text);font-size:1.1rem;border-left:2px solid var(--accent);padding-left:1.2rem;margin:2rem 0;font-style:normal;font-family:'DM Serif Display',serif;line-height:1.5}
+.btn{background:var(--accent);color:var(--bg);border:none;padding:0.9rem 2.4rem;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.3s;border-radius:2px}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--glow)}
+.btn-sm{padding:0.6rem 1.6rem;font-size:0.75rem}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1px solid #333;color:var(--text);padding:0.85rem 1rem;font-size:0.88rem;font-family:'Inter',sans-serif;border-radius:2px;transition:border-color 0.3s;line-height:1.7}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+.form-group textarea{min-height:80px;resize:vertical;line-height:1.6}
+.form-group .hint{font-size:0.78rem;color:var(--muted);margin-top:0.3rem}
+.step-header{margin-bottom:2rem}
+.step-header .phase{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.step-header h2{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:0.8rem;line-height:1.15}
+.step-header p{color:var(--muted);font-size:0.86rem;line-height:1.8}
+.progress-bar{width:100%;height:4px;background:#333;margin:2rem 0;border-radius:2px;overflow:hidden}
+.progress-bar .fill{height:100%;background:var(--accent);transition:width 0.6s ease}
+.processing{text-align:center;padding:4rem 2rem}
+.processing .spinner{width:48px;height:48px;border:2px solid #333;border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 2rem}
+.processing p{color:var(--muted);font-size:0.85rem;animation:pulse 2s ease infinite}
+.processing h2{margin-bottom:1rem}
+.nav-row{display:flex;gap:1rem;margin-top:2rem;justify-content:space-between}
+.report{padding:0;max-width:100%;margin:0;position:relative;z-index:1}
+/* ---- SCROLLABLE REPORT SYSTEM ---- */
+.report-slide{display:block;padding:clamp(2.5rem,6vh,5rem) clamp(1.5rem,5vw,4rem);max-width:820px;margin:0 auto;position:relative;overflow:hidden}
+.report-slide.slide-enter{animation:slideIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes slideIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+/* ---- ACCORDION SYSTEM ---- */
+.accordion-section{border-bottom:1px solid rgba(201,149,107,0.15);margin:0 auto;max-width:820px}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:1.5rem 2rem;background:var(--card);transition:background 0.3s;user-select:none;-webkit-user-select:none}
+.accordion-header:hover{background:rgba(22,28,48,0.95)}
+.accordion-header h2{font-size:clamp(2.2rem,5vw,3.1rem);margin:0;line-height:1.15;font-family:'DM Serif Display',serif;font-weight:400;color:var(--white)}
+.accordion-toggle{font-size:1.8rem;color:var(--accent);transition:transform 0.4s ease;flex-shrink:0;margin-left:1rem;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.accordion-section.open .accordion-toggle{transform:rotate(45deg)}
+.accordion-body{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.6s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease}
+.accordion-section.open .accordion-body{max-height:8000px;opacity:1}
+.accordion-body-inner{padding:clamp(1.5rem,4vh,3rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
+/* Save/Print floating bar */
+.save-bar{text-align:center;padding:1rem 2rem;max-width:820px;margin:0 auto}
+/* Synthesis always open — no accordion wrapper */
+.synthesis-section{display:block;padding:clamp(2.5rem,6vh,5rem) clamp(1.5rem,5vw,4rem);max-width:820px;margin:0 auto;position:relative;overflow:hidden}
+/* Report header (slide 0) */
+.report-header{text-align:center;padding:0}
+.report-header .brand{font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.report-header h1{font-size:clamp(2.8rem,7vw,4.2rem);margin-bottom:0.8rem;line-height:1.05}
+.report-header .name{font-size:1.5rem;color:var(--accent);font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:0.05em}
+/* Section watermarks */
+.report-slide .section-watermark{position:absolute;top:50%;right:-30px;transform:translateY(-50%);font-size:20rem;opacity:0.025;pointer-events:none;z-index:0;font-family:'Cormorant Garamond',serif;line-height:1;color:var(--accent)}
+.report-slide>*{position:relative;z-index:1}
+/* Section glyphs */
+.section-glyph{display:inline-block;width:30px;height:30px;vertical-align:middle;margin-right:0.6rem;opacity:0.85}
+.section-glyph svg{width:100%;height:100%}
+/* Energy gradients per section */
+.energy-numerology{background:linear-gradient(160deg,rgba(201,149,107,0.06) 0%,transparent 50%)}
+.energy-northnode{background:linear-gradient(160deg,rgba(90,110,180,0.07) 0%,transparent 50%)}
+.energy-genekeys{background:linear-gradient(160deg,rgba(90,170,120,0.06) 0%,transparent 50%)}
+.energy-humandesign{background:linear-gradient(160deg,rgba(140,90,180,0.07) 0%,transparent 50%)}
+.energy-ikigai{background:linear-gradient(160deg,rgba(201,160,80,0.06) 0%,transparent 50%)}
+.energy-synthesis{background:linear-gradient(160deg,rgba(180,120,160,0.05) 0%,rgba(90,130,180,0.04) 40%,rgba(120,180,130,0.03) 100%)}
+/* Section typography */
+.report-slide h2{font-size:clamp(2.2rem,5vw,3.1rem);margin-bottom:0.5rem;line-height:1.15}
+.report-slide h3{font-size:clamp(1.15rem,2.5vw,1.5rem);margin-bottom:0.5rem;margin-top:2.2rem;font-weight:400}
+.report-slide .subtitle{color:var(--accent);font-size:0.9rem;margin-bottom:1.6rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.04em}
+.accordion-body-inner h2{font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:0.5rem;line-height:1.15}
+.accordion-body-inner .subtitle{color:var(--accent);font-size:0.9rem;margin-bottom:1.6rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.04em}
+.report-slide p{margin-bottom:1rem;font-size:0.86rem;line-height:1.95}
+/* Glow border (replaces solid left border) */
+.report-slide .insight{background:var(--card);padding:1.4rem 1.6rem;border-left:2px solid var(--accent);box-shadow:-2px 0 12px rgba(201,149,107,0.15),inset 2px 0 8px rgba(201,149,107,0.05);margin:1.6rem 0;font-size:0.84rem;line-height:1.9;border-radius:0 6px 6px 0}
+.report-slide .reframe{color:var(--accent);font-family:'DM Serif Display',serif;font-size:1.2rem;font-style:normal;margin:2rem 0;line-height:1.4}
+.report-slide .glossary{font-size:0.78rem;color:var(--muted);font-style:italic;margin:-0.2rem 0 1.4rem 0;padding-left:0.6rem;border-left:1px solid rgba(201,149,107,0.2);line-height:1.7}
+/* Cinematic display text for key quotes */
+.display-quote{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3rem);color:var(--white);text-align:center;line-height:1.3;padding:2.5rem 1rem;margin:2rem 0;position:relative}
+.display-quote::before,.display-quote::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.display-quote::before{top:0}
+.display-quote::after{bottom:0}
+/* Glowing text for key phrases */
+.glow-text{color:var(--accent);text-shadow:0 0 8px rgba(201,149,107,0.3),0 0 20px rgba(201,149,107,0.1)}
+/* Shimmer animation on accent elements */
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.shimmer-accent{background:linear-gradient(90deg,var(--accent) 0%,#e8c9a0 25%,var(--accent) 50%,#e8c9a0 75%,var(--accent) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite}
+/* Reveal on tap */
+.reveal-block{cursor:pointer;transition:all 0.4s ease}
+.reveal-block .reveal-summary{display:block}
+.reveal-block .reveal-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease,margin 0.4s ease;margin-top:0}
+.reveal-block.open .reveal-detail{max-height:800px;opacity:1;margin-top:1rem}
+.reveal-hint{font-size:0.7rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.5rem;transition:opacity 0.3s}
+.reveal-block.open .reveal-hint{opacity:0}
+.coord-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.8rem 0}
+.coord-card{background:var(--card);padding:1.2rem 1.4rem;border-radius:6px;border:1px solid rgba(201,149,107,0.08);transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s}
+.coord-card:hover{border-color:rgba(201,149,107,0.35);cursor:pointer;transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,149,107,0.1)}
+.coord-card .label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}
+.coord-card .value{font-size:1.2rem;color:var(--white);font-family:'DM Serif Display',serif}
+.coord-card .gloss{font-size:0.7rem;color:var(--muted);margin-top:0.35rem;line-height:1.55}
+.gene-key-spectrum{display:flex;align-items:center;gap:0.5rem;margin:1.2rem 0;padding:1.2rem;background:var(--card);border-radius:6px;border:1px solid rgba(201,149,107,0.08)}
+.gene-key-spectrum .shadow{color:#9b7070;flex:1;text-align:center;font-size:0.84rem;font-family:'Cormorant Garamond',serif}
+.gene-key-spectrum .arrow{color:var(--muted);font-size:0.7rem}
+.gene-key-spectrum .gift{color:var(--accent);flex:1;text-align:center;font-size:0.84rem;font-weight:400;font-family:'Cormorant Garamond',serif}
+.gene-key-spectrum .arrow2{color:var(--muted);font-size:0.7rem}
+.gene-key-spectrum .siddhi{color:#a0c0a0;flex:1;text-align:center;font-size:0.84rem;font-family:'Cormorant Garamond',serif}
+.ikigai-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0}
+.ikigai-card{background:var(--card);padding:1.2rem;border-radius:6px;border:1px solid rgba(201,149,107,0.08)}
+.ikigai-card h4{font-family:'DM Serif Display',serif;font-size:0.94rem;color:var(--accent);margin-bottom:0.5rem;font-weight:400}
+.ikigai-card p{font-size:0.78rem;color:var(--muted);line-height:1.75}
+.cta-box{background:linear-gradient(135deg,var(--card),rgba(30,22,15,0.8));border:1px solid var(--accent);box-shadow:0 0 30px rgba(201,149,107,0.08);padding:3rem 2.5rem;text-align:center;margin:2rem 0;border-radius:8px}
+.cta-box h3{font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:1.2rem;font-family:'DM Serif Display',serif}
+.cta-box p{color:var(--muted);font-size:0.84rem;margin-bottom:1.5rem;line-height:1.9}
+.print-btn{position:fixed;top:1rem;right:1rem;z-index:100}
+.essence-block{background:var(--card);border:1px solid #333;border-radius:3px;padding:1.5rem;margin:1.2rem 0}
+.essence-block h4{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:1rem;margin-bottom:0.6rem}
+.essence-block .quote{font-size:0.78rem;color:var(--muted);padding:0.4rem 0 0.4rem 1rem;border-left:1px solid var(--accent);margin:0.4rem 0;font-style:italic;line-height:1.7}
+.essence-block .quote .attr{color:var(--accent);font-size:0.72rem;font-style:normal;text-transform:uppercase;letter-spacing:0.08em}
+.essence-block p{font-size:0.88rem;margin-bottom:0.5rem}
+.pillar-card{background:var(--card);border-left:3px solid var(--accent);padding:1.2rem 1.5rem;margin:1rem 0;border-radius:0 3px 3px 0}
+.pillar-card h4{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.05rem;margin-bottom:0.5rem}
+.pillar-card p{font-size:0.85rem;margin-bottom:0.4rem}
+.template-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.template-card{background:var(--card);padding:1rem;border-radius:3px;font-size:0.82rem}
+.template-card h5{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:0.9rem;margin-bottom:0.5rem}
+.template-card .overlap{color:var(--text);margin-bottom:0.3rem}
+.template-card .diverge{color:var(--muted)}
+.purpose-statement{background:linear-gradient(135deg,var(--card),rgba(30,22,15,0.6));border:1px solid rgba(201,149,107,0.25);box-shadow:0 0 25px rgba(201,149,107,0.06);padding:2rem 2.5rem;text-align:center;margin:1.8rem 0;border-radius:8px;font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--white);font-style:normal;line-height:1.65}
+.hd-type-card{background:var(--card);padding:2rem;border:1px solid rgba(201,149,107,0.2);border-radius:8px;text-align:center;margin:1.5rem 0;box-shadow:0 0 20px rgba(201,149,107,0.05)}
+.hd-type-card .type-name{font-size:2rem;font-family:'DM Serif Display',serif;color:var(--accent);margin-bottom:0.7rem}
+.hd-type-card .type-detail{font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem;line-height:1.7}
+.test-results{background:#1a1a1a;border:1px solid #333;padding:1rem;margin:1rem 0;font-family:monospace;font-size:0.75rem;color:var(--muted);max-height:300px;overflow-y:auto;border-radius:3px}
+.test-results .pass{color:#6a9a6a}
+.test-results .fail{color:#9a6a6a}
+@media print{html{font-size:15px}.print-btn,.btn,.nav-row,.btn-outline,.save-bar,#starfield{display:none!important}.screen{display:none!important;min-height:0;padding:0}.screen#s-report{display:block!important;padding:0.5rem}.report{max-width:100%}.report-slide{display:block!important;min-height:0!important;padding:1.5rem 1rem!important;break-inside:avoid}.accordion-section{break-inside:avoid}.accordion-body{max-height:none!important;opacity:1!important;overflow:visible!important}.accordion-body-inner{padding:1rem!important}.accordion-toggle{display:none!important}.accordion-header{background:none!important;padding:1rem 0!important}.synthesis-section{padding:1.5rem 1rem!important;break-inside:avoid}body{background:#fff;color:#222}.report-slide .insight{border-left-color:#999;box-shadow:none!important}.cta-box{border-color:#999;box-shadow:none!important}.section-watermark{display:none!important}.energy-numerology,.energy-northnode,.energy-genekeys,.energy-humandesign,.energy-ikigai,.energy-synthesis{background:none!important}.glow-text{text-shadow:none!important;-webkit-text-fill-color:currentColor!important}.shimmer-accent{-webkit-text-fill-color:currentColor!important;animation:none!important}}
+.loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
+.loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
+.loc-item .loc-country{color:var(--muted);font-size:0.75rem}
+@media(max-width:600px){.coord-grid,.ikigai-grid,.template-compare{grid-template-columns:1fr}.screen{padding:1.5rem}.form-group textarea{min-height:100px}}
+@media(max-width:400px){.nav-row{flex-direction:column-reverse;gap:0.5rem}.nav-row .btn,.nav-row .btn-outline{width:100%;text-align:center}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<!-- SCREEN 1: WELCOME -->
+<div class="screen welcome active" id="s-welcome">
+  <div>
+    <div class="welcome-badge">Brianna Bomi &mdash; Sovereign Arc</div>
+    <h1>Your Soul<br><em>Blueprint</em></h1>
+    <div class="hook">Not what your mind wants. Not what your fear will tolerate. What your soul is actually asking for.</div>
+    <p>This tool combines five systems: astrology, human design, numerology, gene keys, and ikigai. To tell you, clearly, why you're here and what to do about it.</p>
+    <p>You'll need your date of birth, time of birth (if you know it) and 8 minutes to give honest answers.</p>
+    <button class="btn" onclick="goTo('s-birth')">Begin Your Blueprint</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: BIRTH INFO -->
+<div class="screen" id="s-birth">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 1 of 6 &mdash; Your Details</div>
+      <h2>Your Birth Data</h2>
+      <p>Everything here is calculated from when and where you were born. The more accurate your info, the more precise your blueprint.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:16%"></div></div>
+    <div class="form-group">
+      <label>Full Birth Name</label>
+      <input type="text" id="birthName" placeholder="As it appears on your birth certificate">
+      <div class="hint">Used to calculate your Destiny Number. First, middle, and last name.</div>
+    </div>
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="date" id="birthDate">
+    </div>
+    <div class="form-group">
+      <label>Time of Birth</label>
+      <input type="time" id="birthTime" value="12:00">
+      <div class="hint">Don't know? Leave it at noon. Your results will be slightly less precise but still useful.</div>
+    </div>
+    <div class="form-group" style="position:relative">
+      <label>Birth Location</label>
+      <input type="text" id="birthPlace" placeholder="Start typing your city..." autocomplete="off">
+      <div class="hint">Start typing your city and select it from the dropdown</div>
+      <div id="locDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--accent);border-top:none;max-height:200px;overflow-y:auto;z-index:50"></div>
+      <input type="hidden" id="birthLat">
+      <input type="hidden" id="birthLng">
+      <input type="hidden" id="birthTz">
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-welcome')">&larr; Back</button>
+      <button class="btn" onclick="calculateAndProceed()">Calculate My Blueprint</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: PROCESSING -->
+<div class="screen" id="s-processing1">
+  <div class="processing">
+    <div class="spinner"></div>
+    <h2>Calculating your Soul Blueprint&hellip;</h2>
+    <p id="processingMsg">Mapping your planet positions</p>
+  </div>
+</div>
+
+<!-- SCREEN 4-7: IKIGAI QUESTIONS -->
+<div class="screen" id="s-ikigai1">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 2 of 6 &mdash; Ikigai</div>
+      <h2>What You Love</h2>
+      <p>Not what looks good on paper. What you'd do on a free Saturday with no one watching.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:33%"></div></div>
+    <div class="form-group">
+      <label>What activities make you lose track of time?</label>
+      <textarea id="ik-love-1" placeholder="e.g., Writing, cooking, solving puzzles, deep conversations, building things, researching rabbit holes..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What topics could you talk about for hours?</label>
+      <textarea id="ik-love-2" placeholder="e.g., Psychology, design, business strategy, spirituality, how systems work, health..."></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-birth')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai2')">Continue</button>
+    </div>
+    <div style="text-align:center;margin-top:0.8rem"><a href="#" onclick="skipIkigai('s-ikigai2','love');return false" style="color:var(--muted);font-size:0.78rem;text-decoration:none">Not sure? You can skip this section.</a></div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai2">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 3 of 6 &mdash; Ikigai</div>
+      <h2>What You're Good At</h2>
+      <p>The things that feel easy to you but hard for other people. The stuff friends ask you for help with.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:50%"></div></div>
+    <div class="form-group">
+      <label>What skills come naturally to you or what have you gotten really good at?</label>
+      <textarea id="ik-good-1" placeholder="e.g., Explaining complex ideas simply, reading people, organizing chaos, writing, leading teams..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>What do people come to you for?</label>
+      <textarea id="ik-good-2" placeholder="e.g., Career advice, relationship perspective, creative feedback, calm in a crisis..."></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai1')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai3')">Continue</button>
+    </div>
+    <div style="text-align:center;margin-top:0.8rem"><a href="#" onclick="skipIkigai('s-ikigai3','good');return false" style="color:var(--muted);font-size:0.78rem;text-decoration:none">Not sure? You can skip this section.</a></div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai3">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 4 of 6 &mdash; Ikigai</div>
+      <h2>What the World Needs</h2>
+      <p>The thing that frustrates you because you know it could be different. Not the whole world, your corner of it.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:66%"></div></div>
+    <div class="form-group">
+      <label>What problem or injustice fires you up?</label>
+      <textarea id="ik-world-1" placeholder="e.g., People stuck in careers that drain them, broken education systems, mental health stigma, lack of access to good information..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>If you could change one thing in your industry or community, what would it be?</label>
+      <textarea id="ik-world-2" placeholder="Be specific. 'The way startups treat people' is better than 'make the world better.'"></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai2')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-ikigai4')">Continue</button>
+    </div>
+    <div style="text-align:center;margin-top:0.8rem"><a href="#" onclick="skipIkigai('s-ikigai4','world');return false" style="color:var(--muted);font-size:0.78rem;text-decoration:none">Not sure? You can skip this section.</a></div>
+  </div>
+</div>
+
+<div class="screen" id="s-ikigai4">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 5 of 6 &mdash; Ikigai</div>
+      <h2>What You Can Be Paid For</h2>
+      <p>Purpose without infrastructure is a journal entry. AND when you're in alignment with your soul, money always comes.</p>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:83%"></div></div>
+    <div class="form-group">
+      <label>What do people already tell you that you should charge for?</label>
+      <textarea id="ik-paid-1" placeholder="The thing where someone says 'you're so good at this, why aren't you doing this for a living?'"></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai3')">&larr; Back</button>
+      <button class="btn" onclick="goTo('s-email')">Continue</button>
+    </div>
+    <div style="text-align:center;margin-top:0.8rem"><a href="#" onclick="skipIkigai('s-email','paid');return false" style="color:var(--muted);font-size:0.78rem;text-decoration:none">Not sure? You can skip this section.</a></div>
+  </div>
+</div>
+
+<!-- SCREEN: EMAIL CAPTURE -->
+<div class="screen" id="s-email">
+  <div>
+    <div class="step-header">
+      <div class="phase">Step 6 of 6 &mdash; Almost done</div>
+      <h2>One more thing before your blueprint.</h2>
+    </div>
+    <div class="progress-bar"><div class="fill" style="width:95%"></div></div>
+    <div style="background:var(--card);border:1px solid var(--accent);border-radius:4px;padding:1.2rem 1.4rem;margin-bottom:1.5rem">
+      <p style="font-size:0.84rem;color:var(--white);margin:0;line-height:1.7"><strong style="color:var(--accent)">Your report is not saved anywhere.</strong> I will never see it. Once you leave the page, it's gone. <strong>Save or print your report on the next page.</strong></p>
+    </div>
+    <p style="font-size:0.88rem;color:var(--text);margin-bottom:1.5rem;line-height:1.7">We'll email you an AI prompt to turn your blueprint into weekly action steps.</p>
+    <div class="form-group">
+      <label>Your Email</label>
+      <input type="email" id="userEmail" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label>Your First Name</label>
+      <input type="text" id="userFirstName" placeholder="So we can personalize your report.">
+    </div>
+    <p style="font-size:0.76rem;color:var(--muted);margin-top:0.5rem">Check your spam or promotions folder for your AI prompt. It may take a few minutes.</p>
+    <div class="nav-row">
+      <button class="btn-outline btn-sm" onclick="goTo('s-ikigai4')">&larr; Back</button>
+      <button class="btn" onclick="captureEmailAndGenerate()">Show My Blueprint</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: PROCESSING 2 -->
+<div class="screen" id="s-processing2">
+  <div class="processing">
+    <div class="spinner"></div>
+    <h2>Building your Soul Blueprint&hellip;</h2>
+    <p id="processingMsg2">Cross-referencing your five systems</p>
+  </div>
+</div>
+
+<!-- SCREEN: REPORT -->
+<div class="screen" id="s-report" style="padding:0;max-width:100%">
+  <div class="report" id="reportContent"></div>
+</div>
+
+<script>
+// ============================================================
+// LOCATION AUTOCOMPLETE (GeoNames)
+// ============================================================
+let locDebounce = null;
+let locResults = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  const inp = document.getElementById('birthPlace');
+  const dd = document.getElementById('locDropdown');
+  if (!inp) return;
+  inp.addEventListener('input', function() {
+    const q = this.value.trim();
+    if (q.length < 2) { dd.style.display = 'none'; return; }
+    clearTimeout(locDebounce);
+    locDebounce = setTimeout(() => searchLocation(q), 300);
+  });
+  inp.addEventListener('blur', function() {
+    setTimeout(() => { dd.style.display = 'none'; }, 200);
+  });
+});
+
+async function searchLocation(q) {
+  const dd = document.getElementById('locDropdown');
+  try {
+    const url = 'https://secure.geonames.org/searchJSON?q=' + encodeURIComponent(q) + '&maxRows=6&featureClass=P&orderby=population&username=demo';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (data.geonames && data.geonames.length > 0) {
+      locResults = data.geonames;
+      renderLocResults(locResults);
+      return;
+    }
+  } catch(e) {
+    console.log('GeoNames error, falling back to Nominatim:', e);
+  }
+  try {
+    const url2 = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(q) + '&limit=6&addressdetails=1';
+    const resp2 = await fetch(url2, { headers: { 'Accept-Language': 'en' } });
+    const data2 = await resp2.json();
+    locResults = data2.map(r => ({
+      name: r.address?.city || r.address?.town || r.address?.village || r.name,
+      adminName1: r.address?.state || r.address?.region || '',
+      countryName: r.address?.country || '',
+      lat: r.lat, lng: r.lon, timezone: null
+    }));
+    renderLocResults(locResults);
+  } catch(e2) {
+    console.log('Both geocoding services failed:', e2);
+  }
+}
+
+function renderLocResults(results) {
+  const dd = document.getElementById('locDropdown');
+  if (results.length === 0) { dd.style.display = 'none'; return; }
+  dd.innerHTML = results.map((r, i) => {
+    const region = r.adminName1 ? r.adminName1 + ', ' : '';
+    return '<div class="loc-item" onmousedown="selectLocation(' + i + ')">' +
+      '<div>' + (r.name || '') + '</div>' +
+      '<div class="loc-country">' + region + (r.countryName || '') + '</div></div>';
+  }).join('');
+  dd.style.display = 'block';
+}
+
+async function selectLocation(idx) {
+  const r = locResults[idx];
+  const inp = document.getElementById('birthPlace');
+  const region = r.adminName1 ? ', ' + r.adminName1 : '';
+  inp.value = (r.name || '') + region + ', ' + (r.countryName || '');
+  document.getElementById('birthLat').value = r.lat || '';
+  document.getElementById('birthLng').value = r.lng || '';
+  document.getElementById('locDropdown').style.display = 'none';
+  let tz = r.timezone?.timeZoneId || r.timezone || null;
+  if (!tz && r.lat && r.lng) {
+    try {
+      const tzUrl = 'https://secure.geonames.org/timezoneJSON?lat=' + r.lat + '&lng=' + r.lng + '&username=demo';
+      const tzResp = await fetch(tzUrl);
+      const tzData = await tzResp.json();
+      tz = tzData.timezoneId || null;
+    } catch(e) { console.log('Timezone lookup failed'); }
+  }
+  document.getElementById('birthTz').value = tz || Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+function getUtcOffset(tzName, dateStr, timeStr) {
+  try {
+    const [y, mo, d] = dateStr.split('-').map(Number);
+    const [h, mi] = timeStr.split(':').map(Number);
+    const localDate = new Date(y, mo - 1, d, h, mi);
+    const target = new Date(localDate.toLocaleString('en-US', { timeZone: tzName }));
+    const utc = new Date(localDate.toLocaleString('en-US', { timeZone: 'UTC' }));
+    return (utc - target) / 3600000;
+  } catch(e) { return 0; }
+}
+
+// ============================================================
+// STATE
+// ============================================================
+let STATE = {};
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function skipIkigai(nextScreen, section) {
+  // Mark this section as skipped so the report can handle it gracefully
+  if (!STATE.skippedSections) STATE.skippedSections = [];
+  STATE.skippedSections.push(section);
+  goTo(nextScreen);
+}
+
+// ============================================================
+// NUMEROLOGY ENGINE
+// ============================================================
+function reduceToSingle(n) {
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+    n = String(n).split('').reduce((a, b) => a + parseInt(b), 0);
+  }
+  return n;
+}
+
+function calcLifePath(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const mR = reduceToSingle(m);
+  const dR = reduceToSingle(d);
+  const yR = reduceToSingle(y);
+  return reduceToSingle(mR + dR + yR);
+}
+
+// Pythagorean letter mapping — verified against cheat sheet
+const PYTH_MAP = {a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
+
+function calcDestinyNumber(name) {
+  // Process every letter of the full birth name, including middle names
+  // Sum ALL letter values, then reduce (preserving master numbers 11, 22, 33)
+  const letters = name.toLowerCase().replace(/[^a-z]/g, '');
+  let sum = 0;
+  for (let i = 0; i < letters.length; i++) {
+    sum += PYTH_MAP[letters[i]] || 0;
+  }
+  return reduceToSingle(sum);
+}
+
+// Sanity check: "Robert Nesta Marley"
+// R=9 O=6 B=2 E=5 R=9 T=2 = 33
+// N=5 E=5 S=1 T=2 A=1 = 14
+// M=4 A=1 R=9 L=3 E=5 Y=7 = 29
+// Total = 33+14+29 = 76 -> 7+6 = 13 -> 1+3 = 4
+// calcDestinyNumber("Robert Nesta Marley") should return 4
+
+// ============================================================
+// ASTRONOMICAL ENGINE — powered by astronomy-engine (Swiss Ephemeris grade)
+// ============================================================
+function normDeg(d) { return ((d % 360) + 360) % 360; }
+
+function geoEclLon(body, date) {
+  var vec = Astronomy.GeoVector(body, date, true);
+  return Astronomy.Ecliptic(vec).elon;
+}
+
+// True (osculating) North Node — computed from the Moon's instantaneous
+// orbital plane via angular-momentum cross product.  HD software (Jovian
+// Archive / Swiss Ephemeris) uses the true node, which can differ from the
+// mean-node polynomial by up to ~1.7°, enough to shift gate boundaries.
+function trueNorthNodeLon(date) {
+  var dt = 0.001; // days (~86 s) for finite-difference velocity
+  var d2 = new Date(date.getTime() + dt * 86400000);
+
+  // Ecliptic Cartesian position at t
+  var vec1 = Astronomy.GeoVector(Astronomy.Body.Moon, date, true);
+  var ecl1 = Astronomy.Ecliptic(vec1);
+  var r1   = Math.sqrt(vec1.x * vec1.x + vec1.y * vec1.y + vec1.z * vec1.z);
+  var lon1 = ecl1.elon * Math.PI / 180, lat1 = ecl1.elat * Math.PI / 180;
+  var x1 = r1 * Math.cos(lat1) * Math.cos(lon1);
+  var y1 = r1 * Math.cos(lat1) * Math.sin(lon1);
+  var z1 = r1 * Math.sin(lat1);
+
+  // Ecliptic Cartesian position at t + dt
+  var vec2 = Astronomy.GeoVector(Astronomy.Body.Moon, d2, true);
+  var ecl2 = Astronomy.Ecliptic(vec2);
+  var r2   = Math.sqrt(vec2.x * vec2.x + vec2.y * vec2.y + vec2.z * vec2.z);
+  var lon2 = ecl2.elon * Math.PI / 180, lat2 = ecl2.elat * Math.PI / 180;
+  var x2 = r2 * Math.cos(lat2) * Math.cos(lon2);
+  var y2 = r2 * Math.cos(lat2) * Math.sin(lon2);
+  var z2 = r2 * Math.sin(lat2);
+
+  // Velocity (AU / day)
+  var vx = (x2 - x1) / dt, vy = (y2 - y1) / dt, vz = (z2 - z1) / dt;
+
+  // Angular momentum h = r × v  (only hx, hy needed for node longitude)
+  var hx = y1 * vz - z1 * vy;
+  var hy = z1 * vx - x1 * vz;
+
+  // Ascending node longitude Ω = atan2(hx, −hy)
+  return normDeg(Math.atan2(hx, -hy) * 180 / Math.PI);
+}
+
+function getAllPositions(date) {
+  var bodies = [
+    ['sun', Astronomy.Body.Sun], ['moon', Astronomy.Body.Moon],
+    ['mercury', Astronomy.Body.Mercury], ['venus', Astronomy.Body.Venus],
+    ['mars', Astronomy.Body.Mars], ['jupiter', Astronomy.Body.Jupiter],
+    ['saturn', Astronomy.Body.Saturn], ['uranus', Astronomy.Body.Uranus],
+    ['neptune', Astronomy.Body.Neptune], ['pluto', Astronomy.Body.Pluto]
+  ];
+  var pos = {};
+  for (var i = 0; i < bodies.length; i++) {
+    pos[bodies[i][0]] = geoEclLon(bodies[i][1], date);
+  }
+  pos.earth = normDeg(pos.sun + 180);
+  pos.northNode = trueNorthNodeLon(date);
+  pos.southNode = normDeg(pos.northNode + 180);
+  return pos;
+}
+
+function getZodiacSign(lon) {
+  var signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+  return signs[Math.floor(normDeg(lon) / 30)];
+}
+
+function getZodiacDegree(lon) { return Math.floor(normDeg(lon) % 30); }
+
+// Find the UTC Date when the Sun was exactly 88 degrees of solar arc
+// earlier than at birthDate. Uses Newton-Raphson iteration.
+function find88SolarArcDate(birthDate) {
+  var birthSun = geoEclLon(Astronomy.Body.Sun, birthDate);
+  var target = normDeg(birthSun - 88);
+  var estMs = birthDate.getTime() - (88 / 0.9856) * 86400000;
+  for (var iter = 0; iter < 50; iter++) {
+    var d = new Date(estMs);
+    var curSun = geoEclLon(Astronomy.Body.Sun, d);
+    var diff = target - curSun;
+    while (diff > 180) diff -= 360;
+    while (diff < -180) diff += 360;
+    if (Math.abs(diff) < 0.0001) break;
+    estMs += (diff / 0.9856) * 86400000;
+  }
+  return new Date(estMs);
+}
+
+// ============================================================
+// HUMAN DESIGN TYPE ENGINE
+// ============================================================
+const GATE_CENTERS = {
+  64:'head',61:'head',63:'head',
+  47:'ajna',24:'ajna',4:'ajna',17:'ajna',43:'ajna',11:'ajna',
+  62:'throat',23:'throat',56:'throat',35:'throat',12:'throat',45:'throat',33:'throat',8:'throat',31:'throat',20:'throat',16:'throat',
+  7:'g',1:'g',13:'g',25:'g',46:'g',2:'g',15:'g',10:'g',
+  21:'heart',51:'heart',26:'heart',40:'heart',
+  36:'sp',22:'sp',37:'sp',6:'sp',49:'sp',55:'sp',30:'sp',
+  5:'sacral',14:'sacral',29:'sacral',59:'sacral',9:'sacral',3:'sacral',42:'sacral',27:'sacral',34:'sacral',
+  48:'spleen',57:'spleen',44:'spleen',50:'spleen',32:'spleen',28:'spleen',18:'spleen',
+  53:'root',60:'root',52:'root',19:'root',39:'root',41:'root',58:'root',38:'root',54:'root'
+};
+
+const CHANNELS = [
+  [64,47,'head','ajna'],[61,24,'head','ajna'],[63,4,'head','ajna'],
+  [17,62,'ajna','throat'],[43,23,'ajna','throat'],[11,56,'ajna','throat'],
+  [31,7,'throat','g'],[8,1,'throat','g'],[33,13,'throat','g'],[20,10,'throat','g'],
+  [45,21,'throat','heart'],[35,36,'throat','sp'],[12,22,'throat','sp'],
+  [16,48,'throat','spleen'],[20,57,'throat','spleen'],
+  [20,34,'throat','sacral'],
+  [25,51,'g','heart'],[46,29,'g','sacral'],[15,5,'g','sacral'],[2,14,'g','sacral'],
+  [10,57,'g','spleen'],
+  [26,44,'heart','spleen'],[40,37,'heart','sp'],
+  [6,59,'sp','sacral'],[49,19,'sp','root'],[55,39,'sp','root'],[30,41,'sp','root'],
+  [50,27,'spleen','sacral'],[57,34,'spleen','sacral'],
+  [28,38,'spleen','root'],[18,58,'spleen','root'],[32,54,'spleen','root'],
+  [44,26,'spleen','heart'],
+  [3,60,'sacral','root'],[9,52,'sacral','root'],[42,53,'sacral','root']
+];
+
+function calcHDType(birthDateUTC) {
+  var date88 = find88SolarArcDate(birthDateUTC);
+  var conscious = getAllPositions(birthDateUTC);
+  var unconscious = getAllPositions(date88);
+
+  var activatedGates = new Set();
+  var planetKeys = Object.keys(conscious);
+  for (var i = 0; i < planetKeys.length; i++) {
+    var k = planetKeys[i];
+    activatedGates.add(getGateFromLongitude(conscious[k]));
+    activatedGates.add(getGateFromLongitude(unconscious[k]));
+  }
+
+  var definedCenters = new Set();
+  var definedChannels = [];
+
+  CHANNELS.forEach(function(ch) {
+    if (activatedGates.has(ch[0]) && activatedGates.has(ch[1])) {
+      definedChannels.push([ch[0], ch[1]]);
+      definedCenters.add(ch[2]);
+      definedCenters.add(ch[3]);
+    }
+  });
+
+  var motorCenters = ['heart', 'sp', 'sacral', 'root'];
+  var throatMotorConnected = false;
+
+  if (definedCenters.has('throat')) {
+    var visited = new Set(['throat']);
+    var queue = ['throat'];
+    while (queue.length > 0) {
+      var current = queue.shift();
+      CHANNELS.forEach(function(ch) {
+        if (activatedGates.has(ch[0]) && activatedGates.has(ch[1])) {
+          var next = null;
+          if (ch[2] === current && visited.has(ch[3]) === false) next = ch[3];
+          if (ch[3] === current && visited.has(ch[2]) === false) next = ch[2];
+          if (next) {
+            visited.add(next);
+            queue.push(next);
+            if (motorCenters.indexOf(next) !== -1) throatMotorConnected = true;
+          }
+        }
+      });
+    }
+  }
+
+  var sacralDefined = definedCenters.has('sacral');
+  var type, strategy, notSelf;
+
+  if (definedCenters.size === 0) {
+    type = 'Reflector'; strategy = 'Wait a lunar cycle'; notSelf = 'Disappointment';
+  } else if (sacralDefined && throatMotorConnected) {
+    type = 'Manifesting Generator'; strategy = 'Respond, then inform'; notSelf = 'Frustration and anger';
+  } else if (sacralDefined) {
+    type = 'Generator'; strategy = 'Wait to respond'; notSelf = 'Frustration';
+  } else if (throatMotorConnected && !sacralDefined) {
+    type = 'Manifestor'; strategy = 'Inform before acting'; notSelf = 'Anger';
+  } else {
+    type = 'Projector'; strategy = 'Wait for the invitation'; notSelf = 'Bitterness';
+  }
+
+  var authority;
+  if (type === 'Reflector') { authority = 'Lunar Authority'; }
+  else if (definedCenters.has('sp')) { authority = 'Emotional Authority'; }
+  else if (definedCenters.has('sacral')) { authority = 'Sacral Authority'; }
+  else if (definedCenters.has('spleen')) { authority = 'Splenic Authority'; }
+  else if (definedCenters.has('heart')) { authority = 'Ego Authority'; }
+  else if (definedCenters.has('g')) { authority = 'Self-Projected Authority'; }
+  else { authority = 'Mental/Environment Authority'; }
+
+  return { type: type, strategy: strategy, authority: authority, notSelf: notSelf, definedCenters: Array.from(definedCenters), definedChannels: definedChannels, activatedGates: Array.from(activatedGates) };
+}
+
+// ============================================================
+// HUMAN DESIGN GATE MAPPING
+// ============================================================
+const GATE_ORDER = [17,21,51,42,3,27,24,2,23,8,20,16,35,45,12,15,52,39,53,62,56,31,33,7,4,29,59,40,64,47,6,46,18,48,57,32,50,28,44,1,43,14,34,9,5,26,11,10,58,38,54,61,60,41,19,13,49,30,55,37,63,22,36,25];
+
+// Rave Mandala offset: Gate 17 starts at 3°52'30" Aries (3.875°), not 0°
+const GATE_OFFSET = 3.875;
+
+function getGateFromLongitude(lon) {
+  const idx = Math.floor(normDeg(lon - GATE_OFFSET) / 5.625);
+  return GATE_ORDER[idx % 64];
+}
+
+function getLineFromLongitude(lon) {
+  const posInGate = normDeg(lon - GATE_OFFSET) % 5.625;
+  return Math.floor(posInGate / 0.9375) + 1;
+}
+
+function getIncarnationCrossType(conscLine, uncLine) {
+  const profile = conscLine * 10 + uncLine;
+  const rightAngle = [13,14,24,25,35,36,46];
+  const juxtaposition = [41];
+  if (rightAngle.includes(profile)) return 'Right Angle';
+  if (juxtaposition.includes(profile)) return 'Juxtaposition';
+  return 'Left Angle';
+}
+
+// ============================================================
+// CONTENT DATABASES
+// ============================================================
+const ZODIAC_SYMBOLS = {Aries:'\u2648',Taurus:'\u2649',Gemini:'\u264A',Cancer:'\u264B',Leo:'\u264C',Virgo:'\u264D',Libra:'\u264E',Scorpio:'\u264F',Sagittarius:'\u2650',Capricorn:'\u2651',Aquarius:'\u2652',Pisces:'\u2653'};
+
+const NORTH_NODE = {
+  Aries: {title:'Embracing Independence & Leadership',purpose:'Learning to be bold, independent, and self-driven.',growth:'Taking initiative, embracing challenges, prioritizing yourself.',south:'Libra: Over-relying on others, people-pleasing, indecisiveness.',careers:'Entrepreneur, coach, motivational speaker, trailblazer in any field.'},
+  Taurus: {title:'Creating Stability & Self-Worth',purpose:'Building security, financial independence, and self-reliance.',growth:'Embracing patience, persistence, and valuing yourself.',south:'Scorpio: Emotional chaos, toxic attachments, power struggles.',careers:'Wealth coaching, real estate, sustainable business, luxury branding.'},
+  Gemini: {title:'Mastering Communication & Curiosity',purpose:'Sharing knowledge, embracing flexibility, being open-minded.',growth:'Asking questions, networking, speaking, teaching.',south:'Sagittarius: Rigid beliefs, running from commitment, always seeking more.',careers:'Public speaking, journalism, content creation, social media, education.'},
+  Cancer: {title:'Nurturing, Feeling & Building Emotional Foundations',purpose:'Prioritizing emotional intelligence, deep connections, and intuition.',growth:'Leaning into vulnerability, family, and personal fulfillment over ambition.',south:'Capricorn: Workaholism, suppression of emotions, over-identifying with status.',careers:'Healing work, life coaching, spiritual guidance, home-based business.'},
+  Leo: {title:'Stepping into the Spotlight & Authenticity',purpose:'Becoming confident, shining brightly, and embracing joy.',growth:'Expressing yourself, being unapologetically YOU, taking center stage.',south:'Aquarius: Hiding behind the group, prioritizing others over self.',careers:'Personal branding, acting, creative entrepreneurship, leadership roles.'},
+  Virgo: {title:'Bringing Order, Service & Practicality',purpose:'Using logic, structure, and service to refine skills and make a tangible impact.',growth:'Mastering discipline, details, and responsibility.',south:'Pisces: Escapism, disorganization, lack of boundaries.',careers:'Health coaching, consulting, writing, systems creation, business strategy.'},
+  Libra: {title:'Embracing Partnership & Harmony',purpose:'Learning balance, compromise, and collaboration.',growth:'Seeking fairness, diplomacy, and healthy relationships.',south:'Aries: Self-reliance to a fault, impulsiveness, lone wolf tendencies.',careers:'Mediation, branding, public relations, relationships coaching.'},
+  Scorpio: {title:'Mastering Depth & Power',purpose:'Embracing depth, intensity, and rebirth.',growth:'Releasing control, moving into spirituality, reorganizing limitations.',south:'Taurus: Attachment to comfort, resistance to change, materialism.',careers:'Depth coaching, spiritual practice, transformation, psychology, investing.'},
+  Sagittarius: {title:'Exploring Truth, Adventure & Expansion',purpose:'Seeking wisdom, taking risks, and expanding horizons.',growth:'Embracing spontaneity, living boldly, trusting intuition.',south:'Gemini: Overanalyzing, staying in the comfort zone.',careers:'Travel, philosophy, motivational speaking, thought leadership.'},
+  Capricorn: {title:'Building Legacy, Structure & Authority',purpose:'Mastering discipline, leadership, and long-term success.',growth:'Taking responsibility, setting boundaries, and leading with integrity.',south:'Cancer: Emotional dependency, avoidance of responsibility, fear of success.',careers:'CEO, business strategist, high-performance coach, real estate.'},
+  Aquarius: {title:'Embracing Innovation & Collective Change',purpose:'Thinking outside the box, revolutionizing industries, and helping the collective.',growth:'Letting go of ego, embracing teamwork, and trusting intuition.',south:'Leo: Needing validation, attachment to fame, prioritizing personal success over impact.',careers:'Tech entrepreneur, social change leader, futurist, community builder.'},
+  Pisces: {title:'Embodying Spirituality & Flow',purpose:'Trusting intuition, embracing creativity, and moving with the current.',growth:'Releasing the grip of logic, staying embodied through uncertainty, receiving from spirit world.',south:'Virgo: Perfectionism, needing to figure it all out, fear of uncertainty.',careers:'Intuitive coach, spiritual guide, artist, musician, energetic literacy practitioner.'}
+};
+
+const LIFE_PATH = {
+  1:{name:'The Leader',purpose:'To pioneer, lead, and forge new paths. You are here to embrace independence, confidence, and bold action. Your soul\'s journey is about self-mastery, innovation, and becoming a trailblazer.'},
+  2:{name:'The Collaborator',purpose:'To build harmony, relationships, and connections. You are here to be a peacemaker, use your intuition, and bring balance to the world through cooperation and diplomacy.'},
+  3:{name:'The Creative',purpose:'To express yourself, inspire others, and bring joy. You are here to use creativity, storytelling, and self-expression to make the world more vibrant and inspiring.'},
+  4:{name:'The Builder',purpose:'To create stability, foundations, and long-term success. You are here to master discipline, hard work, and practicality to bring lasting structures into the world.'},
+  5:{name:'The Freedom Seeker',purpose:'To embrace adventure, change, and new experiences. You are here to break free from limitations and help others expand beyond comfort zones.'},
+  6:{name:'The Nurturer',purpose:'To care for, heal, and uplift others. You are here to bring love, responsibility, and compassion into the world through service and emotional intelligence.'},
+  7:{name:'The Seeker',purpose:'To seek wisdom, knowledge, and spiritual truth. You are here to master inner growth, deep thinking, and enlightenment to guide others on their path.'},
+  8:{name:'The CEO',purpose:'To master power, success, and wealth. You are here to step into leadership, financial sovereignty, and influence, creating a lasting legacy.'},
+  9:{name:'The Humanitarian',purpose:'To serve humanity, catalyze evolution, and bring transformation. You are here to help the world evolve through compassion, wisdom, and selfless service.'},
+  11:{name:'The Visionary',purpose:'To inspire, uplift, and channel higher wisdom. You are here to bring spiritual awareness and visionary leadership to the world.'},
+  22:{name:'The Master Builder',purpose:'To turn big dreams into reality. You are here to build large-scale success and make a lasting impact through discipline, strategy, and vision.'},
+  33:{name:'The Master Teacher',purpose:'To uplift humanity through transformation, wisdom, and unconditional love. You are here to guide, mentor, and elevate others.'}
+};
+
+const DESTINY = {
+  1:'Through leadership, independence, and forging your own path. You take initiative and inspire others with your confidence and originality.',
+  2:'Through relationships, collaboration, and bringing balance. You are a natural mediator, helping others find harmony and connection.',
+  3:'Through creativity, self-expression, and communication. You shine when you share your gifts, entertain, and uplift others.',
+  4:'Through stability, structure, and discipline. You thrive by creating strong foundations, organizing, and methodically building success.',
+  5:'Through adventure, versatility, and breaking free from restrictions. You embrace change and inspire others to do the same.',
+  6:'Through love, care, and responsibility. You thrive when you help, nurture, and support others, creating a sense of home and community.',
+  7:'Through introspection, wisdom, and deep knowledge. You analyze, research, and guide others toward enlightenment.',
+  8:'Through business, leadership, and financial mastery. You are here to step into your authority and create material success.',
+  9:'Through compassion, wisdom, and service to humanity. You are driven to inspire, transform, and elevate others.',
+  11:'Through visionary ideas, intuition, and uplifting others. You thrive when you spread light, knowledge, and inspiration.',
+  22:'Through turning dreams into reality. You have the ability to build legacies, create massive impact, and masterfully execute big visions.',
+  33:'Through spiritual wisdom, transformation, and teaching. You are here to be a beacon of love, helping others evolve and awaken.'
+};
+
+const DN_KEYS = [1,2,3,4,5,6,7,8,9,11,22,33];
+const COMBO = {
+1:{1:'A fearless pioneer who thrives by forging their own path and breaking new ground',2:'A diplomatic leader who succeeds through partnerships and intuitive leadership',3:'A charismatic innovator who expresses leadership through creativity and storytelling',4:'A structured visionary who builds success through discipline and long-term planning',5:'A dynamic trailblazer who thrives in fast-paced industries and unconventional models',6:'A heart-centered leader who balances independence with service and mentorship',7:'A deep-thinking leader who blends intellect, spirituality, and wisdom to guide others',8:'A powerful CEO who masters wealth, influence, and business strategy',9:'A mission-driven leader who uses their platform for humanitarian work and legacy-building',11:'A visionary leader who combines intuition with ambition to inspire movements',22:'A master builder of change who brings big ideas to life with strategy',33:'A spiritual role model who leads with higher wisdom and divine inspiration'},
+2:{1:'A collaborative leader who balances independence with partnerships',2:'A master peacemaker who thrives in mediation and emotional intelligence',3:'A charming connector who expresses gifts through creative storytelling',4:'A steady builder who creates lasting success through structure and teamwork',5:'A social adventurer who thrives in networking and bringing diverse people together',6:'A nurturing visionary who balances emotional intelligence with service-based leadership',7:'A spiritual guide who deeply connects through intuition, wisdom, and research',8:'A powerful networker who blends business savvy with emotional intelligence',9:'A compassionate leader who thrives in humanitarian work and transformation',11:'A spiritual guide who uplifts others with deep emotional wisdom',22:'A peacemaking strategist who builds large-scale solutions for harmony',33:'A divine nurturer who supports and transforms through unconditional love'},
+3:{1:'A bold creator who thrives in personal branding and leadership in creative fields',2:'A collaborative artist who succeeds through emotional storytelling and connection',3:'A true visionary with endless creative energy and magnetic influence',4:'A structured artist who blends creativity with business strategy and discipline',5:'A free-spirited innovator who thrives in entertainment and unconventional industries',6:'A creative transformer who uses art and emotional depth to inspire reorganization',7:'A spiritual storyteller who merges creativity with deep wisdom and philosophy',8:'A business-savvy artist who turns creativity into a highly profitable career',9:'A humanitarian creative who uses art or storytelling to change the world',11:'A prophetic artist who channels higher inspiration into creative work',22:'A creative empire builder who turns ideas into large-scale impact',33:'A divine storyteller who inspires through teaching and artistic mastery'},
+4:{1:'A strategic leader who builds success through discipline and persistence',2:'A loyal partner who thrives through collaboration, patience, and dedication',3:'A creative builder who merges structure with innovation to create impact',4:'A master architect who thrives on stability, structure, and long-term planning',5:'A structured adventurer who balances stability with the need for change',6:'A nurturing builder who thrives in family businesses and mentorship',7:'A spiritual strategist who blends research, wisdom, and planning',8:'A business empire builder who turns persistence into massive financial success',9:'A humanitarian entrepreneur who builds businesses with a purpose-driven mission',11:'A spiritual architect who blends intuition with practical mastery',22:'A true master builder who creates legacies that stand the test of time',33:'A teacher of foundations who structures wisdom into impactful systems'},
+5:{1:'A fearless pioneer who thrives in fast-paced industries and risk-taking',2:'A charismatic connector who brings people together through communication',3:'A magnetic entertainer who uses storytelling, creativity, and charm to inspire',4:'A structured explorer who blends adventure with discipline for sustainable success',5:'A wild free spirit who thrives in ever-changing environments and unconventional careers',6:'A heart-led adventurer who balances freedom with responsibility and coaching',7:'A spiritual traveler who merges deep wisdom with exploration and philosophy',8:'A wealthy risk-taker who succeeds in entrepreneurial ventures and investing',9:'A humanitarian visionary who uses change and movement to create global impact',11:'A charismatic visionary who inspires change through personal magnetism',22:'A global innovator who builds structures for massive reorganization',33:'A freedom teacher who helps others unlock their limitless potential'},
+6:{1:'A bold caretaker who leads by example in heart-centered industries',2:'A compassionate peacemaker who thrives building harmonious communities',3:'A creative nurturer who expresses love through art, music, or communication',4:'A structured mentor who builds strong foundations in family, business, or education',5:'A free-spirited guide who balances personal freedom with helping others',6:'A master transformer who thrives in counseling, coaching, or holistic wellness',7:'A spiritual teacher who shares deep wisdom and guidance with others',8:'A philanthropic leader who creates wealth with a mission to serve',9:'A selfless humanitarian dedicated to global transformation and reorganization',11:'A spiritual caregiver who transforms through deep intuitive wisdom',22:'A compassionate builder who creates lasting support systems',33:'A master transformer who uplifts humanity with divine love and service'},
+7:{1:'A spiritual leader who pioneers new ways of thinking and learning',2:'A deeply intuitive guide who blends intellect with emotional intelligence',3:'A philosophical storyteller who shares wisdom through writing and creative outlets',4:'A structured seeker who turns knowledge into systems and strategies',5:'A free-spirited philosopher who blends adventure with intellectual pursuits',6:'A spiritual caretaker who uses wisdom to guide and nurture others',7:'A mystical master deeply connected to higher consciousness',8:'A business sage who blends spirituality with entrepreneurship and wealth creation',9:'A global wisdom keeper who changes the world through enlightenment',11:'A spiritual mystic who channels divine truth into teachings',22:'A structured wisdom leader who turns insight into global change',33:'A cosmic teacher who spreads enlightenment through profound guidance'},
+8:{1:'A powerful CEO who thrives as a self-made entrepreneur or business leader',2:'A strategic negotiator who blends influence with diplomacy for success',3:'A charismatic mogul who builds wealth through creativity and marketing',4:'A disciplined empire builder who excels in structured, long-term success',5:'A dynamic business innovator who thrives in high-energy, fast-moving industries',6:'A wealthy nurturer who uses financial success to support family and community',7:'A spiritual entrepreneur who blends business and depth for impact',8:'A financial powerhouse who masters wealth, investments, and legacy creation',9:'A philanthropic leader who builds wealth to create humanitarian change',11:'A soul-sourced CEO who blends wealth and higher purpose',22:'A world-class empire builder who creates massive financial legacies',33:'A philanthropic teacher who uses wealth for global transformation and service'},
+9:{1:'A fearless activist who leads powerful humanitarian efforts',2:'A peaceful change-maker who builds bridges and inspires unity',3:'A visionary artist who uses creativity for social impact',4:'A strategic humanitarian who turns passion into structured change',5:'A global adventurer who brings reorganization through movement and travel',6:'A compassionate transformer who nurtures through service and emotional depth',7:'A spiritual activist who blends deep wisdom with humanitarian work',8:'A wealth-driven philanthropist who turns financial success into global impact',9:'A selfless world-changer who dedicates life to uplifting humanity',11:'A spiritual humanitarian who uplifts and awakens global consciousness',22:'A world-changer who builds large-scale solutions for humanity',33:'A divine transformer who dedicates their life to enlightenment and service'},
+11:{1:'A pioneering visionary who leads with divine inspiration and courage',2:'An intuitive peacemaker who uplifts others with higher wisdom',3:'A creative messenger who channels spiritual truths through art and expression',4:'A disciplined visionary who grounds intuition into practical systems',5:'A dynamic spiritual explorer who inspires change through freedom',6:'A compassionate transformer who nurtures with visionary love and guidance',7:'A mystical teacher who blends deep wisdom with spiritual enlightenment',8:'A soul-sourced leader who combines wealth and power with divine service',9:'A humanitarian visionary who inspires global consciousness and compassion',11:'A spiritual illuminator who channels divine truth and uplifts humanity',22:'A masterful visionary builder who turns divine inspiration into lasting legacies',33:'A spiritual mentor who guides the world with higher wisdom and unconditional love'},
+22:{1:'A powerful visionary builder who leads global change with strategy and courage',2:'A harmonious architect who creates large-scale systems through collaboration',3:'A charismatic empire-builder who expresses visionary ideas with creativity and joy',4:'A master builder who grounds massive dreams with discipline and practicality',5:'A change leader who inspires global freedom and innovation',6:'A nurturing visionary who builds impactful systems of care and service',7:'A spiritual strategist who grounds deep wisdom into structures for enlightenment',8:'A global CEO who masters power, influence, and legacy on a massive scale',9:'A humanitarian builder who creates large-scale change for humanity',11:'A divinely guided architect who blends intuition with practical mastery',22:'A world-class master builder who creates legacies that last generations',33:'A spiritual visionary builder who uplifts humanity through love-driven structures'},
+33:{1:'A bold spiritual teacher who leads with divine love and higher guidance',2:'A compassionate guide who nurtures harmony through relationships',3:'A master storyteller who inspires with creative teaching and divine expression',4:'A grounded teacher who builds strong foundations for spiritual wisdom',5:'A liberating guide who inspires freedom and inner reorganization through love',6:'A divine transformer who channels unconditional love into service and care',7:'A spiritual sage who teaches enlightenment through deep wisdom',8:'A philanthropic leader who uses wealth and power for global transformation',9:'A world teacher who uplifts humanity through compassion and service',11:'A spiritual mentor who channels visionary truth and divine inspiration',22:'A builder-teacher who creates lasting structures of love and service',33:'A cosmic master teacher who embodies unconditional love and global enlightenment'}
+};
+
+// ============================================================
+// GENE KEYS DATABASE
+// ============================================================
+const GENE_KEYS = {
+1:{shadow:'Entropy',gift:'Freshness',siddhi:'Beauty',theme:'From the ordinary to the extraordinary. Your life\'s work is about bringing fresh creative energy into everything you touch, moving from stagnation into radical aliveness.'},
+2:{shadow:'Dislocation',gift:'Orientation',siddhi:'Unity',theme:'Finding your true direction in life. You\'re here to trust your inner compass and help others orient toward their authentic path, even when the terrain is unfamiliar.'},
+3:{shadow:'Chaos',gift:'Innovation',siddhi:'Innocence',theme:'Transmuting chaos into creative breakthrough. You carry the gift of seeing new solutions where others see only confusion, and your innovations emerge from embracing disorder.'},
+4:{shadow:'Intolerance',gift:'Understanding',siddhi:'Forgiveness',theme:'Moving from rigid judgment to deep understanding. Your life\'s work asks you to see the logic within seeming irrationality and extend radical forgiveness.'},
+5:{shadow:'Impatience',gift:'Patience',siddhi:'Timelessness',theme:'Mastering divine timing. You are learning that the most powerful things cannot be rushed. Your gift is the capacity to wait with presence, not passivity.'},
+6:{shadow:'Conflict',gift:'Diplomacy',siddhi:'Peace',theme:'Reorganizing conflict into lasting peace. You carry the frequency of emotional intelligence that can bridge any divide when you stop reacting and start responding.'},
+7:{shadow:'Division',gift:'Guidance',siddhi:'Virtue',theme:'Leading through natural authority. Your life\'s work is about guiding others not through force but through the integrity of your lived example.'},
+8:{shadow:'Mediocrity',gift:'Style',siddhi:'Exquisiteness',theme:'Bringing unique creative expression into the world. You\'re here to refuse the ordinary and find your own distinctive voice that inspires others to find theirs.'},
+9:{shadow:'Inertia',gift:'Determination',siddhi:'Invincibility',theme:'Mastering focused attention. Your power lies in the ability to concentrate your energy on what truly matters and see it through with relentless determination.'},
+10:{shadow:'Self-Obsession',gift:'Naturalness',siddhi:'Being',theme:'Embodying effortless authenticity. You\'re learning to drop all personas and simply be yourself, which, paradoxically, is the most powerful thing you can do.'},
+11:{shadow:'Obscurity',gift:'Idealism',siddhi:'Light',theme:'Illuminating new possibilities. You carry visions of what could be and your life\'s work is about holding those ideals with enough grounding to bring them into form.'},
+12:{shadow:'Vanity',gift:'Discrimination',siddhi:'Purity',theme:'Purifying your creative expression. You\'re here to speak only what is essential and true, cutting through noise to deliver pure, undiluted creative power.'},
+13:{shadow:'Discord',gift:'Discernment',siddhi:'Empathy',theme:'Listening beneath the surface. Your life\'s work involves hearing what people actually mean beneath what they say. The gift of deep empathic perception.'},
+14:{shadow:'Compromise',gift:'Competence',siddhi:'Bounteousness',theme:'Mastering your craft so deeply that prosperity naturally follows. You\'re here to stop settling and fully own your competence as a vehicle for financial sovereignty.'},
+15:{shadow:'Dullness',gift:'Magnetism',siddhi:'Florescence',theme:'Becoming a force of natural magnetism. Your life\'s work is about embracing the full spectrum of human experience and blooming through diversity.'},
+16:{shadow:'Indifference',gift:'Versatility',siddhi:'Mastery',theme:'The path from dabbling to deep mastery. You\'re here to commit so fully to your skills that they become a channel for something greater than technique.'},
+17:{shadow:'Opinion',gift:'Far-sightedness',siddhi:'Omniscience',theme:'Seeing the bigger pattern. Your life\'s work is about moving beyond fixed opinions into a wider perspective that can anticipate what\'s coming.'},
+18:{shadow:'Judgement',gift:'Integrity',siddhi:'Perfection',theme:'Refining through honest assessment. You carry the capacity to see what needs correcting, not from judgment, but from a deep love of integrity.'},
+19:{shadow:'Co-dependence',gift:'Sensitivity',siddhi:'Sacrifice',theme:'Reorganizing emotional sensitivity into strength. You\'re here to honor your deep feeling nature as a gift, not a liability.'},
+20:{shadow:'Superficiality',gift:'Self-Assurance',siddhi:'Presence',theme:'Mastering total presence. Your life\'s work is about being so fully here, in this moment, that your presence itself becomes a reorganizing force.'},
+21:{shadow:'Control',gift:'Authority',siddhi:'Valour',theme:'Moving from control to true authority. You\'re learning that real power comes from inner sovereignty, not from managing external circumstances.'},
+22:{shadow:'Dishonour',gift:'Graciousness',siddhi:'Grace',theme:'Embodying emotional grace under pressure. Your life\'s work asks you to meet even difficult emotions with elegance and compassion.'},
+23:{shadow:'Complexity',gift:'Simplicity',siddhi:'Quintessence',theme:'Distilling complexity into simple truth. You carry the rare gift of making the profound accessible. Your words land when you strip away what\'s unnecessary.'},
+24:{shadow:'Addiction',gift:'Invention',siddhi:'Silence',theme:'Breaking free from mental loops. Your life\'s work is about channeling your restless mind into genuine invention and finding the silence beneath the noise.'},
+25:{shadow:'Constriction',gift:'Acceptance',siddhi:'Universal Love',theme:'Opening to unconditional love. You\'re here to accept life exactly as it is, and in that acceptance, discover a love that has no conditions or boundaries.'},
+26:{shadow:'Pride',gift:'Artfulness',siddhi:'Invisibility',theme:'Mastering the art of influence with integrity. Your gift is the ability to communicate in ways that move people without manipulation.'},
+27:{shadow:'Selfishness',gift:'Altruism',siddhi:'Selflessness',theme:'Nurturing that nourishes without depleting. You\'re here to care for others in a way that also honors your own needs. Sustainable generosity.'},
+28:{shadow:'Purposelessness',gift:'Totality',siddhi:'Immortality',theme:'Living with total commitment. Your life\'s work is about throwing yourself fully into the game of life. Half-measures are not your frequency.'},
+29:{shadow:'Half-heartedness',gift:'Commitment',siddhi:'Devotion',theme:'The power of saying yes completely. You\'re learning to commit with your whole being, not just your mind, and in that devotion, finding meaning.'},
+30:{shadow:'Desire',gift:'Lightness',siddhi:'Rapture',theme:'Moving from craving into appreciation. Your life\'s work is about meeting each experience with lightness rather than attachment. Finding rapture in what is.'},
+31:{shadow:'Arrogance',gift:'Leadership',siddhi:'Humility',theme:'Leading through earned humility. You carry natural authority that lands only when it comes from genuine service rather than self-importance.'},
+32:{shadow:'Failure',gift:'Preservation',siddhi:'Veneration',theme:'Building what endures. Your life\'s work is about creating structures (businesses, relationships, systems) that stand the test of time.'},
+33:{shadow:'Forgetting',gift:'Mindfulness',siddhi:'Revelation',theme:'Remembering what matters. You\'re here to pay exquisite attention to the lessons life offers and share those revelations with others.'},
+34:{shadow:'Force',gift:'Strength',siddhi:'Majesty',theme:'Channeling raw power with grace. Your life\'s work is about learning when to push and when to yield. True strength is never forceful.'},
+35:{shadow:'Hunger',gift:'Adventure',siddhi:'Boundlessness',theme:'Embracing the full adventure of being human. You\'re here to taste every flavor of experience and help others step beyond their comfort zones.'},
+36:{shadow:'Turbulence',gift:'Humanity',siddhi:'Compassion',theme:'Finding compassion through emotional storms. Your life\'s work turns personal suffering into deep empathy for the human condition.'},
+37:{shadow:'Weakness',gift:'Equality',siddhi:'Tenderness',theme:'Creating communities built on genuine equality. You carry the gift of bringing people together in a spirit of tenderness and mutual respect.'},
+38:{shadow:'Struggle',gift:'Perseverance',siddhi:'Honour',theme:'Turning struggle into purposeful perseverance. You\'re here to fight, not against life, but for what your soul knows is worth defending.'},
+39:{shadow:'Provocation',gift:'Dynamism',siddhi:'Liberation',theme:'Using creative tension as fuel. Your life\'s work involves provoking growth (in yourself and others) through dynamic, sometimes uncomfortable catalysis.'},
+40:{shadow:'Exhaustion',gift:'Resolve',siddhi:'Divine Will',theme:'Finding sustainable power through right relationship with rest. You\'re learning that resolve without recovery leads nowhere.'},
+41:{shadow:'Fantasy',gift:'Anticipation',siddhi:'Emanation',theme:'Dreaming with purpose. Your life\'s work is about channeling imagination into grounded anticipation. Seeing what\'s possible and beginning to build it.'},
+42:{shadow:'Expectation',gift:'Detachment',siddhi:'Celebration',theme:'Completing cycles with grace. You\'re here to learn the art of letting things end so new things can begin. Celebrating each chapter fully.'},
+43:{shadow:'Deafness',gift:'Insight',siddhi:'Epiphany',theme:'Hearing the breakthrough thought. Your life\'s work involves trusting the sudden knowing that arrives fully formed. The insight that changes everything.'},
+44:{shadow:'Interference',gift:'Teamwork',siddhi:'Synarchy',theme:'Creating collaborative power structures. You carry the gift of bringing the right people together at the right time for collective impact.'},
+45:{shadow:'Dominance',gift:'Synergy',siddhi:'Communion',theme:'Building communities that thrive. Your life\'s work is about creating environments where every person\'s gifts are amplified by the group.'},
+46:{shadow:'Seriousness',gift:'Delight',siddhi:'Ecstasy',theme:'Finding ecstasy in embodiment. You\'re here to fall in love with being in a body. To discover that physical life itself is the spiritual practice.'},
+47:{shadow:'Oppression',gift:'Transmutation',siddhi:'Transfiguration',theme:'Alchemizing suffering into wisdom. Your life\'s work turns heavy experiences into pure understanding. Turning lead into gold.'},
+48:{shadow:'Inadequacy',gift:'Resourcefulness',siddhi:'Wisdom',theme:'Moving from feeling not enough to deep wisdom. You\'re here to discover that your well of knowledge is bottomless. Trust what you know.'},
+49:{shadow:'Reaction',gift:'Revolution',siddhi:'Rebirth',theme:'Catalyzing necessary revolution. Your life\'s work involves sensing when systems need to change and having the courage to initiate that change.'},
+50:{shadow:'Corruption',gift:'Equilibrium',siddhi:'Harmony',theme:'Bringing things into cosmic balance. You carry the gift of sensing when something is off-kilter and restoring harmony through natural law.'},
+51:{shadow:'Agitation',gift:'Initiative',siddhi:'Awakening',theme:'Shocking yourself and others awake. Your life\'s work uses sudden initiation (sometimes comfortable, sometimes not) to catalyze genuine awakening.'},
+52:{shadow:'Stress',gift:'Restraint',siddhi:'Stillness',theme:'Discovering the power of perfect stillness. You\'re here to master the art of stopping. Of being so still that the truth can finally reach you.'},
+53:{shadow:'Immaturity',gift:'Expansion',siddhi:'Super-consciousness',theme:'Beginning bold new cycles. Your life\'s work is about initiating: starting things, expanding into new territory, and growing through every beginning.'},
+54:{shadow:'Greed',gift:'Aspiration',siddhi:'Ascension',theme:'Reorganizing material ambition into spiritual ascension. You\'re learning that your drive for success is actually a drive for transcendence.'},
+55:{shadow:'Victimisation',gift:'Freedom',siddhi:'Freedom',theme:'Claiming radical emotional freedom. Your life\'s work is the ultimate liberation: freedom from victimhood, freedom to feel everything, freedom to be fully alive.'},
+56:{shadow:'Distraction',gift:'Enrichment',siddhi:'Intoxication',theme:'Enriching life through story. You carry the gift of making meaning from experience and sharing it in ways that intoxicate others with wonder.'},
+57:{shadow:'Unease',gift:'Intuition',siddhi:'Clarity',theme:'Trusting your deep intuitive knowing. Your life\'s work is about honoring the quiet voice that knows before the mind understands.'},
+58:{shadow:'Dissatisfaction',gift:'Vitality',siddhi:'Bliss',theme:'Reorganizing restlessness into pure vitality. You\'re here to discover that your dissatisfaction is actually a signal pointing toward greater aliveness.'},
+59:{shadow:'Dishonesty',gift:'Intimacy',siddhi:'Transparency',theme:'Mastering radical intimacy. Your life\'s work involves breaking down the barriers between people through fearless emotional honesty.'},
+60:{shadow:'Limitation',gift:'Realism',siddhi:'Justice',theme:'Working within limits to create breakthroughs. You\'re learning that constraints are not prisons but creative structures your genius requires.'},
+61:{shadow:'Psychosis',gift:'Inspiration',siddhi:'Sanctity',theme:'Channeling cosmic inspiration. Your life\'s work involves receiving and transmitting ideas that come from beyond the personal mind. Sacred creative downloads.'},
+62:{shadow:'Intellect',gift:'Precision',siddhi:'Impeccability',theme:'Communicating with surgical precision. You carry the gift of naming things exactly. Your words have power when they are precise and spare.'},
+63:{shadow:'Doubt',gift:'Inquiry',siddhi:'Truth',theme:'Questioning your way to truth. Your life\'s work uses doubt not as paralysis but as the sacred practice of inquiry that reveals what is actually real.'},
+64:{shadow:'Confusion',gift:'Imagination',siddhi:'Illumination',theme:'Moving from confusion to illumination. You\'re here to trust the creative chaos of your imagination as it assembles the pieces of a larger vision.'}
+};
+
+const CROSS_TYPES = {
+  'Right Angle': {
+    title: 'The Personal Destiny',
+    description: 'Your Incarnation Cross is a Right Angle Cross, which means you are on a deeply personal journey. Your life theme is individual-focused growth. You learn about yourself by navigating the world based on your unique design. While deeply personal, your path serves as an example for others.',
+    themes: 'Individual-focused growth. Self-discovery that inspires others. Natural leadership and pioneering.',
+    advice: 'You are not meant to live for others. You thrive when you follow your own inner guidance. Your personal destiny, when fully expressed, naturally encourages those around you to embrace their own truth.'
+  },
+  'Juxtaposition': {
+    title: 'The Fixed Fate',
+    description: 'Your Incarnation Cross is a Juxtaposition Cross, which means you have a specific and focused purpose in life. It is as though you are on a straight road, moving toward a predestined goal. You have a clear understanding of what you need to do.',
+    themes: 'Purpose-driven and focused. Structure and routine bring success. Narrow but powerful influence.',
+    advice: 'Your journey was set in motion from birth. You thrive when you accept your path and lean into it fully. Trusting in divine timing and your natural instincts is essential for fulfillment.'
+  },
+  'Left Angle': {
+    title: 'The Transpersonal Destiny',
+    description: 'Your Incarnation Cross is a Left Angle Cross, which means your life purpose is intertwined with others. You are here to learn through relationships, shared experiences, and mutual growth. Each connection brings deeper lessons.',
+    themes: 'Growth through relationships and interactions. Often mentors, transformers, or teachers. Destiny unfolds through collaboration.',
+    advice: 'You thrive in settings where you can share your wisdom and receive guidance from others. Your purpose leads you to create lasting impact through connections.'
+  }
+};
+
+// ============================================================
+// CALCULATION ORCHESTRATOR
+// ============================================================
+function calculateAndProceed() {
+  const name = document.getElementById('birthName').value.trim();
+  const dateStr = document.getElementById('birthDate').value;
+  const timeStr = document.getElementById('birthTime').value || '12:00';
+  const place = document.getElementById('birthPlace').value.trim();
+  const tz = document.getElementById('birthTz').value || Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  if (!name || !dateStr) {
+    alert('Please enter your full birth name and date of birth.');
+    return;
+  }
+
+  goTo('s-processing1');
+
+  var [year, month, day] = dateStr.split('-').map(Number);
+  var [hour, minute] = timeStr.split(':').map(Number);
+  var localH = hour + minute / 60;
+
+  // Convert local time to UTC using timezone
+  var utcOffset = getUtcOffset(tz, dateStr, timeStr);
+  var utcH = localH + utcOffset;
+
+  // Build UTC date
+  var adjYear = year, adjMonth = month - 1, adjDay = day;
+  var totalMinutes = Math.round(utcH * 60);
+  var utcDate = new Date(Date.UTC(adjYear, adjMonth, adjDay, 0, totalMinutes));
+
+  // Sun longitude at birth (using astronomy-engine)
+  var sunLon = geoEclLon(Astronomy.Body.Sun, utcDate);
+  var sunSign = getZodiacSign(sunLon);
+  var sunDeg = getZodiacDegree(sunLon);
+
+  // North Node
+  var nnLon = trueNorthNodeLon(utcDate);
+  var nnSign = getZodiacSign(nnLon);
+
+  // HD Gate (Conscious Sun)
+  var conscGate = getGateFromLongitude(sunLon);
+  var conscLine = getLineFromLongitude(sunLon);
+
+  // Earth is opposite Sun
+  var earthLon = normDeg(sunLon + 180);
+  var earthGate = getGateFromLongitude(earthLon);
+
+  // Unconscious Sun: 88 degrees of SOLAR ARC before birth
+  var date88 = find88SolarArcDate(utcDate);
+  var uncSunLon = geoEclLon(Astronomy.Body.Sun, date88);
+  var uncGate = getGateFromLongitude(uncSunLon);
+  var uncLine = getLineFromLongitude(uncSunLon);
+  var uncEarthLon = normDeg(uncSunLon + 180);
+  var uncEarthGate = getGateFromLongitude(uncEarthLon);
+
+  // Profile: conscious Sun line / unconscious Sun line
+  var profile = conscLine + '/' + uncLine;
+
+  // Incarnation Cross type
+  var crossType = getIncarnationCrossType(conscLine, uncLine);
+
+  // Numerology
+  var lifePath = calcLifePath(dateStr);
+  var destinyNum = calcDestinyNumber(name);
+
+  // Gene Keys
+  var geneKey = conscGate;
+  // Gene Keys Activation Sequence:
+  // Life's Work = Personality Sun, Evolution = Design Sun,
+  // Radiance = Personality Earth, Purpose = Design Earth
+  var gkPurpose = uncEarthGate;
+
+  // South Node
+  var snLon = normDeg(nnLon + 180);
+  var snSign = getZodiacSign(snLon);
+
+  // Human Design Type (using full planetary positions via astronomy-engine)
+  var hdResult = calcHDType(utcDate);
+
+  STATE = {
+    name: name, dateStr: dateStr, timeStr: timeStr, place: place,
+    sunSign: sunSign, sunDeg: sunDeg, sunLon: sunLon,
+    nnSign: nnSign, snSign: snSign,
+    conscGate: conscGate, conscLine: conscLine, earthGate: earthGate,
+    uncGate: uncGate, uncLine: uncLine, uncEarthGate: uncEarthGate,
+    profile: profile, crossType: crossType,
+    lifePath: lifePath, destinyNum: destinyNum,
+    geneKey: geneKey, gkPurpose: gkPurpose,
+    hdType: hdResult.type,
+    hdStrategy: hdResult.strategy,
+    hdAuthority: hdResult.authority,
+    hdNotSelf: hdResult.notSelf,
+    utcDate: utcDate, date88: date88
+  };
+
+  const msgs = [
+    'Mapping your planet positions',
+    'Running your numerology',
+    'Identifying your Human Design type',
+    'Calculating your Gene Key',
+    'Done'
+  ];
+  let i = 0;
+  const msgEl = document.getElementById('processingMsg');
+  const interval = setInterval(() => {
+    i++;
+    if (i < msgs.length) { msgEl.textContent = msgs[i]; }
+    else { clearInterval(interval); goTo('s-ikigai1'); }
+  }, 700);
+}
+
+// ============================================================
+// DEEP IKIGAI ANALYSIS ENGINE
+// ============================================================
+const DRIVE_MAP = {
+  guiding: ['teach','mentor','guide','coach','support','advise','counsel','lead','facilitate','educate','training','helping','empower','show','instruct','tutor'],
+  creating: ['create','build','design','make','develop','innovate','craft','write','compose','invent','produce','architect','generate','form','shape','sculpt','paint','draw','code','program'],
+  healing: ['heal','transform','change','grow','evolve','recover','restore','repair','mend','nurture','care','soothe','comfort','hold','protect','serve','therapy','wellness','health'],
+  connecting: ['connect','relate','community','relationship','collaborate','network','gather','unite','bridge','bring together','conversation','listen','engage','bond'],
+  understanding: ['analyze','understand','research','learn','study','discover','explore','investigate','decode','figure','solve','puzzle','pattern','curiosity','question','insight','knowledge','wisdom'],
+  expressing: ['speak','write','communicate','express','share','tell','perform','art','music','sing','dance','story','voice','message','content','publish','podcast','video','creative'],
+  structuring: ['organize','structure','system','plan','strategy','manage','discipline','framework','process','optimize','efficient','streamline','order','method','operations'],
+  liberating: ['freedom','adventure','travel','explore','independence','break free','unconventional','bold','risk','courage','authentic','boundaries','sovereignty','emancipation','rebel']
+};
+
+const DRIVE_LABELS = {
+  guiding: 'a drive to guide others toward what they cannot yet see in themselves',
+  creating: 'a compulsion to build things that did not exist before you touched them',
+  healing: 'a pull toward restoring what has been fragmented, in yourself and others',
+  connecting: 'a need to create the relational fabric that holds communities together',
+  understanding: 'a hunger to decode patterns most people walk past without noticing',
+  expressing: 'a need to externalize what lives inside you so it can be witnessed',
+  structuring: 'a drive to bring order to chaos and make complex things workable',
+  liberating: 'a refusal to let yourself or anyone else be smaller than they actually are'
+};
+
+// Short verb phrases designed to embed cleanly inside a sentence
+const IKIGAI_VERBS = {
+  guiding: 'guide others into clarity',
+  creating: 'build what doesn\'t exist yet',
+  healing: 'heal what others have given up on',
+  connecting: 'bring people together',
+  understanding: 'decode the patterns others miss',
+  expressing: 'give form to what lives inside you',
+  structuring: 'create order where there is none',
+  liberating: 'set people free from what keeps them small'
+};
+
+const TENSION_READS = {
+  'guiding-structuring': 'You want to guide people into their own knowing, but your paid work asks you to build systems. The resolution: build systems that guide.',
+  'creating-structuring': 'Your creative impulse resists the container your livelihood requires. The resolution is not to choose. It is to create within structure.',
+  'healing-expressing': 'You feel pulled between holding the container and taking up space. Both are the same gift wearing different clothes.',
+  'healing-structuring': 'You want to transform but the world pays for systems. Your edge: build the infrastructure that makes transformation scalable without losing the soul of it.',
+  'creating-guiding': 'You make things and you teach. What you are actually doing is neither. You are translating.',
+  'expressing-understanding': 'You want to speak and you want to study. The tension is productive: your deepest insights come from the act of articulating what you are still learning.',
+  'liberating-structuring': 'You want freedom but the market wants frameworks. Your work is to build structures that liberate rather than constrain.',
+  'connecting-creating': 'You gather people and you make things. The synthesis: you create containers where connection happens.',
+};
+
+function detectDrives(answers) {
+  const text = answers.filter(a => a).join(' ').toLowerCase();
+  const scores = {};
+  Object.entries(DRIVE_MAP).forEach(([drive, keywords]) => {
+    let count = 0;
+    keywords.forEach(kw => {
+      const regex = new RegExp('\\b' + kw + '\\w*\\b', 'g');
+      const matches = text.match(regex);
+      if (matches) count += matches.length;
+    });
+    if (count > 0) scores[drive] = count;
+  });
+  return Object.entries(scores).sort((a,b) => b[1] - a[1]);
+}
+
+function analyzeIkigai(ikigai) {
+  const quadrants = {
+    love: detectDrives(ikigai.love),
+    good: detectDrives(ikigai.good),
+    world: detectDrives(ikigai.world),
+    paid: detectDrives(ikigai.paid)
+  };
+  const primaries = {};
+  Object.entries(quadrants).forEach(([q, drives]) => {
+    primaries[q] = drives.length > 0 ? drives[0][0] : null;
+  });
+  const allDrives = {};
+  Object.values(quadrants).forEach(drives => {
+    drives.forEach(([d]) => { allDrives[d] = (allDrives[d] || 0) + 1; });
+  });
+  const crossSignal = Object.entries(allDrives).filter(([_,c]) => c >= 2).sort((a,b) => b[1] - a[1]).map(([d]) => d);
+  const tensions = [];
+  if (primaries.love && primaries.paid && primaries.love !== primaries.paid) {
+    tensions.push({ from: primaries.love, to: primaries.paid, type: 'love-paid' });
+  }
+  if (primaries.world && primaries.good && primaries.world !== primaries.good) {
+    tensions.push({ from: primaries.world, to: primaries.good, type: 'world-good' });
+  }
+  return { quadrants, primaries, crossSignal, tensions };
+}
+
+// ============================================================
+// ESSENCE EXTRACTION ENGINE
+// ============================================================
+function extractEssence(ikigai) {
+  const quadrantLabels = { love: 'Love', good: 'Skill', world: 'World-Need', paid: 'Paid' };
+  const allAnswers = [];
+  const allText = [];
+
+  Object.entries(ikigai).forEach(([q, answers]) => {
+    answers.forEach((a, i) => {
+      if (a && a.trim()) {
+        allAnswers.push({ text: a.trim(), quadrant: quadrantLabels[q], index: i });
+        allText.push(a.trim().toLowerCase());
+      }
+    });
+  });
+
+  const fullText = allText.join(' ');
+
+  function findQuotes(keywords, maxQuotes) {
+    const quotes = [];
+    allAnswers.forEach(a => {
+      const lower = a.text.toLowerCase();
+      for (const kw of keywords) {
+        if (lower.includes(kw) && quotes.length < (maxQuotes || 3)) {
+          const snippet = a.text.length > 120 ? a.text.substring(0, 120) + '...' : a.text;
+          quotes.push({ text: snippet, quadrant: a.quadrant });
+          break;
+        }
+      }
+    });
+    return quotes;
+  }
+
+  const drivesByQuadrant = {};
+  Object.entries(ikigai).forEach(([q, answers]) => {
+    const drives = detectDrives(answers);
+    drives.forEach(([d, count]) => {
+      if (!drivesByQuadrant[d]) drivesByQuadrant[d] = { quadrants: [], totalCount: 0 };
+      drivesByQuadrant[d].quadrants.push(quadrantLabels[q]);
+      drivesByQuadrant[d].totalCount += count;
+    });
+  });
+
+  const crossQuadrantDrives = Object.entries(drivesByQuadrant)
+    .filter(([_, info]) => info.quadrants.length >= 2)
+    .sort((a, b) => b[1].totalCount - a[1].totalCount);
+
+  const SIMPLE_LABELS = {
+    guiding: 'guides others toward what they cannot yet see',
+    creating: 'builds what did not exist before',
+    healing: 'restores what has been broken',
+    connecting: 'weaves people into something stronger',
+    understanding: 'sees the patterns others walk past',
+    expressing: 'makes the invisible visible',
+    structuring: 'turns chaos into something that works',
+    liberating: 'refuses to let anyone stay small'
+  };
+
+  const threads = crossQuadrantDrives.slice(0, 2).map(([drive, info]) => {
+    return { driveKey: drive };
+  });
+
+  const allDrivesRanked = Object.entries(drivesByQuadrant).sort((a,b) => b[1].totalCount - a[1].totalCount);
+  const SURFACE_STORIES = {
+    guiding: 'I help people',
+    creating: 'I\'m a creative person',
+    healing: 'I care about people\'s wellbeing',
+    connecting: 'I\'m a people person',
+    understanding: 'I\'m analytical and curious',
+    expressing: 'I need to express myself',
+    structuring: 'I like things organized',
+    liberating: 'I value freedom and authenticity'
+  };
+  const DEEPER_MOTIVES = {
+    guiding: 'A need to externalize your own unprocessed knowing by installing it in someone else. The act of guiding is how you complete your own understanding. You are not just teaching — you are metabolizing.',
+    creating: 'A nervous system that uses creation as its primary regulation tool. Building is not your preference; it is your homeostasis mechanism. When you stop creating, your system dysregulates.',
+    healing: 'An early pattern of attunement to others\' pain states that your nervous system learned to treat as its own responsibility. The transformative impulse is real, but it is also a protector trying to stabilize your own field by stabilizing everyone else\'s.',
+    connecting: 'A deep belief, often pre-verbal, that you do not fully exist unless you are being witnessed by another. Connection is not your want — it is the mechanism by which you experience your own reality.',
+    understanding: 'A survival strategy that became a superpower. At some point, understanding the pattern meant staying safe. Now the pattern-recognition runs continuously, even when safety is not at stake.',
+    expressing: 'An interior pressure that requires external discharge. What looks like a desire for attention is actually a metabolic process — insight or emotion enters, and if it does not exit through expression, it creates somatic backup.',
+    structuring: 'A nervous system that cannot rest in disorder. What looks like preference for organization is actually a form of somatic self-regulation. You build structure because your body requires it to function.',
+    liberating: 'A cellular memory of constraint that your system is perpetually solving for, even when the original constraint is long past. The freedom drive is real, but it is also running from something that may need to be faced rather than fled.'
+  };
+
+  const coreDrives = allDrivesRanked.slice(0, 2).map(([drive, info]) => {
+    return {
+      surface: SURFACE_STORIES[drive] || 'I do this well',
+      deeper: DEEPER_MOTIVES[drive] || 'A pattern that runs beneath your conscious self-concept.',
+      driveKey: drive
+    };
+  });
+
+  return { threads, coreDrives, SIMPLE_LABELS };
+}
+
+// ============================================================
+// CAREER/INDUSTRY DATA
+// ============================================================
+const LP_CAREERS = {
+  1:['Founder/CEO','Independent consultant','Innovation director','Brand strategist','Solo practitioner'],
+  2:['Mediator','Partnership broker','Counselor','Collaborative designer','Diplomat','Community liaison'],
+  3:['Content creator','Brand voice strategist','Speaker','Creative director','Author','Performance coach'],
+  4:['Operations director','Systems architect','Project manager','Business process designer','Real estate developer'],
+  5:['Travel entrepreneur','Change management consultant','Crisis coach','Multi-industry advisor','Trend strategist'],
+  6:['Wellness practitioner','Family business advisor','Mentor','Interior designer','Hospitality leader','Nonprofit director'],
+  7:['Researcher','Spiritual teacher','Analyst','Author','Technology philosopher','Depth psychologist'],
+  8:['CEO','Investment strategist','Executive coach','Wealth advisor','Real estate mogul','Board director'],
+  9:['Humanitarian leader','Social enterprise founder','International development','Philanthropic advisor','Purpose-driven speaker'],
+  11:['Visionary coach','Intuitive advisor','Thought leader','Spiritual entrepreneur','Consciousness researcher'],
+  22:['Infrastructure builder','Large-scale project director','Policy architect','Institutional founder','Legacy planner'],
+  33:['Master teacher','Spiritual guide','Initiation facilitator','Healing arts leader','Wisdom keeper']
+};
+const LP_INDUSTRIES = {
+  1:['Tech startups','Personal branding','Executive leadership','Innovation'],
+  2:['Mediation & law','HR & people ops','Partnerships','Diplomacy'],
+  3:['Media & entertainment','Marketing','Publishing','Creative arts'],
+  4:['Construction & development','Finance & accounting','Engineering','Government'],
+  5:['Travel & hospitality','Consulting','Venture capital','Media'],
+  6:['Healthcare & wellness','Education','Interior design','Nonprofit'],
+  7:['Research & academia','Technology','Spiritual education','Psychology'],
+  8:['Finance & investing','Corporate leadership','Real estate','Luxury brands'],
+  9:['Nonprofit & NGO','International development','Social enterprise','Education'],
+  11:['Coaching & consulting','Consciousness industry','Spiritual tech','Creative media'],
+  22:['Infrastructure','Government','Large-scale development','Institutional design'],
+  33:['Healing arts','Education','Spiritual leadership','Community development']
+};
+
+// ============================================================
+// REPORT GENERATOR
+// ============================================================
+function generateReport() {
+  STATE.ikigai = {
+    love: [v('ik-love-1'), v('ik-love-2')],
+    good: [v('ik-good-1'), v('ik-good-2')],
+    world: [v('ik-world-1'), v('ik-world-2')],
+    paid: [v('ik-paid-1')]
+  };
+
+  STATE.synthesisPromise = fetchSynthesis();
+
+  goTo('s-processing2');
+
+  const msgs2 = [
+    'Cross-referencing your five systems',
+    'Mapping patterns across your answers',
+    'Writing your personalized report',
+    'Almost there'
+  ];
+  let i = 0;
+  const msgEl2 = document.getElementById('processingMsg2');
+  const animDone = new Promise(function(resolve) {
+    const interval2 = setInterval(function() {
+      i++;
+      if (i < msgs2.length) { msgEl2.textContent = msgs2[i]; }
+      else { clearInterval(interval2); resolve(); }
+    }, 800);
+  });
+
+  Promise.all([animDone, STATE.synthesisPromise]).then(function() {
+    renderReport();
+    goTo('s-report');
+    // Remove any previous slide nav
+    var oldNav = document.getElementById('slideNav');
+    if (oldNav) oldNav.remove();
+    initSlideNav();
+  });
+}
+
+function fetchSynthesis() {
+  const s = STATE;
+  const skippedArr = s.skippedSections || [];
+  const skipped = { love: skippedArr.indexOf('love') !== -1, good: skippedArr.indexOf('good') !== -1, world: skippedArr.indexOf('world') !== -1, paid: skippedArr.indexOf('paid') !== -1 };
+  const lp = LIFE_PATH[s.lifePath];
+  const gk = GENE_KEYS[s.geneKey];
+
+  if (!lp || !gk) {
+    return Promise.resolve();
+  }
+
+  const joinAnswers = function(arr, isSkipped) {
+    if (isSkipped) return '';
+    return (arr || []).filter(function(x) { return x; }).join(' ').trim();
+  };
+
+  const body = {
+    ikigai: {
+      love: joinAnswers(s.ikigai.love, skipped.love),
+      good: joinAnswers(s.ikigai.good, skipped.good),
+      world: joinAnswers(s.ikigai.world, skipped.world),
+      paid: joinAnswers(s.ikigai.paid, skipped.paid)
+    },
+    lifePath: { name: lp.name, purpose: lp.purpose },
+    geneKey: { gift: gk.gift, shadow: gk.shadow, theme: gk.theme }
+  };
+
+  const timeout = new Promise(function(resolve) {
+    setTimeout(function() { resolve({ __timeout: true }); }, 20000);
+  });
+
+  const request = fetch('/.netlify/functions/synthesize', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  }).then(function(r) {
+    if (!r.ok) throw new Error('synthesis HTTP ' + r.status);
+    return r.json();
+  });
+
+  // Reject AI responses that contain raw instructions instead of real synthesis
+  function isValidSynthesis(text) {
+    if (!text || typeof text !== 'string') return false;
+    var bad = ['send me', 'provide the', 'haven\'t provided', 'I can\'t generate', 'I need you to', 'please provide', 'four inputs'];
+    var lower = text.toLowerCase();
+    return !bad.some(function(phrase) { return lower.indexOf(phrase) !== -1; });
+  }
+
+  return Promise.race([request, timeout]).then(function(data) {
+    if (data && !data.__timeout) {
+      STATE.synthesizedPurpose = isValidSynthesis(data.soulPurpose) ? data.soulPurpose : null;
+      STATE.synthesizedIkigai = isValidSynthesis(data.ikigaiSynthesis) ? data.ikigaiSynthesis : null;
+    } else {
+      console.log('Synthesis timed out — using fallback templates');
+    }
+  }).catch(function(err) {
+    console.log('Synthesis failed, using fallback templates:', err && err.message);
+  });
+}
+
+function v(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+// Section glyph SVGs — geometric/celestial icons, not emoji
+const SECTION_GLYPHS = {
+  numerology: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="14" cy="14" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.4"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.5"/><line x1="14" y1="2" x2="14" y2="6" stroke="currentColor" stroke-width="0.6"/><line x1="14" y1="22" x2="14" y2="26" stroke="currentColor" stroke-width="0.6"/><line x1="2" y1="14" x2="6" y2="14" stroke="currentColor" stroke-width="0.6"/><line x1="22" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="0.6"/></svg>',
+  northnode: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="10" r="5" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M9 10 L14 26 L19 10" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="14" cy="10" r="1.5" fill="currentColor" opacity="0.4"/></svg>',
+  genekeys: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 Q14 8 10 14 Q6 20 10 26" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M18 2 Q14 8 18 14 Q22 20 18 26" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="14" cy="7" r="1.2" fill="currentColor" opacity="0.5"/><circle cx="14" cy="14" r="1.2" fill="currentColor" opacity="0.5"/><circle cx="14" cy="21" r="1.2" fill="currentColor" opacity="0.5"/></svg>',
+  humandesign: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><polygon points="14,2 25,9 25,20 14,26 3,20 3,9" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.6"/><polygon points="14,7 20,11 20,18 14,22 8,18 8,11" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.4"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.3"/></svg>',
+  ikigai: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="17" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="11" cy="17" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="17" cy="17" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="14" cy="14" r="1.5" fill="currentColor" opacity="0.4"/></svg>',
+  synthesis: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><path d="M14 2 L14 26 M2 14 L26 14 M5.5 5.5 L22.5 22.5 M22.5 5.5 L5.5 22.5" stroke="currentColor" stroke-width="0.4" opacity="0.25"/><circle cx="14" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.5"/><circle cx="14" cy="14" r="2.5" fill="currentColor" opacity="0.3"/><circle cx="14" cy="2" r="1" fill="currentColor" opacity="0.4"/><circle cx="26" cy="14" r="1" fill="currentColor" opacity="0.4"/><circle cx="14" cy="26" r="1" fill="currentColor" opacity="0.4"/><circle cx="2" cy="14" r="1" fill="currentColor" opacity="0.4"/></svg>'
+};
+
+function sectionGlyph(key) {
+  return '<span class="section-glyph" style="color:var(--accent)">' + (SECTION_GLYPHS[key] || '') + '</span>';
+}
+
+// Build radial/spider Ikigai chart SVG
+function buildIkigaiRadial(ikigaiAnalysis, skipped) {
+  var cx = 200, cy = 200, maxR = 150, labelR = 175;
+  // 4 axes: Love (top), Good (right), World (bottom), Paid (left)
+  var axes = [
+    { label: 'What You Love', key: 'love', angle: -90 },
+    { label: "What You're Good At", key: 'good', angle: 0 },
+    { label: 'What the World Needs', key: 'world', angle: 90 },
+    { label: 'What You Can Be Paid For', key: 'paid', angle: 180 }
+  ];
+  // Overlap labels between axes
+  var overlaps = [
+    { label: 'Passion', angle: -45 },
+    { label: 'Profession', angle: 45 },
+    { label: 'Vocation', angle: 135 },
+    { label: 'Mission', angle: -135 }
+  ];
+
+  // Compute drive strength per quadrant: 0-1 scale
+  function driveStrength(key) {
+    if (skipped[key]) return 0.15;
+    var drives = ikigaiAnalysis.quadrants[key];
+    if (!drives || drives.length === 0) return 0.2;
+    var total = drives.reduce(function(s, d) { return s + d[1]; }, 0);
+    return Math.min(1, 0.25 + total * 0.15);
+  }
+
+  var strengths = axes.map(function(a) { return driveStrength(a.key); });
+
+  function polarToXY(angleDeg, radius) {
+    var rad = angleDeg * Math.PI / 180;
+    return { x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad) };
+  }
+
+  // Build concentric rings
+  var rings = '';
+  for (var r = 1; r <= 4; r++) {
+    var rr = (maxR / 4) * r;
+    rings += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="var(--muted,#8a8078)" stroke-width="0.4" opacity="0.2"/>';
+  }
+
+  // Axis lines
+  var axisLines = '';
+  axes.forEach(function(a) {
+    var p = polarToXY(a.angle, maxR);
+    axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p.x + '" y2="' + p.y + '" stroke="var(--muted,#8a8078)" stroke-width="0.5" opacity="0.25"/>';
+  });
+
+  // Data polygon
+  var points = axes.map(function(a, i) {
+    var p = polarToXY(a.angle, maxR * strengths[i]);
+    return p.x + ',' + p.y;
+  }).join(' ');
+
+  var polygon = '<polygon points="' + points + '" fill="rgba(201,149,107,0.12)" stroke="var(--accent,#c9956b)" stroke-width="1.5" stroke-linejoin="round"/>';
+
+  // Data points (dots on vertices)
+  var dots = '';
+  axes.forEach(function(a, i) {
+    var p = polarToXY(a.angle, maxR * strengths[i]);
+    dots += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="var(--accent,#c9956b)" opacity="0.85"/>';
+    dots += '<circle cx="' + p.x + '" cy="' + p.y + '" r="7" fill="var(--accent,#c9956b)" opacity="0.15"/>';
+  });
+
+  // Axis labels
+  var labels = '';
+  axes.forEach(function(a) {
+    var p = polarToXY(a.angle, labelR + 10);
+    var anchor = 'middle';
+    if (a.angle === 0) anchor = 'start';
+    if (a.angle === 180) anchor = 'end';
+    // Split label for multi-word
+    var parts = a.label.split(' ');
+    if (parts.length <= 3) {
+      labels += '<text x="' + p.x + '" y="' + p.y + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)" dominant-baseline="middle">' + a.label + '</text>';
+    } else {
+      var mid = Math.ceil(parts.length / 2);
+      var line1 = parts.slice(0, mid).join(' ');
+      var line2 = parts.slice(mid).join(' ');
+      labels += '<text x="' + p.x + '" y="' + (p.y - 7) + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)">' + line1 + '</text>';
+      labels += '<text x="' + p.x + '" y="' + (p.y + 7) + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)">' + line2 + '</text>';
+    }
+  });
+
+  // Overlap labels (between axes)
+  var overlapLabels = '';
+  overlaps.forEach(function(o) {
+    var p = polarToXY(o.angle, maxR * 0.55);
+    overlapLabels += '<text x="' + p.x + '" y="' + p.y + '" text-anchor="middle" font-family="\'Inter\',sans-serif" font-size="8.5" fill="var(--muted,#8a8078)" dominant-baseline="middle" opacity="0.7">' + o.label + '</text>';
+  });
+
+  // Center label
+  var center = '<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="14" fill="var(--accent,#c9956b)" font-weight="600">IKIGAI</text>';
+  center += '<text x="' + cx + '" y="' + (cy + 8) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="9" fill="var(--accent,#c9956b)" opacity="0.7">reason for being</text>';
+
+  // Glow behind center
+  var glow = '<circle cx="' + cx + '" cy="' + cy + '" r="22" fill="rgba(201,149,107,0.08)"/>';
+
+  return '<svg viewBox="0 0 400 400" width="380" height="380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;display:block;margin:0 auto">' +
+    rings + axisLines + polygon + dots + glow + center + overlapLabels + labels +
+    '</svg>';
+}
+
+function renderReport() {
+  const s = STATE;
+  const skippedArr = s.skippedSections || [];
+  const skipped = { love: skippedArr.includes('love'), good: skippedArr.includes('good'), world: skippedArr.includes('world'), paid: skippedArr.includes('paid') };
+  const lp = LIFE_PATH[s.lifePath];
+  const dn = DESTINY[s.destinyNum];
+  const nn = NORTH_NODE[s.nnSign];
+  const gk = GENE_KEYS[s.geneKey];
+  const gkP = GENE_KEYS[s.gkPurpose] || gk;
+  const cross = CROSS_TYPES[s.crossType];
+  const combo = COMBO[s.lifePath] ? COMBO[s.lifePath][s.destinyNum] : '';
+  const firstName = (s.firstName || s.name.split(' ')[0]);
+  const ikigaiAnalysis = analyzeIkigai(s.ikigai);
+  const essenceData = extractEssence(s.ikigai);
+  const lpCareers = LP_CAREERS[s.lifePath] || [];
+  const lpIndustries = LP_INDUSTRIES[s.lifePath] || [];
+
+  const [y,m,d] = s.dateStr.split('-');
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dateNice = months[parseInt(m)-1] + ' ' + parseInt(d) + ', ' + y;
+
+  // Helper for rendering quotes
+  function renderQuotes(quotes) {
+    return quotes.map(q => '<div class="quote">"' + q.text + '" <span class="attr">\u2013 ' + q.quadrant + '</span></div>').join('');
+  }
+
+  const slides = [];
+
+  // SLIDE 1: HEADER
+  slides.push(`
+    <div class="report-slide energy-numerology" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:80vh">
+      <div class="brand" style="margin-bottom:1.5rem"><span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</div>
+      <h1 style="font-size:2.8rem;margin-bottom:0.5rem">Your Soul Blueprint</h1>
+      <div class="name" style="font-size:1.6rem;margin-bottom:1rem">${s.name}</div>
+      <p style="color:var(--muted);font-size:0.85rem">${dateNice} &bull; ${s.timeStr} &bull; ${s.place || 'Location not specified'}</p>
+      <div class="display-quote" style="margin-top:2.5rem">
+        <p>Five ancient systems. One territory. <span class="glow-text">Your soul.</span></p>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 2: BLUEPRINT SUMMARY
+  slides.push(`
+    <div class="report-slide energy-numerology">
+      <div class="section-watermark">${ZODIAC_SYMBOLS[s.sunSign] || ''}</div>
+      <h2>${sectionGlyph('numerology')}Your Blueprint Summary</h2>
+      <div class="subtitle">Your blueprint at a glance</div>
+      <p>Here\u2019s what your birth data says across five systems. Tap any section below to explore it in detail.</p>
+      <div class="coord-grid">
+        <div class="coord-card">
+          <div class="label">Sun Sign</div>
+          <div class="value">${ZODIAC_SYMBOLS[s.sunSign]} ${s.sunSign} (${s.sunDeg}&deg;)</div>
+          <div class="gloss">Your core energy and personality.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">North Node</div>
+          <div class="value">${ZODIAC_SYMBOLS[s.nnSign]} ${s.nnSign}</div>
+          <div class="gloss">Where your soul is growing toward.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Life Path Number</div>
+          <div class="value">${s.lifePath}: ${lp.name}</div>
+          <div class="gloss">Your life\u2019s main theme.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Destiny Number</div>
+          <div class="value">${s.destinyNum}</div>
+          <div class="gloss">How you get there, your natural methods.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Human Design Type</div>
+          <div class="value">${s.hdType}</div>
+          <div class="gloss">How your energy is built to operate.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Human Design Profile</div>
+          <div class="value">${s.profile}</div>
+          <div class="gloss">Your personality archetype.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Gene Key (Life\u2019s Work)</div>
+          <div class="value">Gene Key ${s.geneKey}</div>
+          <div class="gloss">Your growth spectrum, shadow to gift.</div>
+        </div>
+        <div class="coord-card">
+          <div class="label">Incarnation Cross</div>
+          <div class="value">${s.crossType}</div>
+          <div class="gloss">Your life\u2019s overarching theme.</div>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 3: NUMEROLOGY
+  slides.push(`
+    <div class="report-slide energy-numerology">
+      <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-50px">${s.lifePath}</div>
+      <h2>${sectionGlyph('numerology')}Your Numerology Blueprint</h2>
+      <div class="subtitle">Life Path ${s.lifePath} + Destiny ${s.destinyNum}</div>
+
+      <p><strong>Life Path ${s.lifePath}: ${lp.name}</strong></p>
+      <p>${lp.purpose}</p>
+
+      <p style="margin-top:1rem"><strong>Destiny Number ${s.destinyNum}: How You Fulfill Your Purpose</strong></p>
+      <p>${dn}</p>
+
+      <div class="reveal-block">
+        <div class="reveal-summary">
+          ${combo ? '<div class="insight"><strong>Your Unique Combination:</strong> ' + combo + '.</div>' : ''}
+          <p>Your Life Path tells you <em>why</em> you're here. Your Destiny Number tells you <em>how</em>.</p>
+          <div class="reveal-hint">Tap for more</div>
+        </div>
+        <div class="reveal-detail">
+          <p>If you feel tension between the two, that's not confusion, it's the creative friction that keeps you growing.</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 4: NORTH NODE
+  slides.push(`
+    <div class="report-slide energy-northnode">
+      <div class="section-watermark">${ZODIAC_SYMBOLS[s.nnSign] || ''}</div>
+      <h2>${sectionGlyph('northnode')}Your North Node</h2>
+      <div class="subtitle">${ZODIAC_SYMBOLS[s.nnSign]} North Node in ${s.nnSign}: ${nn.title}</div>
+      <div class="display-quote"><p><span class="glow-text">Not what comes easily.</span> What your soul came here to grow into.</p></div>
+      <p><strong>Your Growth Edge:</strong> ${nn.purpose}</p>
+      <p><strong>The Path Forward:</strong> ${nn.growth}</p>
+      <div class="reveal-block">
+        <div class="reveal-summary">
+          <div class="insight">
+            <strong>What you\u2019re releasing (South Node in ${s.snSign}):</strong> ${nn.south}
+          </div>
+          <div class="reveal-hint">Tap for more</div>
+        </div>
+        <div class="reveal-detail">
+          <p>Your South Node is what feels comfortable because it\u2019s familiar, not because it serves you. Your North Node is where you\u2019re being asked to grow, even when it feels uncomfortable.</p>
+          <p style="margin-top:0.8rem"><strong>Career Directions:</strong> ${nn.careers}</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 5: GENE KEYS
+  slides.push(`
+    <div class="report-slide energy-genekeys">
+      <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-40px">${s.geneKey}</div>
+      <h2>${sectionGlyph('genekeys')}Your Gene Keys</h2>
+      <div class="subtitle">Your growth spectrum to your best life, from shadow to gift</div>
+
+      <div style="display:flex;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap">
+        <div style="flex:1;min-width:250px;background:var(--card);border:1px solid var(--accent);border-radius:3px;padding:1.5rem;text-align:center">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Life\u2019s Work</div>
+          <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
+            <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.geneKey}</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">What you\u2019re here to do</div>
+        </div>
+        <div style="flex:1;min-width:250px;background:var(--card);border:1px solid #444;border-radius:3px;padding:1.5rem;text-align:center">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Purpose</div>
+          <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
+            <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.gkPurpose}</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">The energetic signature you\u2019re here to embody</div>
+        </div>
+      </div>
+
+      <p><strong>Life\u2019s Work: Gene Key ${s.geneKey}</strong></p>
+      <p>${gk.theme}</p>
+      <div class="gene-key-spectrum">
+        <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gk.shadow}</div>
+        <div class="arrow">&rarr;</div>
+        <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gk.gift}</div>
+        <div class="arrow2">&rarr;</div>
+        <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gk.siddhi}</div>
+      </div>
+      <div class="display-quote"><p>From <span class="glow-text">${gk.shadow.toLowerCase()}</span> to <span class="glow-text">${gk.gift.toLowerCase()}</span>. Not fixing. Uncompressing.</p></div>
+      <div class="reveal-block">
+        <div class="reveal-summary">
+          <div class="insight">The shadow shows up when your gift gets compressed. Every time you feel ${gk.shadow.toLowerCase()}, it's a signal that ${gk.gift.toLowerCase()} is trying to come through.</div>
+          <div class="reveal-hint">Tap for Purpose Key</div>
+        </div>
+        <div class="reveal-detail">
+          <p style="margin-top:1rem"><strong>Purpose: Gene Key ${s.gkPurpose}</strong></p>
+          <p>${gkP.theme}</p>
+          <div class="gene-key-spectrum">
+            <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gkP.shadow}</div>
+            <div class="arrow">&rarr;</div>
+            <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gkP.gift}</div>
+            <div class="arrow2">&rarr;</div>
+            <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gkP.siddhi}</div>
+          </div>
+          <div class="insight">Your Purpose Key is what you naturally embody when you stop performing. When you're living in ${gkP.gift.toLowerCase()}, people feel it before you say a word.</div>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 6: HUMAN DESIGN
+  slides.push(`
+    <div class="report-slide energy-humandesign">
+      <div class="section-watermark" style="opacity:0.02;font-size:14rem;right:-10px">&#x2B21;</div>
+      <h2>${sectionGlyph('humandesign')}Your Human Design</h2>
+      <div class="subtitle">${s.hdType} | Profile ${s.profile} | ${cross.title}</div>
+
+      <div class="hd-type-card">
+        <div class="type-name"><span class="shimmer-accent">${s.hdType}</span></div>
+        <div class="type-detail"><strong>Strategy:</strong> ${s.hdStrategy}</div>
+        <div class="type-detail"><strong>Authority:</strong> ${s.hdAuthority}</div>
+        <div class="type-detail"><strong>Not-Self Theme:</strong> ${s.hdNotSelf}</div>
+        <div class="type-detail"><strong>Profile:</strong> ${s.profile}</div>
+      </div>
+
+      <div class="reveal-block">
+        <div class="reveal-summary">
+          <p><strong>Your Incarnation Cross: ${cross.title}</strong></p>
+          <p>Gates ${s.conscGate}/${s.earthGate} | ${s.uncGate}/${s.uncEarthGate}</p>
+          <p>${cross.description}</p>
+          <div class="reveal-hint">Tap for more</div>
+        </div>
+        <div class="reveal-detail">
+          <div class="insight">${cross.advice}</div>
+          <p><strong>Key themes:</strong> ${cross.themes}</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 7: IKIGAI
+  slides.push(`
+    <div class="report-slide energy-ikigai">
+      <div class="section-watermark" style="opacity:0.02;font-size:16rem;right:-20px">&#x2609;</div>
+      <h2>${sectionGlyph('ikigai')}Your Ikigai</h2>
+      <div class="subtitle">Where purpose meets practicality</div>
+      <div class="glossary"><strong>Ikigai</strong> is a Japanese concept meaning \u201Creason for being.\u201D The intersection of what you love, what you\u2019re good at, what the world needs, and what you can be paid for. When all four overlap, purpose has infrastructure.</div>
+
+      <div class="ikigai-grid">
+        <div class="ikigai-card">
+          <h4>What You Love</h4>
+          <p>${skipped.love ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.love.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
+          ${!skipped.love && ikigaiAnalysis.primaries.love ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.love] + '.</p>' : ''}
+        </div>
+        <div class="ikigai-card">
+          <h4>What You\u2019re Good At</h4>
+          <p>${skipped.good ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.good.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
+          ${!skipped.good && ikigaiAnalysis.primaries.good ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.good] + '.</p>' : ''}
+        </div>
+        <div class="ikigai-card">
+          <h4>What the World Needs</h4>
+          <p>${skipped.world ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.world.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
+          ${!skipped.world && ikigaiAnalysis.primaries.world ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.world] + '.</p>' : ''}
+        </div>
+        <div class="ikigai-card">
+          <h4>What You Can Be Paid For</h4>
+          <p>${skipped.paid ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.paid.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
+          ${!skipped.paid && ikigaiAnalysis.primaries.paid ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.paid] + '.</p>' : ''}
+        </div>
+      </div>
+
+      <div style="text-align:center;margin:2rem 0">
+        ${buildIkigaiRadial(ikigaiAnalysis, skipped)}
+      </div>
+
+      <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
+      ${(function() {
+        var hasLove = s.ikigai.love.filter(function(x){return x;}).length > 0 && !skipped.love;
+        var hasGood = s.ikigai.good.filter(function(x){return x;}).length > 0 && !skipped.good;
+        var hasWorld = s.ikigai.world.filter(function(x){return x;}).length > 0 && !skipped.world;
+        var hasPaid = s.ikigai.paid.filter(function(x){return x;}).length > 0 && !skipped.paid;
+        var hasAny = hasLove || hasGood || hasWorld || hasPaid;
+
+        var ikigaiStatement;
+        if (s.synthesizedIkigai) {
+          ikigaiStatement = s.synthesizedIkigai;
+        } else if (hasAny) {
+          var mainDrive = ikigaiAnalysis.crossSignal[0] ||
+                          ikigaiAnalysis.primaries.world ||
+                          ikigaiAnalysis.primaries.good ||
+                          ikigaiAnalysis.primaries.love ||
+                          ikigaiAnalysis.primaries.paid;
+          if (mainDrive) {
+            var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
+            var gkGift = gk.gift.toLowerCase();
+            ikigaiStatement = 'Your soul\'s unique expression is to ' + IKIGAI_VERBS[mainDrive] +
+                              ', channeling your gift of ' + gkGift +
+                              ' in service of your soul\'s purpose ' + lpPurposeFirst + '.';
+          } else {
+            ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+          }
+        } else {
+          ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+        }
+        return '<div class="purpose-statement" style="margin:1rem auto;max-width:600px;text-align:center">' + ikigaiStatement + '</div>';
+      })()}
+
+      ${ikigaiAnalysis.crossSignal.length > 0 ? '<div class="insight"><strong>The signal across your answers:</strong> ' + (ikigaiAnalysis.crossSignal.length >= 2 ? 'Two drives keep showing up across your answers: <em>' + ikigaiAnalysis.crossSignal[0] + '</em> and <em>' + ikigaiAnalysis.crossSignal[1] + '</em>. These aren\'t choices you made deliberately. They chose you. They\'re the shape your thinking naturally takes when no one is watching.' : 'One drive runs through everything: <em>' + ikigaiAnalysis.crossSignal[0] + '</em>. This is not a preference. It\'s the shape your thinking naturally takes when no one is watching.') + '</div>' : ''}
+
+      ${ikigaiAnalysis.tensions.length > 0 ? '<p style="margin-top:1rem"><strong>The productive tension:</strong> ' + (function() { const t = ikigaiAnalysis.tensions[0]; const key = t.from + '-' + t.to; return TENSION_READS[key] || TENSION_READS[t.to + '-' + t.from] || 'What you love (' + t.from + ') and what sustains you (' + t.to + ') pull in different directions. That tension is not a problem to solve. It\'s the creative friction that keeps you from settling into half of yourself.'; })() + '</p>' : ''}
+
+      <div class="insight" style="margin-top:1rem">If you feel resistance around what emerged here, that's normal. It's not the truth, it's the part of you that prefers the familiar. The Ikigai sits at the center of all four quadrants, and yours is starting to take shape.</div>
+    </div>
+  `);
+
+  // SLIDE 8: SYNTHESIS
+  slides.push(`
+    <div class="report-slide energy-synthesis">
+      <div class="section-watermark" style="opacity:0.02;font-size:20rem;right:-40px">&#x2726;</div>
+      <h2>${sectionGlyph('synthesis')}The Synthesis</h2>
+      <div class="subtitle">What all five systems are saying together</div>
+      <div class="display-quote"><p><span class="glow-text">Five different maps. One territory. Your soul.</span></p></div>
+
+      <p>${firstName}, here is what emerges when we read your blueprint as a single story:</p>
+      <p>Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> tells us your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}. Your <strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that mission: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. Your <strong>North Node in ${s.nnSign}</strong> points to where your soul is growing: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. Your <strong>Gene Key ${s.geneKey}</strong> maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>. And your <strong>${s.hdType}</strong> design tells your body how to move through all of it: ${s.hdStrategy.toLowerCase()}. One thread. Five confirmations.</p>
+
+      <p style="color:var(--accent);font-family:'DM Serif Display',serif;font-size:1.15rem;margin:1.8rem 0 0.6rem">What is your soul's purpose?</p>
+      <div class="purpose-statement">${(function() {
+        if (s.synthesizedPurpose) return s.synthesizedPurpose;
+        var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
+        var gkGift = gk.gift.toLowerCase();
+        return 'You are here ' + lpPurposeFirst + ', and to share your gift of ' + gkGift + '.';
+      })()}</div>
+
+      <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. You are so close to it that it feels normal. The people around you can see it. You are the last to name it.' : 'There is a part of you that you cannot yet see clearly because you are standing inside it. It feels so normal that it looks like air. The people around you can see it. You are the last to name it.'}</p>
+
+      <p>${(function() {
+        var hasBuild = essenceData.coreDrives.some(function(d) { return ['structuring','creating'].indexOf(d.driveKey) !== -1; });
+        var hasHeal = essenceData.coreDrives.some(function(d) { return ['healing','connecting','liberating'].indexOf(d.driveKey) !== -1; });
+        var hasCreate = essenceData.coreDrives.some(function(d) { return ['creating','expressing'].indexOf(d.driveKey) !== -1; });
+        var hasGuide = essenceData.coreDrives.some(function(d) { return ['guiding','structuring','understanding'].indexOf(d.driveKey) !== -1; });
+
+        if (hasHeal) return 'Your purpose most resembles the helper-transformer path. You do orient toward what is broken and you do feel the pull to restore it. But your version is not self-sacrificing. ' + (hasBuild ? 'It is powered by a structural engine that most helpers lack. You do not just hold space. You see what is actually wrong and build something to address it.' : hasCreate ? 'It runs through a creative channel that most transformers never access. You do not just hold space. You make things that carry the transformation forward without you in the room.' : 'It is diagnostic, not devotional. You name the fracture before you address it.');
+        if (hasCreate) return 'Your purpose most resembles the creative-artist path. You do need to make things, and suppressing that need produces real distress. But your creativity is not self-referential. ' + (hasGuide ? 'It is in service of transmission. You create as a vehicle for something else: understanding, recognition, reorganization.' : 'It has a function beyond aesthetics. What you build carries information. The art is a vessel, not the destination.');
+        if (hasBuild) return 'Your purpose most resembles the builder-founder path. You do build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the container your soul\'s work requires. The business is the vehicle, not the destination.';
+        return 'Your purpose most resembles the high-achiever path. You have genuine capacity for output and follow-through. But your version of achievement is not about metrics or recognition. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would leave you productive but hollow.';
+      })()}</p>
+
+      <div class="reveal-block">
+        <div class="reveal-summary">
+          <div class="insight">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</div>
+          <div class="reveal-hint">Tap for career alignment</div>
+        </div>
+        <div class="reveal-detail">
+          <h3 style="margin-top:1rem">Professions & Industries Aligned With Your Blueprint</h3>
+          <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? 'Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.' : ''}</p>
+          <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}${nn.careers ? '. Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // SLIDE 9: CTA + SAVE
+  slides.push(`
+    <div class="report-slide energy-cta" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:70vh">
+      <div class="cta-box" style="max-width:600px">
+        <h3>Your Blueprint Is the Beginning</h3>
+        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is where <span class="glow-text">resistance</span> shows up. Where your nervous system is vetoing what your soul is asking for.</p>
+        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is a six-stage method for closing that gap. It starts with the <strong>Clearing Breath</strong>: a technique for moving your awareness out of your head and into the place where you can actually hear what\u2019s true.</p>
+        <p style="margin-top:0.8rem;color:var(--accent)">If you feel seen by this blueprint, the work that created it goes deeper.</p>
+        <a href="https://www.briannabomi.com" target="_blank" class="btn" style="display:inline-block;margin-top:1rem;text-decoration:none">Explore the Sovereign Arc</a>
+      </div>
+      <div style="margin-top:2.5rem">
+        <button class="btn" onclick="window.print()">Save / Print Your Blueprint</button>
+        <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.02em">Save this. You'll want to come back to it.</p>
+      </div>
+      <div style="margin-top:2rem;color:var(--muted);font-size:0.75rem">
+        <p>Generated by the Soul Blueprint Experience &bull; <span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</p>
+      </div>
+    </div>
+  `);
+
+  const html = slides.join('\n');
+  document.getElementById('reportContent').innerHTML = html;
+}
+
+// ============================================================
+// EMAIL CAPTURE + KIT SUBSCRIPTION
+// ============================================================
+function captureEmailAndGenerate() {
+  var email = document.getElementById('userEmail').value.trim();
+  var firstName = document.getElementById('userFirstName').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  STATE.email = email;
+  if (firstName) STATE.firstName = firstName;
+
+  // Fire Kit subscription immediately — non-blocking, independent of report
+  sendToKit(email, firstName);
+
+  // Generate report — never waits for Kit
+  generateReport();
+}
+
+function sendToKit(email, firstName) {
+  var payload = {
+    email_address: email,
+    first_name: firstName || '',
+    fields: {
+      life_path: String(STATE.lifePath || ''),
+      north_node: STATE.nnSign || '',
+      gene_key: String(STATE.geneKey || ''),
+      sun_sign: STATE.sunSign || ''
+    }
+  };
+
+  console.log('Sending to Kit:', JSON.stringify(payload, null, 2));
+
+  try {
+    fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) {
+      console.log('Kit response status:', r.status);
+      return r.text();
+    })
+    .then(function(text) {
+      console.log('Kit response body:', text);
+      var d;
+      try { d = JSON.parse(text); } catch(e) {
+        console.error('Kit returned non-JSON:', text);
+        showKitError('Unexpected server response. Check console for details.');
+        return;
+      }
+      if (d.success) {
+        console.log('Kit subscription confirmed - subscriberId:', d.subscriberId, 'tagged:', d.tagged);
+      } else {
+        console.error('Kit subscription FAILED:', JSON.stringify(d));
+        showKitError(d.error || 'Subscription failed. Your report is still saved.');
+      }
+    })
+    .catch(function(e) {
+      console.error('Kit network error:', e);
+      showKitError('Network error - could not reach subscription service.');
+    });
+  } catch (e) {
+    console.error('Kit send crashed:', e);
+  }
+}
+
+function showKitError(msg) {
+  var existing = document.getElementById('kitErrorNotice');
+  if (existing) { existing.textContent = msg || existing.textContent; return; }
+  var notice = document.createElement('div');
+  notice.id = 'kitErrorNotice';
+  notice.style.cssText = 'background:#2a1a1a;border:1px solid #c9956b;color:#e8e0d8;padding:0.8rem 1.2rem;margin:1rem auto;max-width:500px;border-radius:4px;font-size:0.82rem;text-align:center;';
+  notice.textContent = msg || "We could not subscribe your email, but your report is still here.";
+  var report = document.getElementById('reportContent');
+  if (report && report.parentNode) {
+    report.parentNode.insertBefore(notice, report);
+  }
+}
+
+// ============================================================
+// TEST CASES — Verification of calculations
+// ============================================================
+function runTestCases() {
+  const results = [];
+  function test(label, got, expected) {
+    const pass = got === expected;
+    results.push({ label, got, expected, pass });
+    console.log((pass ? 'PASS' : 'FAIL') + ': ' + label + ' — got ' + got + ', expected ' + expected);
+  }
+
+  // --- DESTINY NUMBER TESTS ---
+  test('Destiny: Robert Nesta Marley', calcDestinyNumber('Robert Nesta Marley'), 4);
+  test('Destiny: John Smith', calcDestinyNumber('John Smith'), 8);
+  test('Destiny: Anna Lee', calcDestinyNumber('Anna Lee'), 7);
+
+  // --- LIFE PATH TESTS ---
+  test('Life Path: 1988-03-15', calcLifePath('1988-03-15'), 8);
+  test('Life Path: 1993-11-29', calcLifePath('1993-11-29'), 8);
+  test('Life Path: 1776-07-04', calcLifePath('1776-07-04'), 5);
+
+  // --- GATE MAPPING TESTS (with 3.875° Rave Mandala offset) ---
+  // Gate 17 starts at 3.875°, so 3.875° should be gate 17
+  test('Gate at 3.875° (Gate 17 start)', getGateFromLongitude(3.875), 17);
+  // Gate 21 starts at 3.875+5.625 = 9.5°
+  test('Gate at 9.5° (Gate 21 start)', getGateFromLongitude(9.5), 21);
+  // Gate 25 starts at 358.25° (last gate before 0° Aries wrap)
+  test('Gate at 358.25° (Gate 25 start)', getGateFromLongitude(358.25), 25);
+  // 0° Aries is still within Gate 25 (which spans 358.25° to 3.875°)
+  test('Gate at 0° (still Gate 25)', getGateFromLongitude(0), 25);
+
+  // --- SUN LONGITUDE TESTS (astronomy-engine) ---
+  var sun2000 = geoEclLon(Astronomy.Body.Sun, new Date(Date.UTC(2000, 0, 1, 12, 0, 0)));
+  var sun2000pass = sun2000 > 279 && sun2000 < 282;
+  results.push({ label: 'Sun at J2000.0: ~280.5°', got: sun2000.toFixed(2) + '°', expected: '~280.5°', pass: sun2000pass });
+
+  var sunEquinox = geoEclLon(Astronomy.Body.Sun, new Date(Date.UTC(2000, 2, 20, 12, 0, 0)));
+  var eqPass = sunEquinox > 358 || sunEquinox < 2;
+  results.push({ label: 'Sun at 2000 vernal equinox: ~0°', got: sunEquinox.toFixed(2) + '°', expected: '~0°', pass: eqPass });
+
+  // --- 88° SOLAR ARC TEST (astronomy-engine) ---
+  var testDate = new Date(Date.UTC(1990, 5, 15, 12, 0, 0));
+  var testSunBirth = geoEclLon(Astronomy.Body.Sun, testDate);
+  var testDate88 = find88SolarArcDate(testDate);
+  var testSun88 = geoEclLon(Astronomy.Body.Sun, testDate88);
+  var arcDiff = testSunBirth - testSun88;
+  if (arcDiff < 0) arcDiff += 360;
+  var arcPass = Math.abs(arcDiff - 88) < 0.1;
+  results.push({ label: '88° solar arc diff', got: arcDiff.toFixed(4) + '°', expected: '88.0000°', pass: arcPass });
+
+  // --- GENE KEY EARTH GATE TEST ---
+  test('Gate at 83° (Sun)', getGateFromLongitude(83), GATE_ORDER[Math.floor(83/5.625)]);
+  var earthTestLon = normDeg(83 + 180);
+  test('Gate at 263° (Earth)', getGateFromLongitude(earthTestLon), GATE_ORDER[Math.floor(263/5.625)]);
+
+  // --- LINE CALCULATION TEST ---
+  test('Line at 0.0°', getLineFromLongitude(0.0), 1);
+  test('Line at 0.9375°', getLineFromLongitude(0.9375), 2);
+  test('Line at 5.0°', getLineFromLongitude(5.0), 6);
+
+  // --- PROFILE TEST ---
+  test('Cross type for 1/3', getIncarnationCrossType(1, 3), 'Right Angle');
+  test('Cross type for 5/1', getIncarnationCrossType(5, 1), 'Left Angle');
+  test('Cross type for 4/1', getIncarnationCrossType(4, 1), 'Juxtaposition');
+
+  // --- BRIANNA BOMI VERIFICATION (known chart: Manifestor, 2/4, Ego) ---
+  // Aug 1, 1994, 3:01 AM EDT (UTC-4) = 7:01 AM UTC
+  var briannaResult = calcHDType(new Date(Date.UTC(1994, 7, 1, 7, 1, 0)));
+  test('Brianna Type', briannaResult.type, 'Manifestor');
+  var briannaConsc = getAllPositions(new Date(Date.UTC(1994, 7, 1, 7, 1, 0)));
+  var briannaD88 = find88SolarArcDate(new Date(Date.UTC(1994, 7, 1, 7, 1, 0)));
+  var briannaUnconsc = getAllPositions(briannaD88);
+  test('Brianna Profile', getLineFromLongitude(briannaConsc.sun) + '/' + getLineFromLongitude(briannaUnconsc.sun), '2/4');
+  test('Brianna Authority', briannaResult.authority, 'Ego Authority');
+  test('Brianna Consc Sun Gate', getGateFromLongitude(briannaConsc.sun), 33);
+  test('Brianna Design Sun Gate', getGateFromLongitude(briannaUnconsc.sun), 24);
+  test('Brianna Consc Earth Gate', getGateFromLongitude(briannaConsc.earth), 19);
+  test('Brianna Consc Moon Gate', getGateFromLongitude(briannaConsc.moon), 8);
+
+  // Print summary
+  const passed = results.filter(r => r.pass).length;
+  console.log('\n=== TEST RESULTS: ' + passed + '/' + results.length + ' passed ===\n');
+
+  return results;
+}
+
+// Run tests on load and log to console
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Running Soul Blueprint verification tests...');
+  const results = runTestCases();
+  window._testResults = results;
+  initStarfield();
+});
+
+// ============================================================
+// STARFIELD — slow-drifting particle background
+// ============================================================
+function initStarfield() {
+  var canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  var count = 90;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.12,
+      dy: (Math.random() - 0.5) * 0.08,
+      alpha: Math.random() * 0.4 + 0.1,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.008 + 0.003
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      s.x += s.dx;
+      s.y += s.dy;
+      s.pulse += s.pulseSpeed;
+      if (s.x < -5) s.x = canvas.width + 5;
+      if (s.x > canvas.width + 5) s.x = -5;
+      if (s.y < -5) s.y = canvas.height + 5;
+      if (s.y > canvas.height + 5) s.y = -5;
+      var flicker = s.alpha + Math.sin(s.pulse) * 0.15;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,175,140,' + Math.max(0, flicker) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ============================================================
+// SLIDE NAVIGATION SYSTEM
+// ============================================================
+var currentSlide = 0;
+var totalSlides = 0;
+
+function initSlideNav() {
+  var slides = document.querySelectorAll('.report-slide');
+  totalSlides = slides.length;
+  if (totalSlides === 0) return;
+
+  // Build nav bar
+  var nav = document.createElement('div');
+  nav.className = 'slide-nav';
+  nav.id = 'slideNav';
+  nav.innerHTML =
+    '<button class="nav-arrow" id="slidePrev" onclick="navigateSlide(-1)">←</button>' +
+    '<div class="slide-dots" id="slideDots"></div>' +
+    '<button class="nav-arrow" id="slideNext" onclick="navigateSlide(1)">→</button>' +
+    '<span class="slide-counter" id="slideCounter"></span>';
+  document.body.appendChild(nav);
+
+  // Build dots
+  var dotsEl = document.getElementById('slideDots');
+  for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('data-idx', i);
+    dot.onclick = function() { goToSlide(parseInt(this.getAttribute('data-idx'))); };
+    dotsEl.appendChild(dot);
+  }
+
+  showSlide(0);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('s-report').classList.contains('active')) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); navigateSlide(1); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); navigateSlide(-1); }
+    }
+  });
+
+  // Swipe support for mobile
+  var touchStartX = 0;
+  var reportEl = document.getElementById('s-report');
+  reportEl.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  reportEl.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      navigateSlide(diff > 0 ? 1 : -1);
+    }
+  }, { passive: true });
+}
+
+function showSlide(idx) {
+  var slides = document.querySelectorAll('.report-slide');
+  var dots = document.querySelectorAll('.slide-dots .dot');
+  slides.forEach(function(s, i) {
+    s.classList.remove('active', 'slide-enter');
+    if (i === idx) {
+      s.classList.add('active');
+      // Trigger entrance animation
+      void s.offsetWidth;
+      s.classList.add('slide-enter');
+    }
+  });
+  dots.forEach(function(d, i) {
+    d.classList.toggle('active', i === idx);
+  });
+  currentSlide = idx;
+  var prev = document.getElementById('slidePrev');
+  var next = document.getElementById('slideNext');
+  var counter = document.getElementById('slideCounter');
+  if (prev) prev.disabled = idx === 0;
+  if (next) next.disabled = idx === totalSlides - 1;
+  if (counter) counter.textContent = (idx + 1) + ' / ' + totalSlides;
+  window.scrollTo(0, 0);
+}
+
+function navigateSlide(dir) {
+  var target = currentSlide + dir;
+  if (target >= 0 && target < totalSlides) {
+    goToSlide(target);
+  }
+}
+
+function goToSlide(idx) {
+  if (idx >= 0 && idx < totalSlides) {
+    showSlide(idx);
+  }
+}
+
+// Reveal-on-tap handler
+document.addEventListener('click', function(e) {
+  var block = e.target.closest('.reveal-block');
+  if (block) {
+    block.classList.toggle('open');
+  }
+});
+
+</script>
+</body>
+</html>
