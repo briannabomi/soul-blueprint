@@ -6,21 +6,23 @@
 <title>Your Soul Blueprint | Brianna Bomi</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#c9956b;--accent2:#d4a574;--text:#e8e0d8;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15)}
+:root{--bg:#0a0e1a;--card:rgba(16,22,40,0.85);--card2:rgba(22,28,48,0.8);--accent:#c9956b;--accent2:#d4a574;--text:#e0dcd6;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15);--midnight:#0d1225;--deep:#111830}
 html{font-size:16.2px}
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.7}
-h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white);letter-spacing:0.02em}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.85;font-size:0.88rem}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+h1,h2{font-family:'DM Serif Display',serif;font-weight:400;color:var(--white);letter-spacing:0.01em}
+h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);letter-spacing:0.02em}
 .screen{display:none;min-height:100vh;padding:2rem;max-width:720px;margin:0 auto;animation:fadeIn 0.8s ease}
 .screen.active{display:flex;flex-direction:column;justify-content:center}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .welcome-badge{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.welcome h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.15;margin-bottom:1.5rem}
-.welcome h1 em{color:var(--accent);font-style:italic}
+.welcome h1{font-size:clamp(2.6rem,7vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
+.welcome h1 em{color:var(--accent);font-style:normal}
 .welcome p{color:var(--muted);font-size:0.95rem;max-width:520px;margin-bottom:2rem}
-.welcome .hook{color:var(--text);font-size:1.05rem;border-left:2px solid var(--accent);padding-left:1.2rem;margin:2rem 0;font-style:italic;font-family:'Cormorant Garamond',serif}
+.welcome .hook{color:var(--text);font-size:1.1rem;border-left:2px solid var(--accent);padding-left:1.2rem;margin:2rem 0;font-style:normal;font-family:'DM Serif Display',serif;line-height:1.5}
 .btn{background:var(--accent);color:var(--bg);border:none;padding:0.9rem 2.4rem;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.3s;border-radius:2px}
 .btn:hover{background:var(--accent2);transform:translateY(-1px)}
 .btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
@@ -28,14 +30,14 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 .btn-sm{padding:0.6rem 1.6rem;font-size:0.75rem}
 .form-group{margin-bottom:1.5rem}
 .form-group label{display:block;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1px solid #333;color:var(--text);padding:0.8rem 1rem;font-size:0.95rem;font-family:'Inter',sans-serif;border-radius:2px;transition:border-color 0.3s}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1px solid #333;color:var(--text);padding:0.85rem 1rem;font-size:0.88rem;font-family:'Inter',sans-serif;border-radius:2px;transition:border-color 0.3s;line-height:1.7}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
 .form-group textarea{min-height:80px;resize:vertical;line-height:1.6}
 .form-group .hint{font-size:0.78rem;color:var(--muted);margin-top:0.3rem}
 .step-header{margin-bottom:2rem}
 .step-header .phase{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
-.step-header h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:0.8rem}
-.step-header p{color:var(--muted);font-size:0.9rem}
+.step-header h2{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:0.8rem;line-height:1.15}
+.step-header p{color:var(--muted);font-size:0.86rem;line-height:1.8}
 .progress-bar{width:100%;height:4px;background:#333;margin:2rem 0;border-radius:2px;overflow:hidden}
 .progress-bar .fill{height:100%;background:var(--accent);transition:width 0.6s ease}
 .processing{text-align:center;padding:4rem 2rem}
@@ -43,41 +45,101 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 .processing p{color:var(--muted);font-size:0.85rem;animation:pulse 2s ease infinite}
 .processing h2{margin-bottom:1rem}
 .nav-row{display:flex;gap:1rem;margin-top:2rem;justify-content:space-between}
-.report{padding:3rem 2rem;max-width:780px;margin:0 auto}
-.report-header{text-align:center;padding:3rem 0;border-bottom:1px solid #333;margin-bottom:3rem}
-.report-header .brand{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.report-header h1{font-size:clamp(2rem,5vw,3rem);margin-bottom:0.5rem}
-.report-header .name{font-size:1.3rem;color:var(--accent);font-family:'Cormorant Garamond',serif;font-style:italic}
-.report-section{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid #222}
-.report-section h2{font-size:1.6rem;margin-bottom:0.3rem}
-.report-section h3{font-size:1.25rem;margin-bottom:0.3rem;margin-top:1.8rem}
-.report-section .subtitle{color:var(--accent);font-size:0.85rem;margin-bottom:1.2rem;font-family:'Cormorant Garamond',serif;font-style:italic}
-.report-section p{margin-bottom:0.8rem;font-size:0.92rem}
-.report-section .insight{background:var(--card);padding:1.2rem 1.5rem;border-left:2px solid var(--accent);margin:1.2rem 0;font-size:0.9rem}
-.report-section .reframe{color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;margin:1.5rem 0}
-.report-section .glossary{font-size:0.82rem;color:var(--muted);font-style:italic;margin:-0.4rem 0 1rem 0;padding-left:0.5rem;border-left:1px solid #444}
-.coord-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
-.coord-card{background:var(--card);padding:1rem 1.2rem;border-radius:3px}
-.coord-card .label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
-.coord-card .value{font-size:1.1rem;color:var(--white);font-family:'Cormorant Garamond',serif}
-.coord-card .gloss{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;font-style:italic;line-height:1.4}
-.gene-key-spectrum{display:flex;align-items:center;gap:0.5rem;margin:1rem 0;padding:1rem;background:var(--card);border-radius:3px}
-.gene-key-spectrum .shadow{color:#8b6060;flex:1;text-align:center;font-size:0.8rem}
+.report{padding:0;max-width:100%;margin:0;position:relative;z-index:1}
+/* ---- SCROLLABLE REPORT SYSTEM ---- */
+.report-slide{display:block;padding:clamp(2.5rem,6vh,5rem) clamp(1.5rem,5vw,4rem);max-width:820px;margin:0 auto;position:relative;overflow:hidden}
+.report-slide.slide-enter{animation:slideIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes slideIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+/* ---- ACCORDION SYSTEM ---- */
+.accordion-section{border-bottom:1px solid rgba(201,149,107,0.15);margin:0 auto;max-width:820px}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:1.5rem 2rem;background:var(--card);transition:background 0.3s;user-select:none;-webkit-user-select:none}
+.accordion-header:hover{background:rgba(22,28,48,0.95)}
+.accordion-header h2{font-size:clamp(2.2rem,5vw,3.1rem);margin:0;line-height:1.15;font-family:'DM Serif Display',serif;font-weight:400;color:var(--white)}
+.accordion-toggle{font-size:1.8rem;color:var(--accent);transition:transform 0.4s ease;flex-shrink:0;margin-left:1rem;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.accordion-section.open .accordion-toggle{transform:rotate(45deg)}
+.accordion-body{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.6s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease}
+.accordion-section.open .accordion-body{max-height:8000px;opacity:1}
+.accordion-body-inner{padding:clamp(1.5rem,4vh,3rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
+/* Save/Print floating bar */
+.save-bar{text-align:center;padding:1rem 2rem;max-width:820px;margin:0 auto}
+/* Synthesis always open — no accordion wrapper */
+.synthesis-section{display:block;padding:clamp(2.5rem,6vh,5rem) clamp(1.5rem,5vw,4rem);max-width:820px;margin:0 auto;position:relative;overflow:hidden}
+/* Report header (slide 0) */
+.report-header{text-align:center;padding:0}
+.report-header .brand{font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.report-header h1{font-size:clamp(2.8rem,7vw,4.2rem);margin-bottom:0.8rem;line-height:1.05}
+.report-header .name{font-size:1.5rem;color:var(--accent);font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:0.05em}
+/* Section watermarks */
+.section-watermark{position:absolute;top:50%;right:-30px;transform:translateY(-50%);font-size:20rem;opacity:0.025;pointer-events:none;z-index:0;font-family:'Cormorant Garamond',serif;line-height:1;color:var(--accent)}
+.report-slide>*:not(.section-watermark),.accordion-body-inner>*:not(.section-watermark),.synthesis-section>*:not(.section-watermark){position:relative;z-index:1}
+/* Section glyphs */
+.section-glyph{display:inline-block;width:30px;height:30px;vertical-align:middle;margin-right:0.6rem;opacity:0.85}
+.section-glyph svg{width:100%;height:100%}
+/* Energy gradients per section */
+.energy-numerology{background:linear-gradient(160deg,rgba(201,149,107,0.06) 0%,transparent 50%)}
+.energy-northnode{background:linear-gradient(160deg,rgba(90,110,180,0.07) 0%,transparent 50%)}
+.energy-genekeys{background:linear-gradient(160deg,rgba(90,170,120,0.06) 0%,transparent 50%)}
+.energy-humandesign{background:linear-gradient(160deg,rgba(140,90,180,0.07) 0%,transparent 50%)}
+.energy-ikigai{background:linear-gradient(160deg,rgba(201,160,80,0.06) 0%,transparent 50%)}
+.energy-synthesis{background:linear-gradient(160deg,rgba(180,120,160,0.05) 0%,rgba(90,130,180,0.04) 40%,rgba(120,180,130,0.03) 100%)}
+/* Section typography */
+.report-slide h2{font-size:clamp(2.2rem,5vw,3.1rem);margin-bottom:0.15rem;line-height:1.15}
+.report-slide h3{font-size:clamp(1.15rem,2.5vw,1.5rem);margin-bottom:0.15rem;margin-top:0.55rem;font-weight:400}
+.report-slide .subtitle{color:var(--accent);font-size:0.9rem;margin-bottom:0.4rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.04em}
+.accordion-body-inner h2{font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:0.15rem;line-height:1.15}
+.accordion-body-inner .subtitle{color:var(--accent);font-size:0.9rem;margin-bottom:0.4rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.04em}
+.accordion-body-inner h3{margin-top:0.6rem;margin-bottom:0.15rem}
+.synthesis-section h2{font-size:clamp(2.2rem,5vw,3.1rem);line-height:1.15;margin-bottom:0.15rem}
+.synthesis-section .subtitle{margin-bottom:0.4rem}
+.synthesis-section h3{margin-top:0.6rem;margin-bottom:0.15rem}
+.report-slide p{margin-bottom:1rem;font-size:0.86rem;line-height:1.95}
+/* Glow border (replaces solid left border) */
+.report-slide .insight{background:var(--card);padding:1.4rem 1.6rem;border-left:2px solid var(--accent);box-shadow:-2px 0 12px rgba(201,149,107,0.15),inset 2px 0 8px rgba(201,149,107,0.05);margin:1.6rem 0;font-size:0.84rem;line-height:1.9;border-radius:0 6px 6px 0}
+.report-slide .reframe{color:var(--accent);font-family:'DM Serif Display',serif;font-size:1.2rem;font-style:normal;margin:2rem 0;line-height:1.4}
+.report-slide .glossary{font-size:0.78rem;color:var(--muted);font-style:italic;margin:-0.2rem 0 1.4rem 0;padding-left:0.6rem;border-left:1px solid rgba(201,149,107,0.2);line-height:1.7}
+.definition-callout{border-left:2px solid rgba(205,175,130,0.4);padding-left:16px;margin-left:8px;opacity:0.85;font-style:italic;font-size:0.9em;margin-top:8px;margin-bottom:12px}
+.ikigai-diagram,.ikigai-container{max-width:100%;overflow:visible;padding:20px;box-sizing:border-box}
+.ikigai-diagram svg,.ikigai-container svg{max-width:100%;height:auto;overflow:visible}
+/* Cinematic display text for key quotes */
+.display-quote{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3rem);color:var(--white);text-align:center;line-height:1.3;padding:2.5rem 1rem;margin:2rem 0;position:relative}
+.display-quote::before,.display-quote::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.display-quote::before{top:0}
+.display-quote::after{bottom:0}
+/* Glowing text for key phrases */
+.glow-text{color:var(--accent);text-shadow:0 0 8px rgba(201,149,107,0.3),0 0 20px rgba(201,149,107,0.1)}
+/* Shimmer animation on accent elements */
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.shimmer-accent{background:linear-gradient(90deg,var(--accent) 0%,#e8c9a0 25%,var(--accent) 50%,#e8c9a0 75%,var(--accent) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite}
+/* Reveal on tap */
+.reveal-block{cursor:pointer;transition:all 0.4s ease}
+.reveal-block .reveal-summary{display:block}
+.reveal-block .reveal-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease,margin 0.4s ease;margin-top:0}
+.reveal-block.open .reveal-detail{max-height:800px;opacity:1;margin-top:1rem}
+.reveal-hint{font-size:0.7rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.5rem;transition:opacity 0.3s}
+.reveal-block.open .reveal-hint{opacity:0}
+.coord-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.8rem 0}
+.coord-card{background:var(--card);padding:1.2rem 1.4rem;border-radius:6px;border:1px solid rgba(201,149,107,0.08);transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s}
+.coord-card:hover{border-color:rgba(201,149,107,0.35);cursor:pointer;transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,149,107,0.1)}
+.coord-card .label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}
+.coord-card .value{font-size:1.2rem;color:var(--white);font-family:'DM Serif Display',serif}
+.coord-card .gloss{font-size:0.7rem;color:var(--muted);margin-top:0.35rem;line-height:1.55}
+.gene-key-spectrum{display:flex;align-items:center;gap:0.5rem;margin:1.2rem 0;padding:1.2rem;background:var(--card);border-radius:6px;border:1px solid rgba(201,149,107,0.08)}
+.gene-key-spectrum .shadow{color:#9b7070;flex:1;text-align:center;font-size:0.84rem;font-family:'Cormorant Garamond',serif}
 .gene-key-spectrum .arrow{color:var(--muted);font-size:0.7rem}
-.gene-key-spectrum .gift{color:var(--accent);flex:1;text-align:center;font-size:0.8rem;font-weight:500}
+.gene-key-spectrum .gift{color:var(--accent);flex:1;text-align:center;font-size:0.84rem;font-weight:400;font-family:'Cormorant Garamond',serif}
 .gene-key-spectrum .arrow2{color:var(--muted);font-size:0.7rem}
-.gene-key-spectrum .siddhi{color:#a0b8a0;flex:1;text-align:center;font-size:0.8rem}
-.ikigai-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
-.ikigai-card{background:var(--card);padding:1rem;border-radius:3px}
-.ikigai-card h4{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--accent);margin-bottom:0.5rem}
-.ikigai-card p{font-size:0.82rem;color:var(--muted)}
-.cta-box{background:linear-gradient(135deg,var(--card),#1f1a15);border:1px solid var(--accent);padding:2rem;text-align:center;margin:2rem 0;border-radius:3px}
-.cta-box h3{font-size:1.4rem;margin-bottom:0.8rem}
-.cta-box p{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem}
+.gene-key-spectrum .siddhi{color:#a0c0a0;flex:1;text-align:center;font-size:0.84rem;font-family:'Cormorant Garamond',serif}
+.ikigai-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0}
+.ikigai-card{background:var(--card);padding:1.2rem;border-radius:6px;border:1px solid rgba(201,149,107,0.08)}
+.ikigai-card h4{font-family:'DM Serif Display',serif;font-size:0.94rem;color:var(--accent);margin-bottom:0.5rem;font-weight:400}
+.ikigai-card p{font-size:0.78rem;color:var(--muted);line-height:1.75}
+.cta-box{background:linear-gradient(135deg,var(--card),rgba(30,22,15,0.8));border:1px solid var(--accent);box-shadow:0 0 30px rgba(201,149,107,0.08);padding:3rem 2.5rem;text-align:center;margin:2rem 0;border-radius:8px}
+.cta-box h3{font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:1.2rem;font-family:'DM Serif Display',serif}
+.cta-box p{color:var(--muted);font-size:0.84rem;margin-bottom:1.5rem;line-height:1.9}
 .print-btn{position:fixed;top:1rem;right:1rem;z-index:100}
 .essence-block{background:var(--card);border:1px solid #333;border-radius:3px;padding:1.5rem;margin:1.2rem 0}
 .essence-block h4{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:1rem;margin-bottom:0.6rem}
-.essence-block .quote{font-size:0.82rem;color:var(--muted);padding:0.4rem 0 0.4rem 1rem;border-left:1px solid var(--accent);margin:0.4rem 0;font-style:italic}
+.essence-block .quote{font-size:0.78rem;color:var(--muted);padding:0.4rem 0 0.4rem 1rem;border-left:1px solid var(--accent);margin:0.4rem 0;font-style:italic;line-height:1.7}
 .essence-block .quote .attr{color:var(--accent);font-size:0.72rem;font-style:normal;text-transform:uppercase;letter-spacing:0.08em}
 .essence-block p{font-size:0.88rem;margin-bottom:0.5rem}
 .pillar-card{background:var(--card);border-left:3px solid var(--accent);padding:1.2rem 1.5rem;margin:1rem 0;border-radius:0 3px 3px 0}
@@ -88,14 +150,14 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 .template-card h5{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:0.9rem;margin-bottom:0.5rem}
 .template-card .overlap{color:var(--text);margin-bottom:0.3rem}
 .template-card .diverge{color:var(--muted)}
-.purpose-statement{background:linear-gradient(135deg,var(--card),#1f1a15);border:1px solid var(--accent);padding:1.5rem;text-align:center;margin:1.5rem 0;border-radius:3px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);font-style:italic;line-height:1.5}
-.hd-type-card{background:var(--card);padding:1.5rem;border:1px solid var(--accent);border-radius:3px;text-align:center;margin:1.2rem 0}
-.hd-type-card .type-name{font-size:1.6rem;font-family:'Cormorant Garamond',serif;color:var(--accent);margin-bottom:0.5rem}
-.hd-type-card .type-detail{font-size:0.82rem;color:var(--muted);margin-bottom:0.3rem}
+.purpose-statement{background:linear-gradient(135deg,var(--card),rgba(30,22,15,0.6));border:1px solid rgba(201,149,107,0.25);box-shadow:0 0 25px rgba(201,149,107,0.06);padding:2rem 2.5rem;text-align:center;margin:1.8rem 0;border-radius:8px;font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--white);font-style:normal;line-height:1.65}
+.hd-type-card{background:var(--card);padding:2rem;border:1px solid rgba(201,149,107,0.2);border-radius:8px;text-align:center;margin:1.5rem 0;box-shadow:0 0 20px rgba(201,149,107,0.05)}
+.hd-type-card .type-name{font-size:2rem;font-family:'DM Serif Display',serif;color:var(--accent);margin-bottom:0.7rem}
+.hd-type-card .type-detail{font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem;line-height:1.7}
 .test-results{background:#1a1a1a;border:1px solid #333;padding:1rem;margin:1rem 0;font-family:monospace;font-size:0.75rem;color:var(--muted);max-height:300px;overflow-y:auto;border-radius:3px}
 .test-results .pass{color:#6a9a6a}
 .test-results .fail{color:#9a6a6a}
-@media print{html{font-size:16px}.print-btn,.btn,.nav-row,.btn-outline{display:none!important}.screen{display:none!important;min-height:0;padding:0}.screen#s-report{display:block!important;padding:1rem}.report{max-width:100%}body{background:#fff;color:#222}.report-section .insight{border-left-color:#999}.report-section{break-inside:avoid}.cta-box{border-color:#999}}
+@media print{html{font-size:15px}.print-btn,.btn,.nav-row,.btn-outline,.save-bar,#starfield{display:none!important}.screen{display:none!important;min-height:0;padding:0}.screen#s-report{display:block!important;padding:0.5rem}.report{max-width:100%}.report-slide{display:block!important;min-height:0!important;padding:1.5rem 1rem!important;break-inside:avoid}.accordion-section{break-inside:avoid}.accordion-body{max-height:none!important;opacity:1!important;overflow:visible!important}.accordion-body-inner{padding:1rem!important}.accordion-toggle{display:none!important}.accordion-header{background:none!important;padding:1rem 0!important}.synthesis-section{padding:1.5rem 1rem!important;break-inside:avoid}body{background:#fff;color:#222}.report-slide .insight{border-left-color:#999;box-shadow:none!important}.cta-box{border-color:#999;box-shadow:none!important}.section-watermark{display:none!important}.energy-numerology,.energy-northnode,.energy-genekeys,.energy-humandesign,.energy-ikigai,.energy-synthesis{background:none!important}.glow-text{text-shadow:none!important;-webkit-text-fill-color:currentColor!important}.shimmer-accent{-webkit-text-fill-color:currentColor!important;animation:none!important}}
 .loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
 .loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
 .loc-item .loc-country{color:var(--muted);font-size:0.75rem}
@@ -105,6 +167,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 </head>
 <body>
+<canvas id="starfield"></canvas>
 
 <!-- SCREEN 1: WELCOME -->
 <div class="screen welcome active" id="s-welcome">
@@ -244,7 +307,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
     <div class="step-header">
       <div class="phase">Step 5 of 6 &mdash; Ikigai</div>
       <h2>What You Can Be Paid For</h2>
-      <p>Purpose without infrastructure is a journal entry. AND when you're in alignment with your soul, money always comes.</p>
+      <p>Purpose without infrastructure is a journal entry. AND when you're soul-sourced in your work, money follows.</p>
     </div>
     <div class="progress-bar"><div class="fill" style="width:83%"></div></div>
     <div class="form-group">
@@ -264,10 +327,13 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
   <div>
     <div class="step-header">
       <div class="phase">Step 6 of 6 &mdash; Almost done</div>
-      <h2>Where should we send your next move?</h2>
-      <p>See your results next. Get the prompt that turns this into clear weekly priorities and income moves.</p>
+      <h2>One more thing before your blueprint.</h2>
     </div>
     <div class="progress-bar"><div class="fill" style="width:95%"></div></div>
+    <div style="background:var(--card);border:1px solid var(--accent);border-radius:4px;padding:1.2rem 1.4rem;margin-bottom:1.5rem">
+      <p style="font-size:0.84rem;color:var(--white);margin:0;line-height:1.7"><strong style="color:var(--accent)">Your report is not saved anywhere.</strong> I will never see it. Once you leave the page, it's gone. <strong>Save or print your report on the next page.</strong></p>
+    </div>
+    <p style="font-size:0.88rem;color:var(--text);margin-bottom:1.5rem;line-height:1.7">We'll email you an AI prompt to turn your blueprint into weekly action steps.</p>
     <div class="form-group">
       <label>Your Email</label>
       <input type="email" id="userEmail" placeholder="you@example.com">
@@ -276,6 +342,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
       <label>Your First Name</label>
       <input type="text" id="userFirstName" placeholder="So we can personalize your report.">
     </div>
+    <p style="font-size:0.76rem;color:var(--muted);margin-top:0.5rem">Check your spam or promotions folder for your AI prompt. It may take a few minutes.</p>
     <div class="nav-row">
       <button class="btn-outline btn-sm" onclick="goTo('s-ikigai4')">&larr; Back</button>
       <button class="btn" onclick="captureEmailAndGenerate()">Show My Blueprint</button>
@@ -293,7 +360,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--whit
 </div>
 
 <!-- SCREEN: REPORT -->
-<div class="screen" id="s-report">
+<div class="screen" id="s-report" style="padding:0;max-width:100%">
   <div class="report" id="reportContent"></div>
 </div>
 
@@ -728,7 +795,7 @@ const COMBO = {
 2:{1:'A collaborative leader who balances independence with partnerships',2:'A master peacemaker who thrives in mediation and emotional intelligence',3:'A charming connector who expresses gifts through creative storytelling',4:'A steady builder who creates lasting success through structure and teamwork',5:'A social adventurer who thrives in networking and bringing diverse people together',6:'A nurturing visionary who balances emotional intelligence with service-based leadership',7:'A spiritual guide who deeply connects through intuition, wisdom, and research',8:'A powerful networker who blends business savvy with emotional intelligence',9:'A compassionate leader who thrives in humanitarian work and transformation',11:'A spiritual guide who uplifts others with deep emotional wisdom',22:'A peacemaking strategist who builds large-scale solutions for harmony',33:'A divine nurturer who supports and transforms through unconditional love'},
 3:{1:'A bold creator who thrives in personal branding and leadership in creative fields',2:'A collaborative artist who succeeds through emotional storytelling and connection',3:'A true visionary with endless creative energy and magnetic influence',4:'A structured artist who blends creativity with business strategy and discipline',5:'A free-spirited innovator who thrives in entertainment and unconventional industries',6:'A creative transformer who uses art and emotional depth to inspire reorganization',7:'A spiritual storyteller who merges creativity with deep wisdom and philosophy',8:'A business-savvy artist who turns creativity into a highly profitable career',9:'A humanitarian creative who uses art or storytelling to change the world',11:'A prophetic artist who channels higher inspiration into creative work',22:'A creative empire builder who turns ideas into large-scale impact',33:'A divine storyteller who inspires through teaching and artistic mastery'},
 4:{1:'A strategic leader who builds success through discipline and persistence',2:'A loyal partner who thrives through collaboration, patience, and dedication',3:'A creative builder who merges structure with innovation to create impact',4:'A master architect who thrives on stability, structure, and long-term planning',5:'A structured adventurer who balances stability with the need for change',6:'A nurturing builder who thrives in family businesses and mentorship',7:'A spiritual strategist who blends research, wisdom, and planning',8:'A business empire builder who turns persistence into massive financial success',9:'A humanitarian entrepreneur who builds businesses with a purpose-driven mission',11:'A spiritual architect who blends intuition with practical mastery',22:'A true master builder who creates legacies that stand the test of time',33:'A teacher of foundations who structures wisdom into impactful systems'},
-5:{1:'A fearless pioneer who thrives in fast-paced industries and risk-taking',2:'A charismatic connector who brings people together through communication',3:'A magnetic entertainer who uses storytelling, creativity, and charm to inspire',4:'A structured explorer who blends adventure with discipline for sustainable success',5:'A wild free spirit who thrives in ever-changing environments and unconventional careers',6:'A heart-led adventurer who balances freedom with responsibility and coaching',7:'A spiritual traveler who merges deep wisdom with exploration and philosophy',8:'A wealthy risk-taker who succeeds in entrepreneurial ventures and investing',9:'A humanitarian visionary who uses change and movement to create global impact',11:'A charismatic visionary who inspires change through personal magnetism',22:'A global innovator who builds structures for massive reorganization',33:'A freedom teacher who helps others unlock their limitless potential'},
+5:{1:'A fearless pioneer who thrives in fast-paced industries and risk-taking',2:'A charismatic connector who brings people together through communication',3:'A magnetic entertainer who uses storytelling, creativity, and charm to inspire',4:'A structured explorer who blends adventure with discipline for sustainable success',5:'A wild free spirit who thrives in ever-changing environments and unconventional careers',6:'A heart-led adventurer who balances freedom with responsibility and coaching',7:'A spiritual traveler who merges deep wisdom with exploration and philosophy',8:'A wealthy risk-taker who succeeds in entrepreneurial ventures and investing',9:'A humanitarian visionary who uses change and movement to create global impact',11:'A charismatic visionary who inspires change through personal magnetism',22:'A global innovator who builds structures for massive reorganization',33:'A freedom teacher who helps others reclaim the sovereignty they forgot they had'},
 6:{1:'A bold caretaker who leads by example in heart-centered industries',2:'A compassionate peacemaker who thrives building harmonious communities',3:'A creative nurturer who expresses love through art, music, or communication',4:'A structured mentor who builds strong foundations in family, business, or education',5:'A free-spirited guide who balances personal freedom with helping others',6:'A master transformer who thrives in counseling, coaching, or holistic wellness',7:'A spiritual teacher who shares deep wisdom and guidance with others',8:'A philanthropic leader who creates wealth with a mission to serve',9:'A selfless humanitarian dedicated to global transformation and reorganization',11:'A spiritual caregiver who transforms through deep intuitive wisdom',22:'A compassionate builder who creates lasting support systems',33:'A master transformer who uplifts humanity with divine love and service'},
 7:{1:'A spiritual leader who pioneers new ways of thinking and learning',2:'A deeply intuitive guide who blends intellect with emotional intelligence',3:'A philosophical storyteller who shares wisdom through writing and creative outlets',4:'A structured seeker who turns knowledge into systems and strategies',5:'A free-spirited philosopher who blends adventure with intellectual pursuits',6:'A spiritual caretaker who uses wisdom to guide and nurture others',7:'A mystical master deeply connected to higher consciousness',8:'A business sage who blends spirituality with entrepreneurship and wealth creation',9:'A global wisdom keeper who changes the world through enlightenment',11:'A spiritual mystic who channels divine truth into teachings',22:'A structured wisdom leader who turns insight into global change',33:'A cosmic teacher who spreads enlightenment through profound guidance'},
 8:{1:'A powerful CEO who thrives as a self-made entrepreneur or business leader',2:'A strategic negotiator who blends influence with diplomacy for success',3:'A charismatic mogul who builds wealth through creativity and marketing',4:'A disciplined empire builder who excels in structured, long-term success',5:'A dynamic business innovator who thrives in high-energy, fast-moving industries',6:'A wealthy nurturer who uses financial success to support family and community',7:'A spiritual entrepreneur who blends business and depth for impact',8:'A financial powerhouse who masters wealth, investments, and legacy creation',9:'A philanthropic leader who builds wealth to create humanitarian change',11:'A soul-sourced CEO who blends wealth and higher purpose',22:'A world-class empire builder who creates massive financial legacies',33:'A philanthropic teacher who uses wealth for global transformation and service'},
@@ -1191,6 +1258,7 @@ function generateReport() {
   Promise.all([animDone, STATE.synthesisPromise]).then(function() {
     renderReport();
     goTo('s-report');
+    window.scrollTo(0, 0);
   });
 }
 
@@ -1256,6 +1324,179 @@ function fetchSynthesis() {
 
 function v(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
 
+// Section glyph SVGs — geometric/celestial icons, not emoji
+const SECTION_GLYPHS = {
+  numerology: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="14" cy="14" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.4"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.5"/><line x1="14" y1="2" x2="14" y2="6" stroke="currentColor" stroke-width="0.6"/><line x1="14" y1="22" x2="14" y2="26" stroke="currentColor" stroke-width="0.6"/><line x1="2" y1="14" x2="6" y2="14" stroke="currentColor" stroke-width="0.6"/><line x1="22" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="0.6"/></svg>',
+  northnode: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="10" r="5" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M9 10 L14 26 L19 10" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="14" cy="10" r="1.5" fill="currentColor" opacity="0.4"/></svg>',
+  genekeys: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 Q14 8 10 14 Q6 20 10 26" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M18 2 Q14 8 18 14 Q22 20 18 26" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="14" cy="7" r="1.2" fill="currentColor" opacity="0.5"/><circle cx="14" cy="14" r="1.2" fill="currentColor" opacity="0.5"/><circle cx="14" cy="21" r="1.2" fill="currentColor" opacity="0.5"/></svg>',
+  humandesign: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><polygon points="14,2 25,9 25,20 14,26 3,20 3,9" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.6"/><polygon points="14,7 20,11 20,18 14,22 8,18 8,11" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.4"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.3"/></svg>',
+  ikigai: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="17" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="11" cy="17" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="17" cy="17" r="7" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><circle cx="14" cy="14" r="1.5" fill="currentColor" opacity="0.4"/></svg>',
+  synthesis: '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><path d="M14 2 L14 26 M2 14 L26 14 M5.5 5.5 L22.5 22.5 M22.5 5.5 L5.5 22.5" stroke="currentColor" stroke-width="0.4" opacity="0.25"/><circle cx="14" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.5"/><circle cx="14" cy="14" r="2.5" fill="currentColor" opacity="0.3"/><circle cx="14" cy="2" r="1" fill="currentColor" opacity="0.4"/><circle cx="26" cy="14" r="1" fill="currentColor" opacity="0.4"/><circle cx="14" cy="26" r="1" fill="currentColor" opacity="0.4"/><circle cx="2" cy="14" r="1" fill="currentColor" opacity="0.4"/></svg>'
+};
+
+// Constellation star data: stars=[x,y,mag] (0-100 coord space, mag=brightness 1-3), lines=[[i,j],...] connecting star indices
+const CONSTELLATIONS = {
+  Aries: {stars:[[25,55,2],[40,40,3],[60,35,2],[75,40,1.5],[85,50,1]],lines:[[0,1],[1,2],[2,3],[3,4]]},
+  Taurus: {stars:[[20,60,1.5],[30,50,2],[45,40,3],[55,35,2],[65,30,1.5],[50,55,1.5],[60,60,1],[40,55,1]],lines:[[0,1],[1,2],[2,3],[3,4],[2,5],[5,6],[1,7]]},
+  Gemini: {stars:[[30,20,3],[35,35,2],[40,50,1.5],[38,65,1],[70,22,3],[65,37,2],[60,52,1.5],[62,67,1]],lines:[[0,1],[1,2],[2,3],[4,5],[5,6],[6,7],[1,5],[2,6]]},
+  Cancer: {stars:[[35,35,2],[45,45,3],[55,50,2],[65,40,1.5],[50,30,1.5]],lines:[[0,1],[1,2],[2,3],[1,4]]},
+  Leo: {stars:[[20,40,2],[30,25,2.5],[45,20,3],[60,25,2],[70,35,1.5],[65,50,2],[50,55,1.5],[35,50,1]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0]]},
+  Virgo: {stars:[[15,50,1.5],[25,40,2],[40,30,2.5],[55,25,3],[70,30,2],[80,40,1.5],[65,45,2],[50,50,1.5],[55,60,1]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[6,7],[7,8]]},
+  Libra: {stars:[[30,30,2],[50,25,3],[70,30,2],[35,55,2],[50,50,2.5],[65,55,2]],lines:[[0,1],[1,2],[3,4],[4,5],[1,4]]},
+  Scorpio: {stars:[[15,40,2],[25,35,2.5],[38,30,3],[50,35,2],[60,40,2],[70,50,1.5],[78,55,2],[85,48,1.5],[88,55,1]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]]},
+  Sagittarius: {stars:[[30,60,1.5],[40,45,2],[50,35,3],[60,30,2],[70,25,1.5],[55,50,2],[65,55,1.5],[45,55,1.5]],lines:[[0,1],[1,2],[2,3],[3,4],[2,5],[5,6],[1,7]]},
+  Capricorn: {stars:[[20,45,2],[35,35,2.5],[50,30,3],[65,35,2],[75,45,1.5],[70,55,2],[55,55,1.5]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,2]]},
+  Aquarius: {stars:[[15,40,1.5],[30,35,2],[45,30,2.5],[60,35,3],[75,30,2],[65,50,1.5],[55,55,1],[75,50,1]],lines:[[0,1],[1,2],[2,3],[3,4],[3,5],[5,6],[4,7]]},
+  Pisces: {stars:[[20,45,2],[30,35,2.5],[40,30,2],[55,35,3],[65,40,2],[75,50,1.5],[50,55,2],[35,55,1.5]],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[3,6],[6,7],[7,0]]}
+};
+
+function buildConstellationSVG(sunSign, nnSign) {
+  var w = 700, h = 240;
+  var sunGlyph = ZODIAC_SYMBOLS[sunSign] || '?';
+  var nnGlyph = ZODIAC_SYMBOLS[nnSign] || '?';
+
+  var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;display:block;margin:0 auto;overflow:visible">';
+
+  // Background subtle glow behind each glyph
+  svg += '<defs>';
+  svg += '<radialGradient id="sg1" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(224,220,214,0.10)"/><stop offset="100%" stop-color="transparent"/></radialGradient>';
+  svg += '<radialGradient id="sg2" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(201,149,107,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>';
+  svg += '</defs>';
+
+  // Subtle dot starfield background
+  for (var i = 0; i < 30; i++) {
+    var dx = Math.round((Math.sin(i * 7.3 + 1) * 0.5 + 0.5) * w);
+    var dy = Math.round((Math.cos(i * 5.1 + 2) * 0.5 + 0.5) * (h - 40));
+    var dr = (0.4 + (i % 3) * 0.3).toFixed(1);
+    svg += '<circle cx="' + dx + '" cy="' + dy + '" r="' + dr + '" fill="#e0dcd6" opacity="0.08"/>';
+  }
+
+  // Divider line
+  svg += '<line x1="' + (w/2) + '" y1="20" x2="' + (w/2) + '" y2="' + (h-20) + '" stroke="rgba(201,149,107,0.15)" stroke-width="0.5"/>';
+
+  // Left: Sun Sign glyph
+  var lcx = w / 4;
+  svg += '<circle cx="' + lcx + '" cy="105" r="80" fill="url(#sg1)"/>';
+  svg += '<text x="' + lcx + '" y="130" text-anchor="middle" font-size="120" fill="#e0dcd6" opacity="0.85" style="font-family:serif">' + sunGlyph + '</text>';
+  svg += '<text x="' + lcx + '" y="' + (h - 10) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="13" fill="#e0dcd6" opacity="0.7">' + sunSign + ' Sun</text>';
+
+  // Right: North Node glyph
+  var rcx = w * 3 / 4;
+  svg += '<circle cx="' + rcx + '" cy="105" r="80" fill="url(#sg2)"/>';
+  svg += '<text x="' + rcx + '" y="130" text-anchor="middle" font-size="120" fill="#c9956b" opacity="0.9" style="font-family:serif">' + nnGlyph + '</text>';
+  svg += '<text x="' + rcx + '" y="' + (h - 10) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="13" fill="rgba(201,149,107,0.8)">' + nnSign + ' North Node</text>';
+
+  svg += '</svg>';
+  return svg;
+}
+
+function sectionGlyph(key) {
+  return '<span class="section-glyph" style="color:var(--accent)">' + (SECTION_GLYPHS[key] || '') + '</span>';
+}
+
+// Build radial/spider Ikigai chart SVG
+function buildIkigaiRadial(ikigaiAnalysis, skipped) {
+  var cx = 220, cy = 220, maxR = 150, labelR = 185;
+  // 4 axes: Love (top), Good (right), World (bottom), Paid (left)
+  var axes = [
+    { label: 'What You Love', key: 'love', angle: -90 },
+    { label: "What You're Good At", key: 'good', angle: 0 },
+    { label: 'What the World Needs', key: 'world', angle: 90 },
+    { label: 'What You Can Be Paid For', key: 'paid', angle: 180 }
+  ];
+  // Overlap labels between axes
+  var overlaps = [
+    { label: 'Passion', angle: -45 },
+    { label: 'Profession', angle: 45 },
+    { label: 'Vocation', angle: 135 },
+    { label: 'Mission', angle: -135 }
+  ];
+
+  // Compute drive strength per quadrant: 0-1 scale
+  function driveStrength(key) {
+    if (skipped[key]) return 0.15;
+    var drives = ikigaiAnalysis.quadrants[key];
+    if (!drives || drives.length === 0) return 0.2;
+    var total = drives.reduce(function(s, d) { return s + d[1]; }, 0);
+    return Math.min(1, 0.25 + total * 0.15);
+  }
+
+  var strengths = axes.map(function(a) { return driveStrength(a.key); });
+
+  function polarToXY(angleDeg, radius) {
+    var rad = angleDeg * Math.PI / 180;
+    return { x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad) };
+  }
+
+  // Build concentric rings
+  var rings = '';
+  for (var r = 1; r <= 4; r++) {
+    var rr = (maxR / 4) * r;
+    rings += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="var(--muted,#8a8078)" stroke-width="0.4" opacity="0.2"/>';
+  }
+
+  // Axis lines
+  var axisLines = '';
+  axes.forEach(function(a) {
+    var p = polarToXY(a.angle, maxR);
+    axisLines += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p.x + '" y2="' + p.y + '" stroke="var(--muted,#8a8078)" stroke-width="0.5" opacity="0.25"/>';
+  });
+
+  // Data polygon
+  var points = axes.map(function(a, i) {
+    var p = polarToXY(a.angle, maxR * strengths[i]);
+    return p.x + ',' + p.y;
+  }).join(' ');
+
+  var polygon = '<polygon points="' + points + '" fill="rgba(201,149,107,0.12)" stroke="var(--accent,#c9956b)" stroke-width="1.5" stroke-linejoin="round"/>';
+
+  // Data points (dots on vertices)
+  var dots = '';
+  axes.forEach(function(a, i) {
+    var p = polarToXY(a.angle, maxR * strengths[i]);
+    dots += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="var(--accent,#c9956b)" opacity="0.85"/>';
+    dots += '<circle cx="' + p.x + '" cy="' + p.y + '" r="7" fill="var(--accent,#c9956b)" opacity="0.15"/>';
+  });
+
+  // Axis labels
+  var labels = '';
+  axes.forEach(function(a) {
+    var p = polarToXY(a.angle, labelR + 10);
+    var anchor = 'middle';
+    if (a.angle === 0) anchor = 'start';
+    if (a.angle === 180) anchor = 'end';
+    // Split label for multi-word
+    var parts = a.label.split(' ');
+    if (parts.length <= 3) {
+      labels += '<text x="' + p.x + '" y="' + p.y + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)" dominant-baseline="middle">' + a.label + '</text>';
+    } else {
+      var mid = Math.ceil(parts.length / 2);
+      var line1 = parts.slice(0, mid).join(' ');
+      var line2 = parts.slice(mid).join(' ');
+      labels += '<text x="' + p.x + '" y="' + (p.y - 7) + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)">' + line1 + '</text>';
+      labels += '<text x="' + p.x + '" y="' + (p.y + 7) + '" text-anchor="' + anchor + '" font-family="\'Cormorant Garamond\',serif" font-size="12" fill="var(--white,#f5f0eb)">' + line2 + '</text>';
+    }
+  });
+
+  // Overlap labels (between axes)
+  var overlapLabels = '';
+  overlaps.forEach(function(o) {
+    var p = polarToXY(o.angle, maxR * 0.55);
+    overlapLabels += '<text x="' + p.x + '" y="' + p.y + '" text-anchor="middle" font-family="\'Inter\',sans-serif" font-size="8.5" fill="var(--muted,#8a8078)" dominant-baseline="middle" opacity="0.7">' + o.label + '</text>';
+  });
+
+  // Center label
+  var center = '<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="14" fill="var(--accent,#c9956b)" font-weight="600">IKIGAI</text>';
+  center += '<text x="' + cx + '" y="' + (cy + 8) + '" text-anchor="middle" font-family="\'Cormorant Garamond\',serif" font-size="9" fill="var(--accent,#c9956b)" opacity="0.7">reason for being</text>';
+
+  // Glow behind center
+  var glow = '<circle cx="' + cx + '" cy="' + cy + '" r="22" fill="rgba(201,149,107,0.08)"/>';
+
+  return '<svg viewBox="-20 -20 480 480" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;display:block;margin:0 auto;overflow:visible">' +
+    rings + axisLines + polygon + dots + glow + center + overlapLabels + labels +
+    '</svg>';
+}
+
 function renderReport() {
   const s = STATE;
   const skippedArr = s.skippedSections || [];
@@ -1277,271 +1518,327 @@ function renderReport() {
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const dateNice = months[parseInt(m)-1] + ' ' + parseInt(d) + ', ' + y;
 
-  // Helper for rendering quotes
-  function renderQuotes(quotes) {
-    return quotes.map(q => '<div class="quote">"' + q.text + '" <span class="attr">\u2013 ' + q.quadrant + '</span></div>').join('');
-  }
+  const sections = [];
 
-  const html = `
-    <div class="report-header">
-      <div class="brand">Brianna Bomi &bull; Sovereign Arc</div>
-      <h1>Your Soul Blueprint</h1>
-      <div class="name">${s.name}</div>
-      <p style="color:var(--muted);margin-top:0.5rem;font-size:0.85rem">${dateNice} &bull; ${s.timeStr} &bull; ${s.place || 'Location not specified'}</p>
+  // === HEADER (always visible, not collapsible) ===
+  sections.push(`
+    <div class="report-slide energy-numerology" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:80vh">
+      <div class="brand" style="margin-bottom:1.5rem"><span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</div>
+      <h1 style="font-size:2.8rem;margin-bottom:0.5rem">Your Soul Blueprint</h1>
+      <div class="name" style="font-size:1.6rem;margin-bottom:1rem">${s.name}</div>
+      <p style="color:var(--muted);font-size:0.85rem">${dateNice} &bull; ${s.timeStr} &bull; ${s.place || 'Location not specified'}</p>
     </div>
+  `);
 
-    <!-- SECTION 1: COSMIC COORDINATES -->
-    <div class="report-section">
-      <h2>Your Blueprint Summary</h2>
+  // === SAVE/PRINT BAR (top) ===
+  sections.push(`
+    <div class="save-bar">
+      <button class="btn" onclick="window.print()">Save / Print Your Blueprint</button>
+    </div>
+  `);
+
+  // === BLUEPRINT SUMMARY (always visible, not collapsible) ===
+  sections.push(`
+    <div class="report-slide energy-numerology">
+      <div class="section-watermark">${ZODIAC_SYMBOLS[s.sunSign] || ''}</div>
+      <h2>${sectionGlyph('numerology')}Your Blueprint Summary</h2>
       <div class="subtitle">Your blueprint at a glance</div>
-      <p>Here's what your birth data says across five systems. Each one is explained in detail below.</p>
+      <p>Here’s what your birth data says across five systems. Click any item below to explore it in depth.</p>
       <div class="coord-grid">
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-astrology')">
           <div class="label">Sun Sign</div>
           <div class="value">${ZODIAC_SYMBOLS[s.sunSign]} ${s.sunSign} (${s.sunDeg}&deg;)</div>
           <div class="gloss">Your core energy and personality.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-astrology')">
           <div class="label">North Node</div>
           <div class="value">${ZODIAC_SYMBOLS[s.nnSign]} ${s.nnSign}</div>
-          <div class="gloss">Where your soul is growing toward. Not what comes easily, but what you came here to learn.</div>
+          <div class="gloss">Where your soul is growing toward.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-numerology')">
           <div class="label">Life Path Number</div>
           <div class="value">${s.lifePath}: ${lp.name}</div>
-          <div class="gloss">Your life\u2019s main theme.</div>
+          <div class="gloss">Your life’s main theme.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-numerology')">
           <div class="label">Destiny Number</div>
           <div class="value">${s.destinyNum}</div>
           <div class="gloss">How you get there, your natural methods.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-humandesign')">
           <div class="label">Human Design Type</div>
           <div class="value">${s.hdType}</div>
           <div class="gloss">How your energy is built to operate.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-humandesign')">
           <div class="label">Human Design Profile</div>
           <div class="value">${s.profile}</div>
           <div class="gloss">Your personality archetype.</div>
         </div>
-        <div class="coord-card">
-          <div class="label">Gene Key (Life\u2019s Work)</div>
+        <div class="coord-card" onclick="openAndScrollTo('section-genekeys')">
+          <div class="label">Gene Key (Life’s Work)</div>
           <div class="value">Gene Key ${s.geneKey}</div>
           <div class="gloss">Your growth spectrum, shadow to gift.</div>
         </div>
-        <div class="coord-card">
+        <div class="coord-card" onclick="openAndScrollTo('section-humandesign')">
           <div class="label">Incarnation Cross</div>
           <div class="value">${s.crossType}</div>
-          <div class="gloss">Your life's overarching theme.</div>
+          <div class="gloss">Your life’s overarching theme.</div>
         </div>
       </div>
     </div>
+  `);
 
-    <!-- SECTION 2: NUMEROLOGY -->
-    <div class="report-section">
-      <h2>Your Numerology Blueprint</h2>
-      <div class="subtitle">Life Path ${s.lifePath} + Destiny ${s.destinyNum}</div>
-
-      <p><strong>Life Path ${s.lifePath}: ${lp.name}</strong></p>
-      <p>${lp.purpose}</p>
-
-      <p style="margin-top:1rem"><strong>Destiny Number ${s.destinyNum}: How You Fulfill Your Purpose</strong></p>
-      <p>${dn}</p>
-
-      ${combo ? '<div class="insight"><strong>Your Unique Combination:</strong> ' + combo + '.</div>' : ''}
-      <p>Your Life Path tells you <em>why</em> you're here. Your Destiny Number tells you <em>how</em>. If you feel tension between the two, that's not confusion, it's the creative friction that keeps you growing.</p>
-    </div>
-
-    <!-- SECTION 3: NORTH NODE -->
-    <div class="report-section">
-      <h2>Your North Node</h2>
-      <div class="subtitle">${ZODIAC_SYMBOLS[s.nnSign]} North Node in ${s.nnSign}: ${nn.title}</div>
-      <div class="reframe">Not what comes easily. What your soul came here to grow into.</div>
-      <p><strong>Your Growth Edge:</strong> ${nn.purpose}</p>
-      <p><strong>The Path Forward:</strong> ${nn.growth}</p>
-      <div class="insight">
-        <strong>What you\u2019re releasing (South Node in ${s.snSign}):</strong> ${nn.south}
-        <p style="margin-top:0.5rem">Your South Node is what feels comfortable because it\u2019s familiar, not because it serves you. Your North Node is where you\u2019re being asked to grow, even when it feels uncomfortable.</p>
+  // === ACCORDION: NUMEROLOGY ===
+  sections.push(`
+    <div class="accordion-section" id="section-numerology">
+      <div class="accordion-header energy-numerology" onclick="toggleAccordion(this)">
+        <h2>${sectionGlyph('numerology')}Your Numerology Blueprint</h2>
+        <span class="accordion-toggle">+</span>
       </div>
-      <p><strong>Career Directions:</strong> ${nn.careers}</p>
+      <div class="accordion-body">
+        <div class="accordion-body-inner energy-numerology">
+          <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-50px">${s.lifePath}</div>
+          <div class="subtitle">Life Path ${s.lifePath} + Destiny ${s.destinyNum}</div>
+
+          <h3>Life Path ${s.lifePath}: ${lp.name}</h3>
+          <p>${lp.purpose}</p>
+          <p>This isn't a personality label. It's the instruction your soul encoded into your birth date. Your body has been living this pattern for years. What's new is that now you have language for it.</p>
+
+          <h3 style="margin-top:1.5rem">Destiny Number ${s.destinyNum}: How You Fulfill Your Purpose</h3>
+          <p>${dn}</p>
+          <p>You already know this about yourself. Someone describes this pattern and you nod — but there's a deeper layer you haven't named yet. Your Destiny Number isn't what you do. It's how your soul moves through the world when you stop performing.</p>
+
+          ${combo ? '<div class="insight"><strong>Your Unique Combination:</strong> You are ' + combo.charAt(0).toLowerCase() + combo.slice(1) + '.</div>' : ''}
+          <p>Your Life Path tells you <em>why</em> you’re here. Your Destiny Number tells you <em>how</em>.</p>
+          <p>If you feel tension between the two, that’s not confusion, it’s the creative friction that keeps you growing.</p>
+        </div>
+      </div>
     </div>
+  `);
 
-    <!-- SECTION 4: GENE KEYS -->
-    <div class="report-section">
-      <h2>Your Gene Keys</h2>
-      <div class="subtitle">Your growth spectrum to your best life, from shadow to gift</div>
+  // === ACCORDION: NORTH NODE (full depth restored) ===
+  sections.push(`
+    <div class="accordion-section" id="section-astrology">
+      <div class="accordion-header energy-northnode" onclick="toggleAccordion(this)">
+        <h2>${sectionGlyph('northnode')}Your Astrology</h2>
+        <span class="accordion-toggle">+</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner energy-northnode">
+          <div class="section-watermark">${ZODIAC_SYMBOLS[s.nnSign] || ''}</div>
+          <div class="subtitle">${s.sunSign} Sun &bull; North Node in ${s.nnSign}</div>
 
-      <div style="display:flex;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap">
-        <div style="flex:1;min-width:250px;background:var(--card);border:1px solid var(--accent);border-radius:3px;padding:1.5rem;text-align:center">
-          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Life\u2019s Work</div>
-          <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
-            <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.geneKey}</span>
+          <div style="margin:1.2rem 0 1.5rem">
+            ${buildConstellationSVG(s.sunSign, s.nnSign)}
           </div>
-          <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">What you\u2019re here to do</div>
-        </div>
-        <div style="flex:1;min-width:250px;background:var(--card);border:1px solid #444;border-radius:3px;padding:1.5rem;text-align:center">
-          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Purpose</div>
-          <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
-            <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.gkPurpose}</span>
+
+          <h3>${ZODIAC_SYMBOLS[s.sunSign]} Sun in ${s.sunSign}</h3>
+          <p>Your Sun Sign is your core operating frequency — the energy your soul chose to wear in this lifetime. As a ${s.sunSign}, this is not a horoscope. It's the energetic signature your nervous system defaults to when nothing else is pressing. The people closest to you already know this about you. It's the thing they describe when someone asks what you're like.</p>
+
+          <div class="display-quote"><p><span class="glow-text">Not what comes easily.</span> What your soul came here to grow into.</p></div>
+
+          <h3>${ZODIAC_SYMBOLS[s.nnSign]} North Node in ${s.nnSign}: ${nn.title}</h3>
+          <p><strong>Your Growth Edge:</strong> ${nn.purpose}</p>
+          <p><strong>The Path Forward:</strong> ${nn.growth}</p>
+
+          <div class="insight" style="margin:1.5rem 0">
+            <strong>What you’re releasing (South Node in ${s.snSign}):</strong> ${nn.south}
           </div>
-          <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">The energetic signature you\u2019re here to embody</div>
+
+          <div class="definition-callout">Your South Node is what feels comfortable because it’s familiar, not because it serves you. Your North Node is where you’re being asked to grow, even when it feels uncomfortable.</div>
+
+          <p style="margin-top:1rem"><strong>Career Directions:</strong> ${nn.careers}</p>
         </div>
       </div>
-
-      <p><strong>Life\u2019s Work: Gene Key ${s.geneKey}</strong></p>
-      <p>${gk.theme}</p>
-      <div class="gene-key-spectrum">
-        <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gk.shadow}</div>
-        <div class="arrow">&rarr;</div>
-        <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gk.gift}</div>
-        <div class="arrow2">&rarr;</div>
-        <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gk.siddhi}</div>
-      </div>
-      <div class="insight">The journey from ${gk.shadow.toLowerCase()} to ${gk.gift.toLowerCase()} is not about fixing yourself. The shadow shows up when your gift gets compressed, it's the distorted version of the same energy. Every time you feel ${gk.shadow.toLowerCase()}, it's a signal that ${gk.gift.toLowerCase()} is trying to come through. The work isn't to eliminate the shadow. It's to notice it and let the gift move through you.</div>
-
-      <p style="margin-top:1.5rem"><strong>Purpose: Gene Key ${s.gkPurpose}</strong></p>
-      <p>${gkP.theme}</p>
-      <div class="gene-key-spectrum">
-        <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gkP.shadow}</div>
-        <div class="arrow">&rarr;</div>
-        <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gkP.gift}</div>
-        <div class="arrow2">&rarr;</div>
-        <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gkP.siddhi}</div>
-      </div>
-      <div class="insight">Your Purpose Key is what you naturally embody when you stop performing. When you're living in ${gkP.gift.toLowerCase()}, people feel it before you say a word. This isn't a skill you develop — it's something you stop suppressing.</div>
     </div>
+  `);
 
-    <!-- SECTION 5: HUMAN DESIGN -->
-    <div class="report-section">
-      <h2>Your Human Design</h2>
-      <div class="subtitle">${s.hdType} | Profile ${s.profile} | ${cross.title}</div>
-
-      <div class="hd-type-card">
-        <div class="type-name">${s.hdType}</div>
-        <div class="type-detail"><strong>Strategy:</strong> ${s.hdStrategy}</div>
-        <div class="type-detail"><strong>Authority:</strong> ${s.hdAuthority}</div>
-        <div class="type-detail"><strong>Not-Self Theme:</strong> ${s.hdNotSelf}</div>
-        <div class="type-detail"><strong>Profile:</strong> ${s.profile}</div>
+  // === ACCORDION: GENE KEYS (full depth restored) ===
+  sections.push(`
+    <div class="accordion-section" id="section-genekeys">
+      <div class="accordion-header energy-genekeys" onclick="toggleAccordion(this)">
+        <h2>${sectionGlyph('genekeys')}Your Gene Keys</h2>
+        <span class="accordion-toggle">+</span>
       </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner energy-genekeys">
+          <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-40px">${s.geneKey}</div>
+          <h3 style="color:var(--accent);font-size:1.15rem;margin-top:0.3rem;margin-bottom:0.5rem">Your Growth Spectrum to Your Best Life</h3>
 
+          <div style="display:flex;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap">
+            <div style="flex:1;min-width:250px;background:var(--card);border:1px solid var(--accent);border-radius:3px;padding:1.5rem;text-align:center">
+              <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Life’s Work</div>
+              <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
+                <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.geneKey}</span>
+              </div>
+              <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">What you’re here to do</div>
+            </div>
+            <div style="flex:1;min-width:250px;background:var(--card);border:1px solid #444;border-radius:3px;padding:1.5rem;text-align:center">
+              <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Purpose</div>
+              <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 20px var(--glow)">
+                <span style="font-size:2rem;color:var(--accent);font-family:'Cormorant Garamond',serif">${s.gkPurpose}</span>
+              </div>
+              <div style="font-size:0.8rem;color:var(--white);margin-top:0.8rem">The energetic signature you’re here to embody</div>
+            </div>
+          </div>
 
-      <p><strong>Your Incarnation Cross: ${cross.title}</strong></p>
-      <p>Gates ${s.conscGate}/${s.earthGate} | ${s.uncGate}/${s.uncEarthGate}</p>
-      <p>${cross.description}</p>
-      <div class="insight">${cross.advice}</div>
-      <p><strong>Key themes:</strong> ${cross.themes}</p>
+          <h3>Life’s Work: Gene Key ${s.geneKey}</h3>
+          <p>${gk.theme}</p>
+          <div class="gene-key-spectrum">
+            <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gk.shadow}</div>
+            <div class="arrow">&rarr;</div>
+            <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gk.gift}</div>
+            <div class="arrow2">&rarr;</div>
+            <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gk.siddhi}</div>
+          </div>
+
+          <div class="insight" style="margin:1.5rem 0">The journey from ${gk.shadow.toLowerCase()} to ${gk.gift.toLowerCase()} is not a self-improvement project. Your body already knows this spectrum. The shadow shows up when your gift gets compressed by your nervous system — it’s the distorted version of the same energy. Every time you feel ${gk.shadow.toLowerCase()}, that’s not a problem. It’s a signal. Your gift of ${gk.gift.toLowerCase()} is trying to come through, and something in your system is contracting around it. <strong>The work isn’t to eliminate the shadow. It’s to notice it in your body and let the gift move.</strong></div>
+
+          <h3 style="margin-top:2rem">Purpose: Gene Key ${s.gkPurpose}</h3>
+          <p>${gkP.theme}</p>
+          <div class="gene-key-spectrum">
+            <div class="shadow"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Shadow</div>${gkP.shadow}</div>
+            <div class="arrow">&rarr;</div>
+            <div class="gift"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Gift</div>${gkP.gift}</div>
+            <div class="arrow2">&rarr;</div>
+            <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gkP.siddhi}</div>
+          </div>
+
+          <div class="insight" style="margin:1.5rem 0">Your Purpose Key is what you naturally embody when you stop performing. When you’re living in ${gkP.gift.toLowerCase()}, people feel it before you say a word. <strong>This isn’t a skill you develop — it’s something you stop suppressing.</strong></div>
+        </div>
+      </div>
     </div>
+  `);
 
-    <!-- SECTION 6: IKIGAI -->
-    <div class="report-section">
-      <h2>Your Ikigai</h2>
-      <div class="subtitle">Where purpose meets practicality</div>
-      <div class="glossary"><strong>Ikigai</strong> is a Japanese concept meaning \u201Creason for being.\u201D The intersection of what you love, what you\u2019re good at, what the world needs, and what you can be paid for. When all four overlap, purpose has infrastructure.</div>
+  // === ACCORDION: HUMAN DESIGN ===
+  sections.push(`
+    <div class="accordion-section" id="section-humandesign">
+      <div class="accordion-header energy-humandesign" onclick="toggleAccordion(this)">
+        <h2>${sectionGlyph('humandesign')}Your Human Design</h2>
+        <span class="accordion-toggle">+</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner energy-humandesign">
+          <div class="section-watermark" style="opacity:0.02;font-size:14rem;right:-10px">&#x2B21;</div>
+          <div class="subtitle">${s.hdType} | Profile ${s.profile} | ${cross.title}</div>
 
-      <div class="ikigai-grid">
-        <div class="ikigai-card">
-          <h4>What You Love</h4>
-          <p>${skipped.love ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.love.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
-          ${!skipped.love && ikigaiAnalysis.primaries.love ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.love] + '.</p>' : ''}
-        </div>
-        <div class="ikigai-card">
-          <h4>What You\u2019re Good At</h4>
-          <p>${skipped.good ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.good.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
-          ${!skipped.good && ikigaiAnalysis.primaries.good ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.good] + '.</p>' : ''}
-        </div>
-        <div class="ikigai-card">
-          <h4>What the World Needs</h4>
-          <p>${skipped.world ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.world.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
-          ${!skipped.world && ikigaiAnalysis.primaries.world ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.world] + '.</p>' : ''}
-        </div>
-        <div class="ikigai-card">
-          <h4>What You Can Be Paid For</h4>
-          <p>${skipped.paid ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.paid.filter(x=>x).join(' ') || '<em style=\"color:var(--muted)\">Still blooming. Add more when the time feels right.</em>')}</p>
-          ${!skipped.paid && ikigaiAnalysis.primaries.paid ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.paid] + '.</p>' : ''}
+          <div class="hd-type-card">
+            <div class="type-name"><span class="shimmer-accent">${s.hdType}</span></div>
+            <div class="type-detail"><strong>Strategy:</strong> ${s.hdStrategy}</div>
+            <div class="type-detail"><strong>Authority:</strong> ${s.hdAuthority}</div>
+            <div class="type-detail"><strong>Not-Self Theme:</strong> ${s.hdNotSelf}</div>
+            <div class="type-detail"><strong>Profile:</strong> ${s.profile}</div>
+          </div>
+
+          <h3 style="margin-top:1.5rem">Your Incarnation Cross: ${cross.title}</h3>
+          <p>Gates ${s.conscGate}/${s.earthGate} | ${s.uncGate}/${s.uncEarthGate}</p>
+          <div class="definition-callout">${cross.description}</div>
+
+          <div class="insight" style="margin:1.5rem 0">${cross.advice}</div>
+
+          <p><strong>Key themes:</strong> ${cross.themes}</p>
         </div>
       </div>
-
-      <div style="text-align:center;margin:2rem 0">
-        <svg viewBox="0 0 400 400" width="360" height="360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
-          <defs>
-            <style>
-              .venn-circle{fill:none;stroke-width:1.5;opacity:0.85}
-              .venn-label{font-family:'Cormorant Garamond',serif;font-size:11px;fill:var(--white,#f5f0eb);text-anchor:middle}
-              .venn-center{font-family:'Cormorant Garamond',serif;font-size:13px;fill:var(--accent,#c9956b);text-anchor:middle;font-weight:600}
-              .venn-overlap{font-family:'Inter',sans-serif;font-size:7.5px;fill:var(--muted,#8a8078);text-anchor:middle}
-            </style>
-          </defs>
-          <circle cx="165" cy="160" r="110" class="venn-circle" stroke="var(--accent,#c9956b)" fill="rgba(201,149,107,0.06)"/>
-          <circle cx="235" cy="160" r="110" class="venn-circle" stroke="var(--accent2,#d4a574)" fill="rgba(212,165,116,0.06)"/>
-          <circle cx="165" cy="240" r="110" class="venn-circle" stroke="var(--muted,#8a8078)" fill="rgba(138,128,120,0.06)"/>
-          <circle cx="235" cy="240" r="110" class="venn-circle" stroke="var(--white,#f5f0eb)" fill="rgba(245,240,235,0.04)"/>
-          <text x="110" y="105" class="venn-label">What You Love</text>
-          <text x="290" y="105" class="venn-label">What You're</text>
-          <text x="290" y="118" class="venn-label">Good At</text>
-          <text x="110" y="310" class="venn-label">What the</text>
-          <text x="110" y="323" class="venn-label">World Needs</text>
-          <text x="290" y="310" class="venn-label">What You Can</text>
-          <text x="290" y="323" class="venn-label">Be Paid For</text>
-          <text x="200" y="140" class="venn-overlap">Passion</text>
-          <text x="140" y="200" class="venn-overlap">Mission</text>
-          <text x="260" y="200" class="venn-overlap">Profession</text>
-          <text x="200" y="265" class="venn-overlap">Vocation</text>
-          <text x="200" y="196" class="venn-center">IKIGAI</text>
-          <text x="200" y="210" class="venn-center" style="font-size:9px;font-weight:400">reason for being</text>
-        </svg>
-      </div>
-
-      <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
-      ${(function() {
-        var hasLove = s.ikigai.love.filter(function(x){return x;}).length > 0 && !skipped.love;
-        var hasGood = s.ikigai.good.filter(function(x){return x;}).length > 0 && !skipped.good;
-        var hasWorld = s.ikigai.world.filter(function(x){return x;}).length > 0 && !skipped.world;
-        var hasPaid = s.ikigai.paid.filter(function(x){return x;}).length > 0 && !skipped.paid;
-        var hasAny = hasLove || hasGood || hasWorld || hasPaid;
-
-        var ikigaiStatement;
-        if (s.synthesizedIkigai) {
-          ikigaiStatement = s.synthesizedIkigai;
-        } else if (hasAny) {
-          var mainDrive = ikigaiAnalysis.crossSignal[0] ||
-                          ikigaiAnalysis.primaries.world ||
-                          ikigaiAnalysis.primaries.good ||
-                          ikigaiAnalysis.primaries.love ||
-                          ikigaiAnalysis.primaries.paid;
-          if (mainDrive) {
-            var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
-            var gkGift = gk.gift.toLowerCase();
-            ikigaiStatement = 'Your soul\'s unique expression is to ' + IKIGAI_VERBS[mainDrive] +
-                              ', channeling your gift of ' + gkGift +
-                              ' in service of your soul\'s purpose ' + lpPurposeFirst + '.';
-          } else {
-            ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
-          }
-        } else {
-          ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
-        }
-        return '<div class="purpose-statement" style="margin:1rem auto;max-width:600px;text-align:center">' + ikigaiStatement + '</div>';
-      })()}
-
-      ${ikigaiAnalysis.crossSignal.length > 0 ? '<div class="insight"><strong>The signal across your answers:</strong> ' + (ikigaiAnalysis.crossSignal.length >= 2 ? 'Two drives keep showing up across your answers: <em>' + ikigaiAnalysis.crossSignal[0] + '</em> and <em>' + ikigaiAnalysis.crossSignal[1] + '</em>. These aren\'t choices you made deliberately. They chose you. They\'re the shape your thinking naturally takes when no one is watching.' : 'One drive runs through everything: <em>' + ikigaiAnalysis.crossSignal[0] + '</em>. This is not a preference. It\'s the shape your thinking naturally takes when no one is watching.') + '</div>' : ''}
-
-      ${ikigaiAnalysis.tensions.length > 0 ? '<p style="margin-top:1rem"><strong>The productive tension:</strong> ' + (function() { const t = ikigaiAnalysis.tensions[0]; const key = t.from + '-' + t.to; return TENSION_READS[key] || TENSION_READS[t.to + '-' + t.from] || 'What you love (' + t.from + ') and what sustains you (' + t.to + ') pull in different directions. That tension is not a problem to solve. It\'s the creative friction that keeps you from settling into half of yourself.'; })() + '</p>' : ''}
-
-      <div class="insight" style="margin-top:1rem">If you feel resistance around what emerged here, that's normal. It's not the truth, it's the part of you that prefers the familiar. The Ikigai sits at the center of all four quadrants, and yours is starting to take shape.</div>
     </div>
+  `);
 
-    <!-- SECTION 7: SYNTHESIS -->
-    <div class="report-section">
-      <h2>The Synthesis</h2>
+  // === ACCORDION: IKIGAI ===
+  sections.push(`
+    <div class="accordion-section" id="section-ikigai">
+      <div class="accordion-header energy-ikigai" onclick="toggleAccordion(this)">
+        <h2>${sectionGlyph('ikigai')}Your Ikigai</h2>
+        <span class="accordion-toggle">+</span>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner energy-ikigai">
+          <div class="section-watermark" style="opacity:0.02;font-size:16rem;right:-20px">&#x2609;</div>
+          <div class="subtitle">Where purpose meets practicality</div>
+          <div class=”definition-callout”><strong>Ikigai</strong> is a Japanese concept meaning “reason for being.” The intersection of what you love, what you’re good at, what the world needs, and what you can be paid for. When all four overlap, purpose has infrastructure.</div>
+
+          <div style=”text-align:center;margin:1.5rem 0”>
+            ${buildIkigaiRadial(ikigaiAnalysis, skipped)}
+          </div>
+
+          <div class=”ikigai-grid”>
+            <div class="ikigai-card">
+              <h4>What You Love</h4>
+              <p>${skipped.love ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.love.filter(x=>x).join(' ') || '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>')}</p>
+              ${!skipped.love && ikigaiAnalysis.primaries.love ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.love] + '.</p>' : ''}
+            </div>
+            <div class="ikigai-card">
+              <h4>What You’re Good At</h4>
+              <p>${skipped.good ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.good.filter(x=>x).join(' ') || '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>')}</p>
+              ${!skipped.good && ikigaiAnalysis.primaries.good ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.good] + '.</p>' : ''}
+            </div>
+            <div class="ikigai-card">
+              <h4>What the World Needs</h4>
+              <p>${skipped.world ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.world.filter(x=>x).join(' ') || '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>')}</p>
+              ${!skipped.world && ikigaiAnalysis.primaries.world ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.world] + '.</p>' : ''}
+            </div>
+            <div class="ikigai-card">
+              <h4>What You Can Be Paid For</h4>
+              <p>${skipped.paid ? '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>' : (s.ikigai.paid.filter(x=>x).join(' ') || '<em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em>')}</p>
+              ${!skipped.paid && ikigaiAnalysis.primaries.paid ? '<p style="margin-top:0.5rem;color:var(--accent);font-size:0.78rem"><strong>Underlying drive:</strong> ' + DRIVE_LABELS[ikigaiAnalysis.primaries.paid] + '.</p>' : ''}
+            </div>
+          </div>
+
+          <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
+          ${(function() {
+            var hasLove = s.ikigai.love.filter(function(x){return x;}).length > 0 && !skipped.love;
+            var hasGood = s.ikigai.good.filter(function(x){return x;}).length > 0 && !skipped.good;
+            var hasWorld = s.ikigai.world.filter(function(x){return x;}).length > 0 && !skipped.world;
+            var hasPaid = s.ikigai.paid.filter(function(x){return x;}).length > 0 && !skipped.paid;
+            var hasAny = hasLove || hasGood || hasWorld || hasPaid;
+
+            var ikigaiStatement;
+            if (s.synthesizedIkigai) {
+              ikigaiStatement = s.synthesizedIkigai;
+            } else if (hasAny) {
+              var mainDrive = ikigaiAnalysis.crossSignal[0] ||
+                              ikigaiAnalysis.primaries.world ||
+                              ikigaiAnalysis.primaries.good ||
+                              ikigaiAnalysis.primaries.love ||
+                              ikigaiAnalysis.primaries.paid;
+              if (mainDrive) {
+                var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
+                var gkGift = gk.gift.toLowerCase();
+                ikigaiStatement = 'Your soul\'s unique expression is to ' + IKIGAI_VERBS[mainDrive] +
+                                  ', channeling your gift of ' + gkGift +
+                                  ' in service of your soul\'s purpose ' + lpPurposeFirst + '.';
+              } else {
+                ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+              }
+            } else {
+              ikigaiStatement = 'Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.';
+            }
+            return '<div class="purpose-statement" style="margin:1rem auto;max-width:600px;text-align:center">' + ikigaiStatement + '</div>';
+          })()}
+
+          ${ikigaiAnalysis.crossSignal.length > 0 ? '<div class="insight"><strong>The signal across your answers:</strong> ' + (ikigaiAnalysis.crossSignal.length >= 2 ? 'Two drives keep showing up across your answers: <em>' + ikigaiAnalysis.crossSignal[0] + '</em> and <em>' + ikigaiAnalysis.crossSignal[1] + '</em>. These aren\'t choices you made deliberately. They chose you. They\'re the shape your thinking naturally takes when no one is watching.' : 'One drive runs through everything: <em>' + ikigaiAnalysis.crossSignal[0] + '</em>. This is not a preference. It\'s the shape your thinking naturally takes when no one is watching.') + '</div>' : ''}
+
+          ${ikigaiAnalysis.tensions.length > 0 ? '<p style="margin-top:1rem"><strong>The productive tension:</strong> ' + (function() { const t = ikigaiAnalysis.tensions[0]; const key = t.from + '-' + t.to; return TENSION_READS[key] || TENSION_READS[t.to + '-' + t.from] || 'What you love (' + t.from + ') and what sustains you (' + t.to + ') pull in different directions. That tension is not a problem to solve. It\'s the creative friction that keeps you from settling into half of yourself.'; })() + '</p>' : ''}
+
+          <div class="insight" style="margin-top:1rem">If you feel resistance around what emerged here, that’s normal. It’s not the truth, it’s the part of you that prefers the familiar. The Ikigai sits at the center of all four quadrants, and yours is starting to take shape.</div>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // === SYNTHESIS (always fully expanded, no accordion) ===
+  sections.push(`
+    <div class="synthesis-section energy-synthesis" id="section-synthesis">
+      <div class="section-watermark" style="opacity:0.02;font-size:20rem;right:-40px">&#x2726;</div>
+      <h2>${sectionGlyph('synthesis')}The Synthesis</h2>
       <div class="subtitle">What all five systems are saying together</div>
-      <div class="reframe">Five different maps. One territory.</div>
+      <div class="display-quote"><p><span class="glow-text">Five different systems. One territory. Your soul.</span></p></div>
 
-      <p>${firstName}, here is what emerges when we read your blueprint as a single story:</p>
+      <p>${firstName}, here is what your body already knows but your mind hasn't organized yet:</p>
       <p>Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> tells us your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}. Your <strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that mission: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. Your <strong>North Node in ${s.nnSign}</strong> points to where your soul is growing: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. Your <strong>Gene Key ${s.geneKey}</strong> maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>. And your <strong>${s.hdType}</strong> design tells your body how to move through all of it: ${s.hdStrategy.toLowerCase()}. One thread. Five confirmations.</p>
 
-      <p style="color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;margin:1.5rem 0 0.5rem">What is your soul's purpose?</p>
+      <p>None of these systems invented something about you. They named what was already running. The pattern was there before you had language for it — in the decisions you made without knowing why, in the things that kept bothering you that you couldn’t explain, in the way your body responded to certain situations long before your mind caught up.</p>
+
+      <p style="color:var(--accent);font-family:’DM Serif Display’,serif;font-size:1.15rem;margin:1.8rem 0 0.6rem">What is your soul’s purpose?</p>
       <div class="purpose-statement">${(function() {
         if (s.synthesizedPurpose) return s.synthesizedPurpose;
         var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
@@ -1563,34 +1860,35 @@ function renderReport() {
         return 'Your purpose most resembles the high-achiever path. You have genuine capacity for output and follow-through. But your version of achievement is not about metrics or recognition. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would leave you productive but hollow.';
       })()}</p>
 
-      <h3 style="margin-top:2rem">Professions & Industries Aligned With Your Blueprint</h3>
+      <div class="insight" style="margin:1.5rem 0">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</div>
+
+      <h3 style="margin-top:1.5rem">Professions & Industries Aligned With Your Blueprint</h3>
       <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? 'Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.' : ''}</p>
       <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}${nn.careers ? '. Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
-      <div class="insight">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</div>
     </div>
+  `);
 
-    <!-- SECTION 9: NEXT STEP -->
-    <div class="report-section" style="border-bottom:none">
-      <div class="cta-box">
+  // === CTA + SAVE (bottom) ===
+  sections.push(`
+    <div class="report-slide energy-cta" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:70vh">
+      <div class="cta-box" style="max-width:600px">
         <h3>Your Blueprint Is the Beginning</h3>
-        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is where resistance shows up. Where your nervous system is vetoing what your soul is asking for.</p>
-        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is a six-stage method for closing that gap. It starts with the <strong>Clearing Breath</strong>: a technique for moving your awareness out of your head and into the place where you can actually hear what\u2019s true.</p>
+        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is where <span class="glow-text">resistance</span> shows up. Where your nervous system is vetoing what your soul is asking for.</p>
+        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is a six-stage method for closing that gap. It starts with the <strong>Clearing Breath</strong>: a technique for moving your awareness out of your head and into the place where you can actually hear what’s true.</p>
         <p style="margin-top:0.8rem;color:var(--accent)">If you feel seen by this blueprint, the work that created it goes deeper.</p>
         <a href="https://www.briannabomi.com" target="_blank" class="btn" style="display:inline-block;margin-top:1rem;text-decoration:none">Explore the Sovereign Arc</a>
       </div>
+      <div style="margin-top:2.5rem">
+        <button class="btn" onclick="window.print()">Save / Print Your Blueprint</button>
+        <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.02em">Save this. You’ll want to come back to it.</p>
+      </div>
+      <div style="margin-top:2rem;color:var(--muted);font-size:0.75rem">
+        <p>Generated by the Soul Blueprint Experience &bull; <span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</p>
+      </div>
     </div>
+  `);
 
-    <div style="text-align:center;margin:2rem 0">
-      <button class="btn" onclick="window.print()">Save / Print</button>
-      <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;font-family:'Cormorant Garamond',serif;font-style:italic">Save this. You'll want to come back to it.</p>
-    </div>
-
-    <div style="text-align:center;padding:2rem 0;color:var(--muted);font-size:0.75rem">
-      <p>Generated by the Soul Blueprint Experience &bull; Brianna Bomi &bull; Sovereign Arc</p>
-      <p style="margin-top:0.3rem">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</p>
-    </div>
-  `;
-
+  const html = sections.join('\n');
   document.getElementById('reportContent').innerHTML = html;
 }
 
@@ -1765,9 +2063,83 @@ function runTestCases() {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Running Soul Blueprint verification tests...');
   const results = runTestCases();
-  // Store for optional display
   window._testResults = results;
+  initStarfield();
 });
+
+// ============================================================
+// STARFIELD — slow-drifting particle background
+// ============================================================
+function initStarfield() {
+  var canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  var count = 90;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.12,
+      dy: (Math.random() - 0.5) * 0.08,
+      alpha: Math.random() * 0.4 + 0.1,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.008 + 0.003
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      s.x += s.dx;
+      s.y += s.dy;
+      s.pulse += s.pulseSpeed;
+      if (s.x < -5) s.x = canvas.width + 5;
+      if (s.x > canvas.width + 5) s.x = -5;
+      if (s.y < -5) s.y = canvas.height + 5;
+      if (s.y > canvas.height + 5) s.y = -5;
+      var flicker = s.alpha + Math.sin(s.pulse) * 0.15;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,175,140,' + Math.max(0, flicker) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ============================================================
+// ACCORDION SYSTEM
+// ============================================================
+function toggleAccordion(headerEl) {
+  var section = headerEl.parentElement;
+  section.classList.toggle('open');
+}
+
+function openAndScrollTo(sectionId) {
+  var section = document.getElementById(sectionId);
+  if (!section) return;
+  // Open the accordion if it's not already open
+  if (!section.classList.contains('open')) {
+    section.classList.add('open');
+  }
+  // Wait a tick for the DOM to update, then scroll
+  setTimeout(function() {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
 </script>
 </body>
 </html>
