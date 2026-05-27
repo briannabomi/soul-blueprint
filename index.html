@@ -322,7 +322,7 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);let
   </div>
 </div>
 
-<!-- SCREEN: PRE-REPORT WARNING -->
+<!-- SCREEN: EMAIL CAPTURE -->
 <div class="screen" id="s-email">
   <div>
     <div class="step-header">
@@ -334,12 +334,16 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);let
       <p style="font-size:0.84rem;color:var(--white);margin:0;line-height:1.7"><strong style="color:var(--accent)">Your report is not saved anywhere.</strong> I will never see it. Once you leave the page, it's gone. <strong>Save or print your report on the next page.</strong></p>
     </div>
     <div class="form-group">
+      <label>Your Email</label>
+      <input type="email" id="userEmail" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
       <label>Your First Name</label>
       <input type="text" id="userFirstName" placeholder="So we can personalize your report.">
     </div>
     <div class="nav-row">
       <button class="btn-outline btn-sm" onclick="goTo('s-ikigai4')">&larr; Back</button>
-      <button class="btn" onclick="generateReportDirect()">Show My Blueprint</button>
+      <button class="btn" onclick="captureEmailAndGenerate()">Show My Blueprint</button>
     </div>
   </div>
 </div>
