@@ -157,7 +157,76 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);let
 .test-results{background:#1a1a1a;border:1px solid #333;padding:1rem;margin:1rem 0;font-family:monospace;font-size:0.75rem;color:var(--muted);max-height:300px;overflow-y:auto;border-radius:3px}
 .test-results .pass{color:#6a9a6a}
 .test-results .fail{color:#9a6a6a}
-@media print{html{font-size:15px}.print-btn,.btn,.nav-row,.btn-outline,.save-bar,#starfield{display:none!important}.screen{display:none!important;min-height:0;padding:0}.screen#s-report{display:block!important;padding:0.5rem}.report{max-width:100%}.report-slide{display:block!important;min-height:0!important;padding:1.5rem 1rem!important;break-inside:avoid}.accordion-section{break-inside:avoid}.accordion-body{max-height:none!important;opacity:1!important;overflow:visible!important}.accordion-body-inner{padding:1rem!important}.accordion-toggle{display:none!important}.accordion-header{background:none!important;padding:1rem 0!important}.synthesis-section{padding:1.5rem 1rem!important;break-inside:avoid}body{background:#fff;color:#222}.report-slide .insight{border-left-color:#999;box-shadow:none!important}.cta-box{border-color:#999;box-shadow:none!important}.section-watermark{display:none!important}.energy-numerology,.energy-northnode,.energy-genekeys,.energy-humandesign,.energy-ikigai,.energy-synthesis{background:none!important}.glow-text{text-shadow:none!important;-webkit-text-fill-color:currentColor!important}.shimmer-accent{-webkit-text-fill-color:currentColor!important;animation:none!important}}
+@media print{
+@page{size:letter;margin:0.75in 0.85in}
+html{font-size:14px}
+body{background:#fff!important;color:#2a2520!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.print-btn,.btn,.nav-row,.btn-outline,.save-bar,#starfield,.accordion-toggle,.reveal-hint{display:none!important}
+.screen{display:none!important;min-height:0;padding:0}
+.screen#s-report{display:block!important;padding:0}
+.report{max-width:100%;padding:0}
+.report-slide{display:block!important;min-height:0!important;padding:1.8rem 0!important;overflow:visible!important}
+.accordion-section{border-bottom:1px solid #ddd;page-break-inside:avoid;break-inside:avoid}
+.accordion-body{max-height:none!important;opacity:1!important;overflow:visible!important}
+.accordion-body-inner{padding:1.2rem 0!important;overflow:visible!important}
+.accordion-header{background:none!important;padding:1.2rem 0 0.4rem!important;border-bottom:2px solid #c9956b}
+.accordion-header h2{color:#2a2520!important;font-size:1.6rem!important}
+.synthesis-section{padding:1.8rem 0!important;break-inside:avoid;overflow:visible!important}
+.accordion-section{page-break-before:auto}
+#section-numerology{page-break-before:always}
+#section-astrology{page-break-before:always}
+#section-genekeys{page-break-before:always}
+#section-humandesign{page-break-before:always}
+#section-ikigai{page-break-before:always}
+.synthesis-section{page-break-before:always}
+.report-slide[style*="min-height:80vh"]{min-height:0!important;padding:3rem 0!important;text-align:center;page-break-after:always}
+.report-slide[style*="min-height:80vh"] h1{font-size:2.4rem!important;color:#2a2520!important}
+.report-slide[style*="min-height:80vh"] .name{color:#c9956b!important;font-size:1.3rem!important}
+.report-slide[style*="min-height:80vh"] .brand,.report-slide[style*="min-height:80vh"] .shimmer-accent{color:#c9956b!important;-webkit-text-fill-color:#c9956b!important;animation:none!important}
+h1,h2{color:#2a2520!important}
+h3{color:#3a3530!important}
+.report-slide h2,.accordion-body-inner h2,.synthesis-section h2{font-size:1.6rem!important;color:#2a2520!important;margin-bottom:0.3rem!important}
+.report-slide h3,.accordion-body-inner h3,.synthesis-section h3{font-size:1.1rem!important;color:#3a3530!important;margin-bottom:0.2rem!important;margin-top:1rem!important}
+.subtitle{color:#c9956b!important;font-size:0.85rem!important}
+p{color:#2a2520!important;font-size:0.82rem!important;line-height:1.75!important;margin-bottom:0.8rem!important}
+.purpose-statement{background:#faf7f4!important;border:2px solid #c9956b!important;box-shadow:none!important;padding:1.5rem 2rem!important;font-size:1.15rem!important;color:#2a2520!important;font-weight:600!important;line-height:1.6!important;-webkit-text-fill-color:#2a2520!important}
+.display-quote{font-size:1.4rem!important;color:#2a2520!important;padding:1.5rem 0.5rem!important;margin:1.2rem 0!important}
+.display-quote::before,.display-quote::after{background:#c9956b!important}
+.report-slide .insight,.accordion-body-inner .insight,.synthesis-section .insight{background:#faf7f4!important;border-left:3px solid #c9956b!important;box-shadow:none!important;color:#2a2520!important;padding:1rem 1.2rem!important;font-size:0.8rem!important;border-radius:0 4px 4px 0!important}
+.insight strong{color:#2a2520!important}
+.coord-grid{gap:0.8rem!important;margin:1rem 0!important}
+.coord-card{background:#faf7f4!important;border:1px solid #ddd!important;padding:0.8rem 1rem!important}
+.coord-card .label{color:#8a7a6a!important;font-size:0.55rem!important}
+.coord-card .value{color:#2a2520!important;font-size:1rem!important}
+.coord-card .gloss{color:#6a6560!important;font-size:0.65rem!important}
+.gene-key-spectrum{background:#faf7f4!important;border:1px solid #ddd!important}
+.gene-key-spectrum .shadow{color:#8a5a5a!important}
+.gene-key-spectrum .gift{color:#c9956b!important}
+.gene-key-spectrum .siddhi{color:#5a8a5a!important}
+.ikigai-card{background:#faf7f4!important;border:1px solid #ddd!important}
+.ikigai-card h4{color:#c9956b!important}
+.ikigai-card p{color:#4a4540!important}
+.cta-box{background:#faf7f4!important;border:2px solid #c9956b!important;box-shadow:none!important;page-break-inside:avoid}
+.cta-box h3{color:#2a2520!important}
+.cta-box p{color:#4a4540!important}
+svg{max-width:100%!important;height:auto!important;max-height:180px!important}
+.ikigai-diagram svg,.ikigai-container svg{max-height:280px!important}
+.section-glyph{width:22px!important;height:22px!important}
+.section-watermark{display:none!important}
+.energy-numerology,.energy-northnode,.energy-genekeys,.energy-humandesign,.energy-ikigai,.energy-synthesis{background:none!important}
+.glow-text{text-shadow:none!important;-webkit-text-fill-color:#c9956b!important;color:#c9956b!important}
+.shimmer-accent{-webkit-text-fill-color:#c9956b!important;animation:none!important;color:#c9956b!important}
+.hd-type-card{background:#faf7f4!important;border:1px solid #c9956b!important;box-shadow:none!important}
+.hd-type-card .type-name{color:#c9956b!important}
+.hd-type-card .type-detail{color:#4a4540!important}
+.definition-callout{color:#6a6560!important;border-left-color:#c9956b!important}
+.essence-block{background:#faf7f4!important;border:1px solid #ddd!important}
+.essence-block h4{color:#c9956b!important}
+.pillar-card{background:#faf7f4!important;border-left-color:#c9956b!important}
+.pillar-card h4{color:#2a2520!important}
+div[style*="border-radius:50%"][style*="border:2px solid"]{border-color:#c9956b!important;box-shadow:none!important;background:#faf7f4!important}
+.report-slide:last-child{page-break-after:avoid}
+}
 .loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
 .loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
 .loc-item .loc-country{color:var(--muted);font-size:0.75rem}
