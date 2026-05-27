@@ -1,15 +1,14 @@
-exports.handler = async (event) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json"
-  };
+export default async function handler(req, res) {
+  // CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Content-Type", "application/json");
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers, body: "" };
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
   }
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   // ── ENV VAR DIAGNOSTICS ──────────────────────────────────
@@ -23,11 +22,7 @@ exports.handler = async (event) => {
 
   if (!KIT_API_KEY) {
     console.error("[subscribe] FATAL: No API key found (checked KIT_API_KEY and KIT_API_SECRET)");
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ success: false, error: "Server misconfigured: missing API key" })
-    };
+    return res.status(500).json({ success: false, error: "Server misconfigured: missing API key" });
   }
 
   // Kit v4 keys start with "kit_" — warn if format looks wrong
@@ -37,32 +32,18 @@ exports.handler = async (event) => {
 
   if (!KIT_TAG_ID) {
     console.error("[subscribe] FATAL: KIT_TAG_ID not set");
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ success: false, error: "Server misconfigured: missing tag ID" })
-    };
+    return res.status(500).json({ success: false, error: "Server misconfigured: missing tag ID" });
   }
 
   // ── PARSE BODY ───────────────────────────────────────────
-  let payload;
-  try {
-    payload = JSON.parse(event.body);
-  } catch {
-    return { statusCode: 400, headers, body: JSON.stringify({ success: false, error: "Invalid JSON" }) };
-  }
-
-  const { email_address, first_name, fields } = payload;
+  const { email_address, first_name, fields } = req.body;
   console.log("[subscribe] Received payload:", JSON.stringify({ email_address, first_name, fields_keys: fields ? Object.keys(fields) : [] }));
 
   if (!email_address || !email_address.includes("@")) {
-    return { statusCode: 400, headers, body: JSON.stringify({ success: false, error: "Valid email_address required" }) };
+    return res.status(400).json({ success: false, error: "Valid email_address required" });
   }
 
   // ── AUTH HEADERS ─────────────────────────────────────────
-  // Kit v4 API authenticates via X-Kit-Api-Key header.
-  // Key must be a v4 API key (starts with "kit_").
-  // Get yours at: https://app.kit.com/account/edit#api_key
   const kitHeaders = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -95,30 +76,18 @@ exports.handler = async (event) => {
       createData = JSON.parse(createText);
     } catch {
       console.error("[subscribe] Step 1 response is not JSON:", createText.substring(0, 500));
-      return {
-        statusCode: 502,
-        headers,
-        body: JSON.stringify({ success: false, error: "Kit returned non-JSON response", status: createRes.status, raw: createText.substring(0, 200) })
-      };
+      return res.status(502).json({ success: false, error: "Kit returned non-JSON response", status: createRes.status, raw: createText.substring(0, 200) });
     }
 
     if (!createRes.ok) {
       console.error("[subscribe] Step 1 FAILED:", createRes.status, JSON.stringify(createData));
-      return {
-        statusCode: createRes.status,
-        headers,
-        body: JSON.stringify({ success: false, error: "Kit: failed to create subscriber", status: createRes.status, detail: createData })
-      };
+      return res.status(createRes.status).json({ success: false, error: "Kit: failed to create subscriber", status: createRes.status, detail: createData });
     }
 
     const subscriberId = createData.subscriber?.id;
     if (!subscriberId) {
       console.error("[subscribe] No subscriber.id in response:", JSON.stringify(createData));
-      return {
-        statusCode: 502,
-        headers,
-        body: JSON.stringify({ success: false, error: "Kit returned no subscriber id", detail: createData })
-      };
+      return res.status(502).json({ success: false, error: "Kit returned no subscriber id", detail: createData });
     }
 
     console.log("[subscribe] Subscriber created — id:", subscriberId);
@@ -141,28 +110,15 @@ exports.handler = async (event) => {
 
     if (!tagRes.ok) {
       console.error("[subscribe] Step 2 tagging FAILED:", tagRes.status);
-      // Subscriber was still created — return partial success
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ success: true, subscriberId, tagged: false, tagError: tagData })
-      };
+      return res.status(200).json({ success: true, subscriberId, tagged: false, tagError: tagData });
     }
 
     console.log("[subscribe] SUCCESS — subscriber created and tagged");
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ success: true, subscriberId, tagged: true })
-    };
+    return res.status(200).json({ success: true, subscriberId, tagged: true });
 
   } catch (err) {
     console.error("[subscribe] EXCEPTION:", err.message, err.stack);
-    return {
-      statusCode: 502,
-      headers,
-      body: JSON.stringify({ success: false, error: "Failed to reach Kit", detail: err.message })
-    };
+    return res.status(502).json({ success: false, error: "Failed to reach Kit", detail: err.message });
   }
-};
+}

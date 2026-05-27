@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign Foundations | Brianna Bomi</title>
+<meta name="description" content="A 3-month private coaching container inside The Sovereign Arc for high-performing leaders ready to discern the difference between their mind, their nervous system, and their soul.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;
+  --card:rgba(16,22,40,0.85);
+  --card2:rgba(22,28,48,0.8);
+  --accent:#c9956b;
+  --accent2:#d4a574;
+  --text:#e0dcd6;
+  --muted:#8a8078;
+  --white:#f5f0eb;
+  --glow:rgba(201,149,107,0.15);
+  --midnight:#0d1225;
+  --deep:#111830;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  font-weight:300;
+  line-height:1.85;
+  font-size:16px;
+}
+
+/* Starfield */
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* Typography */
+h1,h2{font-family:'DM Serif Display',serif;font-weight:400;color:var(--white);letter-spacing:0.01em}
+h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);letter-spacing:0.02em}
+p{margin-bottom:1rem;font-size:0.92rem;line-height:1.9}
+em{color:var(--accent);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.05em}
+strong{color:var(--white);font-weight:500}
+
+/* Layout */
+.container{max-width:780px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+section{padding:clamp(4rem,10vh,8rem) 0;position:relative}
+section + section{border-top:1px solid rgba(201,149,107,0.08)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:4rem 0}
+.hero-badge{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.1;margin-bottom:1.8rem}
+.hero .subtitle{font-size:1.05rem;color:var(--text);line-height:1.8;margin-bottom:0.5rem;max-width:600px}
+.hero .subtitle strong{color:var(--white)}
+.hero .hook{font-size:0.9rem;color:var(--muted);margin-bottom:2.5rem}
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:var(--bg);
+  border:none;
+  padding:1rem 2.6rem;
+  font-size:0.8rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  transition:all 0.3s;
+  border-radius:2px;
+  text-decoration:none;
+}
+.btn:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,149,107,0.2)}
+.btn-ghost{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.btn-ghost:hover{background:var(--glow);transform:translateY(-2px)}
+.cta-wrapper{margin:2.5rem 0}
+.cta-subtext{font-size:0.78rem;color:var(--muted);margin-top:0.8rem;max-width:500px}
+
+/* Section headings */
+.section-heading{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:1.5rem;line-height:1.15}
+.section-subhead{font-size:0.82rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem}
+
+/* Pain points - stacked short lines */
+.stacked-lines{margin:1.5rem 0}
+.stacked-lines p{margin-bottom:0.4rem;font-size:0.92rem;color:var(--text)}
+.stacked-lines .muted{color:var(--muted)}
+
+/* Accent line (left border callout) */
+.accent-line{border-left:2px solid var(--accent);padding-left:1.4rem;margin:2rem 0;font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--white);line-height:1.5;box-shadow:-2px 0 12px rgba(201,149,107,0.1)}
+
+/* Cards */
+.method-card{background:var(--card);border:1px solid rgba(201,149,107,0.12);border-radius:4px;padding:2.2rem 2rem;margin:2rem 0;position:relative;overflow:hidden}
+.method-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.method-card h3{font-size:1.4rem;margin-bottom:0.8rem;color:var(--white)}
+.method-card p{font-size:0.88rem;color:var(--text)}
+
+/* Included list */
+.included-item{padding:1.5rem 0;border-bottom:1px solid rgba(201,149,107,0.08)}
+.included-item:last-child{border-bottom:none}
+.included-item h3{font-size:1.15rem;color:var(--white);margin-bottom:0.4rem}
+.included-item p{font-size:0.85rem;color:var(--muted);margin-bottom:0}
+
+/* Timeline */
+.timeline-block{background:var(--card);border-radius:4px;padding:2.2rem 2rem;margin:2rem 0;border:1px solid rgba(201,149,107,0.08)}
+.timeline-block h3{font-size:1.3rem;color:var(--accent);margin-bottom:1rem;font-family:'DM Serif Display',serif}
+
+/* Testimonials */
+.testimonial{background:var(--card);border:1px solid rgba(201,149,107,0.1);border-radius:4px;padding:2rem 2.2rem;margin:2rem 0;position:relative}
+.testimonial::before{content:'\201C';position:absolute;top:0.5rem;left:1.2rem;font-size:3rem;color:var(--accent);opacity:0.3;font-family:'DM Serif Display',serif}
+.testimonial p{font-size:0.88rem;padding-left:0.5rem;line-height:1.9}
+.testimonial .attribution{color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:1rem;margin-top:1rem;font-style:italic}
+
+/* Image placeholders */
+.image-slot{
+  width:100%;
+  min-height:300px;
+  background:linear-gradient(135deg,rgba(16,22,40,0.9),rgba(22,28,48,0.9));
+  border:2px dashed rgba(201,149,107,0.3);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:2rem 0;
+  position:relative;
+  overflow:hidden;
+}
+.image-slot img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;border-radius:6px}
+.image-slot .placeholder-text{
+  font-size:0.75rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  opacity:0.6;
+  text-align:center;
+  padding:1rem;
+}
+.image-slot.portrait{max-width:400px;min-height:500px;margin-left:auto;margin-right:auto}
+.image-slot.screenshot{min-height:200px;max-width:500px}
+.image-slot.wide{min-height:250px}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid rgba(201,149,107,0.08);padding:1.8rem 0}
+.faq-item h3{font-size:1.1rem;color:var(--white);margin-bottom:0.8rem;cursor:pointer;font-family:'DM Serif Display',serif}
+.faq-item p{font-size:0.88rem;color:var(--muted)}
+
+/* Who this is for */
+.qualifier{padding:0.6rem 0;font-size:0.9rem;position:relative;padding-left:1.4rem}
+.qualifier::before{content:'—';position:absolute;left:0;color:var(--accent)}
+
+/* Investment box */
+.investment-box{
+  background:linear-gradient(135deg,var(--card),rgba(30,20,15,0.8));
+  border:1px solid var(--accent);
+  border-radius:6px;
+  padding:3rem;
+  text-align:center;
+  margin:3rem 0;
+}
+.investment-box h2{font-size:2.2rem;margin-bottom:0.5rem}
+.investment-box .price{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--accent);margin:1rem 0}
+.investment-box p{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem}
+
+/* Footer */
+.site-footer{padding:3rem 0;text-align:center;border-top:1px solid rgba(201,149,107,0.08)}
+.site-footer p{font-size:0.75rem;color:var(--muted)}
+
+/* Responsive */
+@media(max-width:600px){
+  .container{padding:0 1.5rem}
+  section{padding:clamp(3rem,8vh,5rem) 0}
+  .hero{min-height:auto;padding:6rem 0 4rem}
+  .method-card{padding:1.5rem}
+  .testimonial{padding:1.5rem}
+  .investment-box{padding:2rem 1.5rem}
+  .image-slot.portrait{max-width:100%}
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp 0.8s ease forwards}
+.delay-1{animation-delay:0.2s}
+.delay-2{animation-delay:0.4s}
+.delay-3{animation-delay:0.6s}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">The Sovereign Arc</div>
+    <h1>Stop outsourcing your authority to every voice except your own.</h1>
+    <p class="subtitle">A 3-month private coaching container inside <strong>The Sovereign Arc</strong> for high-performing leaders who are ready to discern the difference between their mind, their nervous system, and their soul — and finally build from the signal that is actually theirs.</p>
+    <p class="hook">This is not another "trust yourself" container. This is where you learn <em>how.</em></p>
+    <div class="cta-wrapper">
+      <a href="YOUR_BOOKING_LINK_HERE" target="_blank" rel="noopener" class="btn">Book a Signal Clarity Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / PHOTO ============ -->
+<section>
+  <div class="container">
+    <div class="image-slot portrait" id="hero-photo">
+      <!-- Replace: add your photo with <img src="your-image.jpg" alt="Brianna Bomi"> -->
+      <span class="placeholder-text">Your photo here<br>(portrait orientation recommended)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN POINT ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">You're not confused. You're listening to too many signals at once.</h2>
+
+    <p>You know something bigger is asking to come through you.</p>
+
+    <div class="stacked-lines">
+      <p>A new direction.</p>
+      <p>A relationship shift.</p>
+      <p>A business evolution.</p>
+      <p>A body of work.</p>
+      <p>A version of your life that feels more honest than the one you keep performing.</p>
+    </div>
+
+    <p>But every time you get close to moving, the spiral starts.</p>
+
+    <div class="stacked-lines">
+      <p class="muted">Your mind builds the argument.</p>
+      <p class="muted">Your nervous system contracts.</p>
+      <p class="muted">Your protector starts pulling receipts from 2009.</p>
+      <p class="muted">Your mentor says one thing.</p>
+      <p class="muted">Your therapist says another.</p>
+      <p class="muted">Your partner has questions.</p>
+      <p class="muted">The market looks weird.</p>
+      <p class="muted">The algorithm is being a dramatic little bitch.</p>
+    </div>
+
+    <p>And suddenly, the thing you <em>knew</em> becomes the thing you're "not sure about anymore."</p>
+
+    <div class="accent-line">
+      You're not blocked because you don't have enough clarity. You're blocked because you can't tell which part of you is speaking.
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE REAL PROBLEM ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">The real problem is not self-trust.</h2>
+    <p>The real problem is <strong>discernment.</strong></p>
+
+    <p>Most people collapse every inner signal into one messy emotional soup and call it "intuition."</p>
+
+    <p>But inside you, there are different signals running at the same time:</p>
+
+    <div class="stacked-lines" style="margin:2rem 0">
+      <p><strong>Your mind</strong> is building a story.</p>
+      <p><strong>Your nervous system</strong> is trying to keep you safe.</p>
+      <p><strong>Your soul</strong> is giving you direction.</p>
+    </div>
+
+    <p>And when you don't know how to tell the difference, you start treating fear like wisdom, contraction like truth, and mental noise like divine guidance.</p>
+
+    <div class="stacked-lines">
+      <p>Cute.</p>
+      <p>Devastating.</p>
+      <p>Expensive.</p>
+    </div>
+
+    <p>Because then you start outsourcing your authority to anything that feels safer than trusting what you already know.</p>
+
+    <div class="stacked-lines">
+      <p class="muted">Your coach.</p>
+      <p class="muted">Your therapist.</p>
+      <p class="muted">Your partner.</p>
+      <p class="muted">Your team.</p>
+      <p class="muted">The market.</p>
+      <p class="muted">The algorithm.</p>
+      <p class="muted">Your nervous system's highlight reel of every time something went wrong.</p>
+    </div>
+
+    <p>And the whole time, your soul has already made the decision.</p>
+    <p>Your protection is running the veto.</p>
+  </div>
+</section>
+
+<!-- ============ RELOCATION ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">You don't need another breakthrough. You need a relocation.</h2>
+
+    <p>The quick win inside Sovereign Foundations is not some dramatic spiritual breakthrough you forget three weeks later.</p>
+
+    <p>The quick win is this:</p>
+
+    <div class="accent-line">
+      You learn to move your awareness out of your head and into the place where your soul's signal actually lives.
+    </div>
+
+    <p>Not conceptually. In your body.</p>
+
+    <div class="stacked-lines">
+      <p>You learn what your mind feels like.</p>
+      <p>You learn what contraction feels like.</p>
+      <p>You learn what the real signal feels like.</p>
+    </div>
+
+    <p>Because once you can feel the difference, you stop needing the whole damn room to validate you before you move.</p>
+
+    <p>That's where sovereignty begins.</p>
+  </div>
+</section>
+
+<!-- ============ INTRODUCING ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">Introducing</div>
+    <h2 class="section-heading">Sovereign Foundations</h2>
+
+    <p><strong>Sovereign Foundations</strong> is a 3-month private coaching container inside <strong>The Sovereign Arc</strong> for high-performing leaders who are ready to stop managing their confusion and start building from their own signal.</p>
+
+    <p>This is the foundational private container where you learn the <strong>3D Method</strong>:</p>
+
+    <div class="accent-line">
+      Discern. Design. Dismantle.
+    </div>
+
+    <p>Not as a cute framework for your Notes app. As an embodied operating system.</p>
+
+    <p>By the end of the container, you will have the tools, practices, and structure to hear yourself more clearly, recognize what is actually yours, and stop letting protection quietly run your life from the backseat.</p>
+  </div>
+</section>
+
+<!-- ============ IMAGE BREAK ============ -->
+<section style="padding:2rem 0">
+  <div class="container">
+    <div class="image-slot wide" id="lifestyle-photo">
+      <!-- Replace: lifestyle/working photo -->
+      <span class="placeholder-text">Lifestyle or working photo<br>(wide orientation)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE 3D METHOD ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">The 3D Method</div>
+    <h2 class="section-heading">Three phases. One operating system.</h2>
+
+    <!-- Phase 1 -->
+    <div class="method-card">
+      <h3>1. Discern the Signal</h3>
+      <p>This is where we separate the noise.</p>
+      <p>You'll learn the <strong>Clearing Breath</strong>, a specific practice that relocates your awareness from your cognitive mind into your heart center — where your soul's signal actually lives.</p>
+      <p>This is the foundation. Because if you keep making decisions from your head while calling it intuition, you're not being guided. You're being managed.</p>
+      <p>In this phase, you begin learning how to tell the difference between: mind chatter, nervous system contraction, protector activation, and actual soul signal.</p>
+      <p style="margin-top:1.2rem;color:var(--muted);font-style:italic">"Oh. I wasn't confused. I was listening to the wrong signal."</p>
+      <p>Exactly. Welcome home.</p>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="method-card">
+      <h3>2. Design the Vision</h3>
+      <p>Once you can hear the signal, we start translating it.</p>
+      <p>You'll move through <strong>Manifestation Science</strong> and your first <strong>Soul Sprint</strong> — a structured process for accessing the vision underneath what your mind has been trying to plan.</p>
+      <p>Not the goal you think sounds impressive. Not the strategy your nervous system picked because it feels safe. The actual direction your soul keeps pointing toward.</p>
+      <p>From there, we begin shaping that signal into something tangible. Because vision without structure is where spiritual people go to cosplay transformation.</p>
+      <p>We're not doing that here.</p>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="method-card">
+      <h3>3. Dismantle the Resistance</h3>
+      <p>Once the vision becomes real, resistance will show up. Obviously.</p>
+      <p>Your system has been organized around the old life. The old identity. The old rules. The old way of staying safe.</p>
+      <p>So when the new direction starts asking you to move, your protection will try to negotiate.</p>
+      <div class="stacked-lines" style="margin:1rem 0">
+        <p class="muted">It will call itself wisdom.</p>
+        <p class="muted">It will call itself timing.</p>
+        <p class="muted">It will call itself "I need to think about it."</p>
+        <p class="muted">It will call itself "I'm waiting for confirmation."</p>
+      </div>
+      <p>And sometimes, yes, pause is real. But sometimes the pause is fear wearing a blazer.</p>
+      <p>In this phase, we identify what is actually blocking the movement so you stop working on the wrong problem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">What's Inside</div>
+    <h2 class="section-heading">What's Included</h2>
+
+    <div class="included-item">
+      <h3>3 months of private coaching</h3>
+      <p>9 private sessions total. Three sessions per month across three months.</p>
+    </div>
+    <div class="included-item">
+      <h3>The Clearing Breath practice</h3>
+      <p>Your foundational daily practice for relocating awareness from the mind into the heart/soul signal.</p>
+    </div>
+    <div class="included-item">
+      <h3>Manifestation Science foundations</h3>
+      <p>So you understand how your thoughts, nervous system, field, and actions actually interact.</p>
+    </div>
+    <div class="included-item">
+      <h3>Your first Soul Sprint</h3>
+      <p>A guided process for accessing the deeper vision your mind may not have authored yet.</p>
+    </div>
+    <div class="included-item">
+      <h3>Introduction to the Legacy Roadmap</h3>
+      <p>The beginning of the operational structure that helps your soul's direction become something you can actually walk toward.</p>
+    </div>
+    <div class="included-item">
+      <h3>Somatic discernment work</h3>
+      <p>So you can start recognizing contraction, protection, truth, and signal in real time.</p>
+    </div>
+    <div class="included-item">
+      <h3>Assignments and integration practices</h3>
+      <p>Because we are not here to collect insights like emotional Pokémon.</p>
+    </div>
+    <div class="included-item">
+      <h3>Crisis-only voice-note access</h3>
+      <p>For moments where support is needed between sessions. 48-hour weekday response window.</p>
+    </div>
+    <div class="included-item">
+      <h3>Next-step recommendation</h3>
+      <p>At the end of the container, I'll tell you what I actually recommend next. Because I don't need you dependent on me. That's not sovereignty. That's a business model.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT HAPPENS FIRST ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">The Experience</div>
+    <h2 class="section-heading">What Happens First</h2>
+
+    <div class="timeline-block">
+      <h3>In Week 1</h3>
+      <p>You learn the Clearing Breath.</p>
+      <p>And when you do it correctly, you feel the difference. Your awareness drops out of your head and into your chest.</p>
+      <p>For many clients, this is the first time they can actually feel that there is another place to make decisions from.</p>
+      <p>Not think about it. <em>Feel it.</em></p>
+      <p>That is the "oh shit" moment.</p>
+      <div class="accent-line" style="margin-top:1.5rem">The quick win is not a breakthrough. The quick win is a relocation.</div>
+    </div>
+
+    <div class="timeline-block">
+      <h3>In Month 1</h3>
+      <p>You've completed your first sessions. You've practiced the Clearing Breath daily. You've started tracking the difference between mind, nervous system, and soul.</p>
+      <p>You move through your first Soul Sprint. And then something starts to shift.</p>
+      <p>You begin hearing what's underneath the plan your mind has been selling you. You begin noticing what is actually yours. You begin realizing how much of your life has been built around reasonable-looking protection.</p>
+      <p>And once you can feel the difference, everything downstream starts changing.</p>
+      <div class="stacked-lines">
+        <p>Your decisions.</p>
+        <p>Your relationships.</p>
+        <p>Your capacity.</p>
+        <p>Your execution.</p>
+        <p>Your ability to move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO THIS IS FOR ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">Who This Is For</h2>
+
+    <div class="qualifier">You are already successful, but something feels slightly off.</div>
+    <div class="qualifier">You've built a lot from your mind, but you can feel a deeper signal trying to come through.</div>
+    <div class="qualifier">You've done therapy, coaching, mindset work, spiritual work, or somatic work — and you're not new to your inner world.</div>
+    <div class="qualifier">You get intuitive hits, but you don't always trust them long enough to act.</div>
+    <div class="qualifier">You oscillate between clarity and collapse.</div>
+    <div class="qualifier">You overcommit because you can't always tell the difference between "this is exciting" and "this is mine."</div>
+    <div class="qualifier">You are tired of outsourcing your decisions to every voice that feels safer than your own.</div>
+    <div class="qualifier">You don't need convincing that the unseen is real. You need structure for working with it.</div>
+  </div>
+</section>
+
+<!-- ============ WHO THIS IS NOT FOR ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">Who This Is Not For</h2>
+
+    <div class="stacked-lines">
+      <p class="muted">This is not for beginners who need to be convinced that intuition, energy, or the body matter.</p>
+      <p class="muted">This is not for people looking for someone to tell them what to do forever.</p>
+      <p class="muted">This is not for people who want a coach to spiritually babysit them through every decision.</p>
+      <p class="muted">This is not for people who want ceremony without integration.</p>
+      <p class="muted">This is not for people who want to be cracked open with no re-entry plan.</p>
+      <p class="muted">This is not therapy, medical care, or crisis support.</p>
+    </div>
+
+    <p style="margin-top:1.5rem">And this is definitely not for someone who wants to stay confused because confusion is currently protecting them from movement.</p>
+
+    <p style="color:var(--muted)">No shade. Actually, some shade.</p>
+  </div>
+</section>
+
+<!-- ============ WHY THIS WORKS ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">Why This Works</h2>
+
+    <p>Most coaching containers tell you to trust yourself. But they don't teach you how to identify which "self" is speaking.</p>
+
+    <p>So you leave with a temporary high, a pretty journal entry, and the exact same decision-making pattern hiding under better language.</p>
+
+    <p>Inside Sovereign Foundations, we work differently.</p>
+
+    <div class="stacked-lines" style="margin:2rem 0">
+      <p>We don't start by arguing with your beliefs. We start by locating the contraction underneath them.</p>
+      <p>We don't treat every inner voice as truth. We discern which signal is speaking.</p>
+      <p>We don't give you vibes and call it transformation. We give you tools, practices, structure, and integration.</p>
+    </div>
+
+    <div class="accent-line">
+      Because sovereignty is not a mood. It is a capacity. And capacity is built.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLIENT RESULTS ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">Client Results</div>
+    <h2 class="section-heading">This is what is possible with the work.</h2>
+    <p style="color:var(--muted);margin-bottom:2.5rem">Not performative alignment. Actual internal reorganization.</p>
+
+    <!-- Testimonial: Theo -->
+    <div class="testimonial">
+      <p><strong>Before I was dark and empty.</strong> I didn't know where I was going, where to go, or even if I wanted to move anywhere in life at that point. It was a very dark moment and very stagnant. <strong>I thought it was crazy. I was like it's not going to work, it's impossible.</strong></p>
+      <p>For the first time I was able to do a different emotion other than be angry — that's when I locked in. I was like, what, I don't have to be mad?</p>
+      <p>My wife is more happy. Extremely happy. We communicate a ton more. She says I'm a lot more emotional, which she's not used to. Not in a bad way — like, you smile... My wife said she feels really, really safe. I said you never felt safe before? She said yes, physically. But not emotionally. And my kids say the same thing.</p>
+      <p class="attribution">— Theo</p>
+    </div>
+
+    <!-- Testimonial: Jeff -->
+    <div class="testimonial">
+      <p>I was in a little bit of a pause. I'd sort of started on a path I was excited and actively exploring but was sort of in between. I will often way overcommit myself and I knew that's not where I wanted the next period to go.</p>
+      <p>Through this work it's like being able to trust myself in areas I wouldn't have before. There are parts of me I was worried about — not showing other people, but looking at myself. We got into that stuff fast.</p>
+      <p>The Legacy Roadmap, you circling back on it and really pushing on it, taking some things off the list, smashing other parts together, that's the piece that made it stick.</p>
+      <p><strong>Brianna is very good at finding a thread and pulling on the right thread very hard. It never felt like we were wasting time.</strong></p>
+      <p class="attribution">— Jeff</p>
+    </div>
+
+    <!-- Testimonial: Kam -->
+    <div class="testimonial">
+      <p>Wow, is all I can say. I came to Bri thinking I knew what I was looking for but found something much better.</p>
+      <p>I'll be the first to say I am not the most woo-woo spiritually focused person you'll meet. Still, the energy sessions and the program opened me up to things I didn't know existed.</p>
+      <p>I've found new ways to look inside and find the "shaman" inside of me, allowing me to connect with my higher purpose and have better relationships with the ones I love.</p>
+      <p>Clarity for why you're here and what you're on this to do is priceless.</p>
+      <p>If you're type A kind of guy like myself, do yourself a favor and look inward with Bri; you won't regret it.</p>
+      <p class="attribution">— Kam Brant</p>
+    </div>
+
+    <!-- Kevin screenshot slot -->
+    <div class="image-slot screenshot" id="kevin-testimonial">
+      <!-- Replace: Kevin text screenshot -->
+      <span class="placeholder-text">Kevin testimonial screenshot<br>(text message screenshot)</span>
+    </div>
+
+    <!-- Additional testimonial images -->
+    <div class="image-slot screenshot" id="testimonial-extra-1">
+      <!-- Replace: additional testimonial screenshot -->
+      <span class="placeholder-text">Additional testimonial screenshot (optional)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COST OF STAYING ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">The Cost of Staying Where You Are</h2>
+
+    <p>Let's do the math.</p>
+
+    <p>You may already be spending:</p>
+
+    <div class="stacked-lines" style="margin:1.5rem 0">
+      <p>$10K–$20K a year on therapy you may have outgrown.</p>
+      <p>$5K–$15K a year on coaching that gives insight without infrastructure.</p>
+      <p>$3K–$10K per retreat or ceremony that opens something with no integration plan.</p>
+    </div>
+
+    <p>That's easily <strong>$20K–$45K a year</strong> trying to manage the confusion. And still making decisions from your head.</p>
+
+    <p>But the money is not the real cost.</p>
+
+    <div class="accent-line">The real cost is the life you keep almost building.</div>
+
+    <div class="stacked-lines">
+      <p class="muted">The business you almost launch.</p>
+      <p class="muted">The relationship conversation you almost have.</p>
+      <p class="muted">The direction you almost commit to.</p>
+      <p class="muted">The wrong yeses you keep saying because you can't tell what's actually yours.</p>
+    </div>
+
+    <p>A year of wrong yeses does not only waste a year. It builds a life you have to dismantle later.</p>
+
+    <p>Your soul's vision does not disappear because you keep delaying it. The gap gets wider. Quietly. In decisions that look reasonable. In opportunities that look fine. In relationships that look good enough.</p>
+
+    <p>You're not bleeding out. You're slowly leaking.</p>
+
+    <p style="color:var(--muted)">And the leak is so quiet you've mistaken it for adulthood.</p>
+  </div>
+</section>
+
+<!-- ============ INVESTMENT ============ -->
+<section>
+  <div class="container">
+    <div class="investment-box">
+      <div class="section-subhead">The Investment</div>
+      <h2>Sovereign Foundations</h2>
+      <p>A 3-month private coaching container. 9 private sessions. The Clearing Breath. Your first Soul Sprint. Introduction to the Legacy Roadmap. Somatic discernment work. Integration practices. Next-step recommendation.</p>
+      <div class="price">Four Figures</div>
+      <a href="YOUR_BOOKING_LINK_HERE" target="_blank" rel="noopener" class="btn">Book a Signal Clarity Call</a>
+      <p class="cta-subtext" style="margin:1rem auto 0">A private call to identify what's actually keeping you stuck: mind, nervous system, or soul — and determine whether Sovereign Foundations is the right next step.</p>
+    </div>
+
+    <p style="text-align:center;color:var(--muted);margin-top:1rem">Because again: dependency is not the goal. Sovereignty is.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT HAPPENS AFTER ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-heading">What Happens After Sovereign Foundations?</h2>
+
+    <p>Some clients complete Sovereign Foundations and integrate on their own. That is a successful outcome.</p>
+
+    <p>Some clients realize the work has opened a deeper arc and choose to continue into <strong>Sovereign Arc Mastery</strong> — the 12-month private container for leaders ready to build their life, business, relationships, and legacy from the signal at a much deeper level.</p>
+
+    <p>Sovereign Foundations teaches you to hear the signal.</p>
+    <p>Sovereign Arc Mastery is where you build an entire life from it.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="container">
+    <div class="section-subhead">Questions</div>
+    <h2 class="section-heading">FAQ</h2>
+
+    <div class="faq-item">
+      <h3>Is this therapy?</h3>
+      <p>No. This is coaching, spiritual development, somatic discernment, and intuitive/energetic work. It is not a replacement for therapy, medical care, mental health treatment, or crisis support. If you are in acute crisis or need clinical care, this is not the front door.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do I need to be "spiritual" for this?</h3>
+      <p>You need to be open. You do not need to identify as woo-woo. Some clients are extremely Type A and still get massive value from this work. But if you need to debate whether intuition, energy, the body, or the unseen are real, this is not the container for you.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why three months?</h3>
+      <p>Because this is foundation work. You need enough time to learn the practices, feel the signal, run the Soul Sprint, begin building the roadmap, and integrate the shift into actual life. One breakthrough is cute. A repeatable internal operating system is better.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is ceremony included?</h3>
+      <p>No. Private ceremony is not included in Sovereign Foundations. That is intentional. Ceremony without integration is irresponsible. Sovereign Foundations creates the prerequisite structure and capacity for deeper ceremonial work later.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I go straight into Sovereign Arc Mastery?</h3>
+      <p>Possibly. But for most people, Sovereign Foundations is the cleanest entry point. If your application shows that the year container is a better fit, we'll have that conversation.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What if I already know what I want?</h3>
+      <p>Then we'll find out whether it's signal, strategy, or protection wearing a cute outfit. Knowing what you want is not the same as knowing which part of you wants it. That distinction matters. A lot.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section>
+  <div class="container" style="text-align:center;padding-top:2rem;padding-bottom:4rem">
+    <h2 class="section-heading">You do not need another person telling you to trust yourself.</h2>
+
+    <p style="max-width:600px;margin:1.5rem auto">You need to learn how to hear yourself clearly enough that trust becomes inevitable.</p>
+
+    <p style="max-width:600px;margin:0 auto 1rem"><strong>That is the work of Sovereign Foundations.</strong></p>
+
+    <p style="max-width:600px;margin:0 auto 1rem;color:var(--muted);font-size:0.88rem">In this 3-month private container, you'll learn to discern the signal, design from it, and dismantle the protection patterns that have been quietly vetoing the life your soul already chose.</p>
+
+    <p style="max-width:600px;margin:0 auto 2rem;color:var(--muted);font-size:0.88rem">Not so you need me forever. So you don't.</p>
+
+    <a href="YOUR_BOOKING_LINK_HERE" target="_blank" rel="noopener" class="btn">Book a Signal Clarity Call</a>
+
+    <p class="cta-subtext" style="max-width:500px;margin:1rem auto 2.5rem">We'll look at what's actually happening underneath the confusion — whether it's mind noise, nervous system protection, or the deeper signal asking you to move.</p>
+
+    <p style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--white)">Stop pretending you can't hear yourself.</p>
+    <p style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--accent)">You can.</p>
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">You've just been listening through too much noise.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 Brianna Bomi &middot; The Sovereign Arc</p>
+  </div>
+</footer>
+
+<!-- ============ STARFIELD SCRIPT ============ -->
+<script>
+(function(){
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  const STAR_COUNT = 120;
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars(){
+    stars = [];
+    for(let i = 0; i < STAR_COUNT; i++){
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.3,
+        a: Math.random(),
+        da: (Math.random() - 0.5) * 0.008
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.da;
+      if(s.a > 1 || s.a < 0.1) s.da *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,149,107,${s.a * 0.4})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  createStars();
+  draw();
+  window.addEventListener('resize', () => { resize(); createStars(); });
+})();
+</script>
+
+<!-- ============ SCROLL ANIMATIONS ============ -->
+<script>
+(function(){
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section .container').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    observer.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>

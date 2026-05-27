@@ -6,7 +6,7 @@
 <title>Your Soul Blueprint | Brianna Bomi</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0e1a;--card:rgba(16,22,40,0.85);--card2:rgba(22,28,48,0.8);--accent:#c9956b;--accent2:#d4a574;--text:#e0dcd6;--muted:#8a8078;--white:#f5f0eb;--glow:rgba(201,149,107,0.15);--midnight:#0d1225;--deep:#111830}
+:root{--bg:#0a0e1a;--card:rgba(16,22,40,0.85);--card2:rgba(22,28,48,0.8);--accent:#c9956b;--accent2:#d4a574;--text:#e0dcd6;--muted:#d4cec7;--white:#f5f0eb;--glow:rgba(201,149,107,0.15);--midnight:#0d1225;--deep:#111830}
 html{font-size:16.2px}
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;font-weight:300;line-height:1.85;font-size:0.88rem}
@@ -29,7 +29,7 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--white);let
 .btn-outline:hover{background:var(--glow)}
 .btn-sm{padding:0.6rem 1.6rem;font-size:0.75rem}
 .form-group{margin-bottom:1.5rem}
-.form-group label{display:block;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.form-group label{display:block;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.5rem}
 .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1px solid #333;color:var(--text);padding:0.85rem 1rem;font-size:0.88rem;font-family:'Inter',sans-serif;border-radius:2px;transition:border-color 0.3s;line-height:1.7}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
 .form-group textarea{min-height:80px;resize:vertical;line-height:1.6}
@@ -1927,7 +1927,7 @@ function sendToKit(email, firstName) {
   console.log('Sending to Kit:', JSON.stringify(payload, null, 2));
 
   try {
-    fetch('/.netlify/functions/subscribe', {
+    fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -1948,7 +1948,16 @@ function sendToKit(email, firstName) {
         console.log('Kit subscription confirmed - subscriberId:', d.subscriberId, 'tagged:', d.tagged);
       } else {
         console.error('Kit subscription FAILED:', JSON.stringify(d));
-        showKitError(d.error || 'Subscription failed. Your report is still saved.');
+        var detail = '';
+        if (d.detail) {
+          if (typeof d.detail === 'object') {
+            detail = ' (' + (d.detail.message || d.detail.error || JSON.stringify(d.detail)).substring(0,120) + ')';
+          } else {
+            detail = ' (' + String(d.detail).substring(0,120) + ')';
+          }
+        }
+        if (d.status) detail += ' [HTTP ' + d.status + ']';
+        showKitError((d.error || 'Subscription failed') + detail);
       }
     })
     .catch(function(e) {

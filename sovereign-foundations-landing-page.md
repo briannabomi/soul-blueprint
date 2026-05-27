@@ -420,23 +420,42 @@ And capacity is built.
 
 # **Client Results**
 
-Clients have described this work as:
+Clients Case Studies:
 
-“Minor epiphanies on a daily basis.”
+"Before I was dark and empty. I didn't know where I was going, where to go, or even if I wanted to move anywhere in life at that point. It was a very dark moment and very stagnant...**I thought it [the work] was crazy. I was like it's not going to work, it's impossible.**
 
-“Being able to trust myself in areas I wouldn’t have before.”
+For the first time I was able to do a different emotion other than be angry — that's when I locked in. I was like, what, I don't have to be mad?
 
-“I didn’t have to think about a ton of things anymore because I actually know what it is.”
+My wife is more happy. Extremely happy. We communicate a ton more. She says I'm a lot more emotional, which she's not used to. Not in a bad way — like, you smile...My wife said she feels really, really safe. I said you never felt safe before? She said yes, physically. But not emotionally. And my kids say the same thing."— Theo
 
-“Clarity for why you’re here and what you’re on this earth to do is priceless.”
+"I was in a little bit of a pause. I'd sort of started on a path I was excited and actively exploring but was sort of in between.
 
-“Nothing short of magical and practical.”
+I will often way overcommit myself and I knew that's not where I wanted the next period to go.
 
-One client said he experienced an emotion other than anger for the first time and realized, “Wait… I don’t have to be mad?”
+I'd gotten to the point where I knew I wanted to be outside of that sort of normal standard way of looking at things.
 
-Another shared that his wife and children began feeling emotionally safer with him — not because he performed a new personality, but because something in his system finally had another channel available.
+Through this work it's like being able to trust myself in areas I wouldn't have before. There are parts of me I was worried about — not showing other people, but looking at myself. We got into that stuff fast.
 
-That’s the work.
+The Legacy Roadmap, you circling back on it and really pushing on it, taking some things off the list, smashing other parts together, that's the piece that made it stick.
+
+**Brianna is very good at finding a thread and pulling on the right thread very hard. It never felt like we were wasting time.**" — Jeff
+
+“Wow, is all I can say
+
+I came to Bri thinking I knew what I was looking for but found something much better. 
+
+I'll be the first to say I am not the most woo-woo spiritually focused person you'll meet. Still, the energy sessions and the program opened me up to things I didn't know existed. 
+
+I've found new ways to look inside and find the "shaman" inside of me, allowing me to connect with my higher purpose and have better relationships with the ones I love. 
+
+Clarity for why you're here and what you're on this to do is priceless. 
+
+If you're type A kind of guy like myself, do yourself a favor and look inward with Bri; you won't regret it.” - Kam Brant.
+
+[insert screenshot of Kevin text]
+
+
+This is what is possible with the work.
 
 Not performative alignment.
 
@@ -500,31 +519,30 @@ And the leak is so quiet you’ve mistaken it for adulthood.
 
 ## **Sovereign Foundations**
 
-3-month private coaching container
+A 3-month private coaching container inside **The Sovereign Arc** for high-performing leaders who are ready to discern the difference between their mind, their nervous system, and their soul — and finally build from the signal that is actually theirs.
 
 9 private sessions
 
-Daily foundational practice
+You leave with a daily Clearing Breath practice that relocates your awareness from cognitive noise to soul signal. Permanent skill. Five minutes a day. Works without me.
 
-Soul Sprint
+You complete a Legacy Roadmap — your three-year soul vision reverse-engineered into quarterly milestones with the operational infrastructure your life actually requires to execute it. A document, not a mood.
 
-Legacy Roadmap introduction
+The protectors that have been vetoing your next move get named, felt, and met at the somatic level — not talked through one more time. Your nervous system stops running decisions your soul has the authority to make.
 
-Somatic discernment work
+You gain a diagnostic framework for recognizing which of the three signals is speaking in any given moment — so the pattern of overthinking, second-guessing, and quietly avoiding breaks permanently, not temporarily.
 
-Integration support
+You walk out with an Integration Protocol so the work continues on its own terms after the container closes. This is a finished sentence, not a first chapter.
 
-**$6,000 paid in full**
+**The Investment** 
 
-or
+**Four Figures**
 
-**$7,500 payment plan**
 
 **[BOOK A SIGNAL CLARITY CALL]**
 
 Then under the button:
 
-**A private 30-minute call to identify what’s actually keeping you stuck: mind, nervous system, or soul — and determine whether Sovereign Foundations is the right next step.**
+**A private call to identify what’s actually keeping you stuck: mind, nervous system, or soul — and determine whether Sovereign Foundations is the right next step.**
 
 Because again: dependency is not the goal.
 
@@ -544,13 +562,7 @@ Sovereign Foundations teaches you to hear the signal.
 
 Sovereign Arc Mastery is where you build an entire life from it.
 
-But you don’t need to decide that now.
-
-Start with the foundation.
-
-Learn the signal.
-
-Then we’ll see what’s actually yours.
+If you already feel this is the path for you, and you know it's time to commit to deeper work.
 
 ---
 
