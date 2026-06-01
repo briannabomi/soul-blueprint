@@ -234,6 +234,16 @@ svg{max-width:100%!important;height:auto!important;max-height:180px!important}
 .pillar-card h4{color:#2a2520!important}
 div[style*="border-radius:50%"][style*="border:2px solid"]{border-color:#c9956b!important;box-shadow:none!important;background:#faf7f4!important}
 .report-slide:last-child{page-break-after:avoid}
+/* Override CSS variables for print (white background) */
+:root{--bg:#fff!important;--card:#faf7f4!important;--card2:#f5f0eb!important;--accent:#c9956b!important;--accent2:#b8845e!important;--text:#2a2520!important;--muted:#6a6560!important;--white:#2a2520!important;--midnight:#fff!important;--deep:#fff!important;--glow:rgba(201,149,107,0.1)!important}
+/* Synthesis + CTA inline style overrides */
+.synthesis-section div[style*="color:var(--white)"],.synthesis-section p[style*="color:var(--white)"]{color:#2a2520!important}
+.synthesis-section div[style*="color:var(--muted)"],.synthesis-section p[style*="color:var(--muted)"]{color:#6a6560!important}
+.synthesis-section div[style*="color:var(--accent)"],.synthesis-section p[style*="color:var(--accent)"],.synthesis-section h3[style*="color:var(--accent)"]{color:#c9956b!important}
+.synthesis-section div[style*="background:linear-gradient"]{background:#c9956b!important;height:1px!important}
+.synthesis-section strong{color:#2a2520!important}
+.synthesis-section em{color:#2a2520!important}
+.cta-box a.btn{display:inline-block!important;background:#c9956b!important;color:#fff!important;padding:0.7rem 2rem!important;text-decoration:none!important;border-radius:2px!important}
 }
 .loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
 .loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
