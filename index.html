@@ -248,8 +248,67 @@ div[style*="border-radius:50%"][style*="border:2px solid"]{border-color:#c9956b!
 .loc-item{padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--text);border-bottom:1px solid #333}
 .loc-item:hover,.loc-item.active{background:var(--glow);color:var(--white)}
 .loc-item .loc-country{color:var(--muted);font-size:0.75rem}
-@media(max-width:600px){.coord-grid,.ikigai-grid,.template-compare{grid-template-columns:1fr}.screen{padding:1.5rem}.form-group textarea{min-height:100px}}
-@media(max-width:400px){.nav-row{flex-direction:column-reverse;gap:0.5rem}.nav-row .btn,.nav-row .btn-outline{width:100%;text-align:center}}
+@media(max-width:600px){
+/* Layout & spacing */
+.screen{padding:1.2rem 1rem;min-height:100svh}
+.report-slide{padding:2rem 1.2rem!important}
+.accordion-body-inner{padding:1.5rem 1.2rem!important}
+.synthesis-section{padding:2rem 1.2rem!important}
+/* Grids → single column */
+.coord-grid,.ikigai-grid,.template-compare{grid-template-columns:1fr}
+/* Touch-friendly buttons (44px minimum) */
+.btn{padding:0.85rem 2rem;font-size:0.85rem;min-height:44px;width:100%}
+.btn-outline{min-height:44px}
+.btn-sm{padding:0.7rem 1.4rem;min-height:44px}
+.nav-row{flex-direction:column-reverse;gap:0.6rem}
+.nav-row .btn,.nav-row .btn-outline{width:100%;text-align:center}
+/* Forms — larger touch targets */
+.form-group input,.form-group select,.form-group textarea{font-size:16px!important;padding:0.9rem 1rem;min-height:44px}
+.form-group textarea{min-height:100px}
+.form-group select{-webkit-appearance:none;appearance:none}
+/* Location dropdown — taller touch targets */
+.loc-item{padding:0.85rem 1rem;min-height:44px}
+/* Accordion — larger tap area */
+.accordion-header{padding:1.2rem 1rem;min-height:56px}
+.accordion-header h2{font-size:1.4rem}
+.accordion-toggle{width:36px;height:36px;min-width:36px}
+/* Report typography scaling */
+.report-slide h2,.synthesis-section h2{font-size:1.8rem!important}
+.report-slide h3,.synthesis-section h3{font-size:1.1rem!important}
+/* Purpose card — breathe on small screens */
+.purpose-statement{padding:1.5rem 1.2rem!important;font-size:1.05rem!important}
+/* CTA box */
+.cta-box{padding:2rem 1.2rem!important}
+/* Coord cards */
+.coord-card{padding:1rem}
+.coord-card .value{font-size:1rem}
+/* Gene key spectrum */
+.gene-key-spectrum{flex-wrap:wrap;gap:0.3rem;padding:1rem}
+.gene-key-spectrum .shadow,.gene-key-spectrum .gift,.gene-key-spectrum .siddhi{flex:none;width:100%;text-align:left}
+.gene-key-spectrum .arrow,.gene-key-spectrum .arrow2{display:none}
+/* HD type card */
+.hd-type-card{padding:1.5rem 1.2rem}
+/* Ikigai diagram */
+.ikigai-diagram,.ikigai-container{padding:10px}
+/* Step header */
+.step-header h2{font-size:1.6rem}
+/* Welcome */
+.welcome h1{font-size:2.2rem}
+.welcome .hook{font-size:1rem}
+/* Safe area for notched phones */
+body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
+/* Prevent iOS zoom on input focus */
+input[type="text"],input[type="date"],input[type="time"],input[type="email"],select,textarea{font-size:16px!important}
+/* Divider lines in synthesis */
+.synthesis-section div[style*="height:1px"]{margin:1.8rem 0!important}
+}
+@media(max-width:400px){
+.screen{padding:1rem 0.8rem}
+.report-slide,.accordion-body-inner,.synthesis-section{padding:1.5rem 0.8rem!important}
+.welcome h1{font-size:1.9rem}
+.accordion-header h2{font-size:1.25rem}
+.cta-box{padding:1.5rem 1rem!important}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 </head>
@@ -541,7 +600,7 @@ function renderLocResults(results) {
   if (results.length === 0) { dd.style.display = 'none'; return; }
   dd.innerHTML = results.map((r, i) => {
     const region = r.adminName1 ? r.adminName1 + ', ' : '';
-    return '<div class="loc-item" onmousedown="selectLocation(' + i + ')">' +
+    return '<div class="loc-item" onmousedown="selectLocation(' + i + ')" ontouchend="event.preventDefault();selectLocation(' + i + ')">' +
       '<div>' + (r.name || '') + '</div>' +
       '<div class="loc-country">' + region + (r.countryName || '') + '</div></div>';
   }).join('');
