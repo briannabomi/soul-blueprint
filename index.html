@@ -293,6 +293,38 @@ div[style*="border-radius:50%"][style*="border:2px solid"]{border-color:#c9956b!
       <input type="hidden" id="birthLng">
       <input type="hidden" id="birthTz">
     </div>
+    <div class="form-group" id="tzRow" style="display:none">
+      <label>Timezone <span style="font-weight:400;color:var(--muted)">(auto-detected)</span></label>
+      <div style="display:flex;align-items:center;gap:0.5rem">
+        <span id="tzDisplay" style="font-size:0.95rem;color:var(--text)"></span>
+        <button type="button" class="btn-outline btn-sm" style="font-size:0.75rem;padding:0.2rem 0.6rem" onclick="showTzOverride()">Change</button>
+      </div>
+      <select id="tzOverride" style="display:none;margin-top:0.4rem;padding:0.4rem;border-radius:6px;border:1px solid var(--accent);background:var(--card);color:var(--text);font-size:0.85rem" onchange="applyTzOverride(this.value)">
+        <option value="">— Select timezone —</option>
+        <option value="Pacific/Honolulu">Hawaii (UTC-10)</option>
+        <option value="America/Anchorage">Alaska (UTC-9)</option>
+        <option value="America/Los_Angeles">Pacific (UTC-8/7)</option>
+        <option value="America/Denver">Mountain (UTC-7/6)</option>
+        <option value="America/Chicago">Central (UTC-6/5)</option>
+        <option value="America/New_York">Eastern (UTC-5/4)</option>
+        <option value="America/Halifax">Atlantic (UTC-4/3)</option>
+        <option value="America/St_Johns">Newfoundland (UTC-3:30)</option>
+        <option value="America/Sao_Paulo">Brazil (UTC-3)</option>
+        <option value="America/Argentina/Buenos_Aires">Argentina (UTC-3)</option>
+        <option value="Europe/London">UK / London (UTC+0/1)</option>
+        <option value="Europe/Paris">Central Europe (UTC+1/2)</option>
+        <option value="Europe/Athens">Eastern Europe (UTC+2/3)</option>
+        <option value="Europe/Moscow">Moscow (UTC+3)</option>
+        <option value="Asia/Dubai">Gulf (UTC+4)</option>
+        <option value="Asia/Kolkata">India (UTC+5:30)</option>
+        <option value="Asia/Bangkok">SE Asia (UTC+7)</option>
+        <option value="Asia/Shanghai">China (UTC+8)</option>
+        <option value="Asia/Tokyo">Japan / Korea (UTC+9)</option>
+        <option value="Australia/Sydney">Australia East (UTC+10/11)</option>
+        <option value="Pacific/Auckland">New Zealand (UTC+12/13)</option>
+      </select>
+      <div class="hint" id="tzHint"></div>
+    </div>
     <div class="nav-row">
       <button class="btn-outline btn-sm" onclick="goTo('s-welcome')">&larr; Back</button>
       <button class="btn" onclick="calculateAndProceed()">Calculate My Blueprint</button>
@@ -506,6 +538,79 @@ function renderLocResults(results) {
   dd.style.display = 'block';
 }
 
+// Offline timezone estimator — maps (lat, lng) to IANA timezone ID.
+// Covers every major birth-location region. No network dependency.
+function estimateTimezone(lat, lng) {
+  lat = parseFloat(lat); lng = parseFloat(lng);
+  // --- Hawaii / far-west Pacific ---
+  if (lng < -140) return 'Pacific/Honolulu';
+  // --- Americas ---
+  if (lng < -40 || (lng < -34 && lat < 10)) {
+    if (lng < -125) return 'America/Los_Angeles';
+    if (lng < -105) {
+      if (lat > 48) return 'America/Los_Angeles';  // BC / Pacific Canada
+      return 'America/Los_Angeles';
+    }
+    if (lng < -100) {
+      if (lat > 48) return 'America/Denver';        // Alberta
+      return 'America/Denver';
+    }
+    if (lng < -85) {
+      if (lat > 15) return 'America/Chicago';        // US/CA Central
+      return 'America/Mexico_City';
+    }
+    // Eastern zone: lng >= -85
+    if (lat > 47 && lng > -57 && lng < -52) return 'America/St_Johns';  // Newfoundland
+    if (lat > 44 && lng > -66 && lng < -59) return 'America/Halifax';   // Atlantic Canada
+    if (lat > 25) return 'America/New_York';          // US/CA Eastern
+    if (lat > 10) return 'America/Mexico_City';       // Caribbean / Central America
+    if (lat > -5) return 'America/Bogota';
+    if (lng > -50) return 'America/Sao_Paulo';        // Eastern Brazil
+    if (lng > -70 && lat <= -20) return 'America/Argentina/Buenos_Aires'; // Argentina/Uruguay
+    if (lat > -35) return 'America/Lima';
+    return 'America/Argentina/Buenos_Aires';
+  }
+  // --- Europe / Africa ---
+  if (lng >= -40 && lng < 40) {
+    if (lat > 35) {
+      if (lng < -5) return 'Europe/Lisbon';
+      if (lng < 1) return 'Europe/London';
+      if (lng < 16) return 'Europe/Paris';            // CET: France, Germany, Italy, Spain
+      if (lng < 30) return 'Europe/Athens';            // EET: Greece, Romania, Finland
+      return 'Europe/Moscow';
+    }
+    // Africa
+    if (lng < 15) return 'Africa/Lagos';
+    if (lng < 32) return 'Africa/Johannesburg';
+    return 'Africa/Nairobi';
+  }
+  // --- Middle East / South Asia ---
+  if (lng >= 40 && lng < 80) {
+    if (lng < 50 && lat > 30) return 'Asia/Tehran';
+    if (lng < 57) return 'Asia/Dubai';
+    if (lng < 70) return 'Asia/Karachi';
+    return 'Asia/Kolkata';
+  }
+  // --- East / Southeast Asia ---
+  if (lng >= 80 && lng < 130) {
+    if (lat > 35 && lng > 125) return 'Asia/Tokyo';
+    if (lat > 35) return 'Asia/Shanghai';
+    if (lng < 105 && lat > 5) return 'Asia/Bangkok';
+    if (lng < 105) return 'Asia/Singapore';            // Equatorial SEA: SG, MY, ID
+    if (lng < 115) return 'Asia/Singapore';
+    return 'Asia/Shanghai';
+  }
+  // --- Far East / Oceania ---
+  if (lng >= 130) {
+    if (lat > 30) return 'Asia/Tokyo';
+    if (lat > -10) return 'Asia/Manila';
+    return 'Australia/Sydney';
+  }
+  // Fallback: estimate from longitude
+  var offsetH = Math.round(lng / 15);
+  return 'Etc/GMT' + (offsetH <= 0 ? '+' : '-') + Math.abs(offsetH);
+}
+
 async function selectLocation(idx) {
   const r = locResults[idx];
   const inp = document.getElementById('birthPlace');
@@ -514,27 +619,62 @@ async function selectLocation(idx) {
   document.getElementById('birthLat').value = r.lat || '';
   document.getElementById('birthLng').value = r.lng || '';
   document.getElementById('locDropdown').style.display = 'none';
-  let tz = r.timezone?.timeZoneId || r.timezone || null;
+  // 1. Try timezone from geocoder response (GeoNames includes it)
+  var tz = r.timezone?.timeZoneId || r.timezone || null;
+  // 2. If no timezone from geocoder, estimate from coordinates (no API call)
   if (!tz && r.lat && r.lng) {
-    try {
-      const tzUrl = 'https://secure.geonames.org/timezoneJSON?lat=' + r.lat + '&lng=' + r.lng + '&username=demo';
-      const tzResp = await fetch(tzUrl);
-      const tzData = await tzResp.json();
-      tz = tzData.timezoneId || null;
-    } catch(e) { console.log('Timezone lookup failed'); }
+    tz = estimateTimezone(r.lat, r.lng);
   }
-  document.getElementById('birthTz').value = tz || Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // 3. Last resort: browser timezone
+  if (!tz) tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  document.getElementById('birthTz').value = tz;
+  // Show the detected timezone so user can verify
+  var tzDisplay = document.getElementById('tzDisplay');
+  if (tzDisplay) {
+    var friendly = tz.replace(/_/g, ' ').replace(/.*\//, '');
+    tzDisplay.textContent = friendly;
+    tzDisplay.parentElement.style.display = '';
+  }
 }
 
 function getUtcOffset(tzName, dateStr, timeStr) {
   try {
+    if (!tzName) throw new Error('No timezone');
     const [y, mo, d] = dateStr.split('-').map(Number);
     const [h, mi] = timeStr.split(':').map(Number);
     const localDate = new Date(y, mo - 1, d, h, mi);
     const target = new Date(localDate.toLocaleString('en-US', { timeZone: tzName }));
     const utc = new Date(localDate.toLocaleString('en-US', { timeZone: 'UTC' }));
-    return (utc - target) / 3600000;
-  } catch(e) { return 0; }
+    if (isNaN(target) || isNaN(utc)) throw new Error('Invalid date conversion');
+    var offset = (utc - target) / 3600000;
+    if (Math.abs(offset) > 14) throw new Error('Offset out of range: ' + offset);
+    return offset;
+  } catch(e) {
+    console.warn('Timezone conversion failed for "' + tzName + '":', e.message, '— using browser timezone');
+    // Fall back to browser timezone instead of silent 0
+    try {
+      var browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const [y, mo, d] = dateStr.split('-').map(Number);
+      const [h, mi] = timeStr.split(':').map(Number);
+      const localDate = new Date(y, mo - 1, d, h, mi);
+      const target = new Date(localDate.toLocaleString('en-US', { timeZone: browserTz }));
+      const utc = new Date(localDate.toLocaleString('en-US', { timeZone: 'UTC' }));
+      return (utc - target) / 3600000;
+    } catch(e2) { return 0; }
+  }
+}
+
+function showTzOverride() {
+  document.getElementById('tzOverride').style.display = '';
+  document.getElementById('tzHint').textContent = 'Select the timezone of your birth location at the time you were born.';
+}
+function applyTzOverride(val) {
+  if (!val) return;
+  document.getElementById('birthTz').value = val;
+  var friendly = val.replace(/_/g, ' ').replace(/.*\//, '');
+  document.getElementById('tzDisplay').textContent = friendly + ' (manual)';
+  document.getElementById('tzOverride').style.display = 'none';
+  document.getElementById('tzHint').textContent = '';
 }
 
 // ============================================================
