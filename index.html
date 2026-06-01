@@ -1241,11 +1241,11 @@ const DRIVE_MAP = {
 
 const DRIVE_LABELS = {
   guiding: 'a drive to guide others toward what they cannot yet see in themselves',
-  creating: 'a compulsion to build things that did not exist before you touched them',
+  creating: 'a need to build things that did not exist before you touched them',
   healing: 'a pull toward restoring what has been fragmented, in yourself and others',
-  connecting: 'a need to create the relational fabric that holds communities together',
+  connecting: 'a need to create the bonds that hold communities together',
   understanding: 'a hunger to decode patterns most people walk past without noticing',
-  expressing: 'a need to externalize what lives inside you so it can be witnessed',
+  expressing: 'a need to bring what lives inside you out into the open',
   structuring: 'a drive to bring order to chaos and make complex things workable',
   liberating: 'a refusal to let yourself or anyone else be smaller than they actually are'
 };
@@ -1905,6 +1905,12 @@ function renderReport() {
           <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-40px">${s.geneKey}</div>
           <h3 style="color:var(--accent);font-size:1.15rem;margin-top:0.3rem;margin-bottom:0.5rem">Your Growth Spectrum to Your Best Life</h3>
 
+          <p style="margin:0.8rem 0 0.3rem">The Life's Work gene key maps the journey from shadow to gift to siddhi.</p>
+          <p style="margin:0.3rem 0">The shadow is the unconscious pattern you're here to transform.</p>
+          <p style="margin:0.3rem 0">The gift frequency is what emerges as you transmute the shadow.</p>
+          <p style="margin:0.3rem 0">The siddhi is the super power, the highest potential expression.</p>
+          <p style="margin:0.3rem 0 1.2rem">Think of it as a spectrum you move along, not a fixed identity.</p>
+
           <div style="display:flex;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap">
             <div style="flex:1;min-width:250px;background:var(--card);border:1px solid var(--accent);border-radius:3px;padding:1.5rem;text-align:center">
               <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem">Life’s Work</div>
@@ -1932,7 +1938,7 @@ function renderReport() {
             <div class="siddhi"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem">Siddhi</div>${gk.siddhi}</div>
           </div>
 
-          <div class="insight" style="margin:1.5rem 0">The journey from ${gk.shadow.toLowerCase()} to ${gk.gift.toLowerCase()} is not a self-improvement project. Your body already knows this spectrum. The shadow shows up when your gift gets compressed by your nervous system — it’s the distorted version of the same energy. Every time you feel ${gk.shadow.toLowerCase()}, that’s not a problem. It’s a signal. Your gift of ${gk.gift.toLowerCase()} is trying to come through, and something in your system is contracting around it. <strong>The work isn’t to eliminate the shadow. It’s to notice it in your body and let the gift move.</strong></div>
+          <div class="insight" style="margin:1.5rem 0">The journey from ${gk.shadow.toLowerCase()} to ${gk.gift.toLowerCase()} is not a self-improvement project. Your body already knows this spectrum. The shadow shows up when your gift gets compressed by your nervous system — it’s the distorted version of the same energy.<br><br>Every time you feel ${gk.shadow.toLowerCase()}, that’s not a problem. It’s a signal. Your gift of ${gk.gift.toLowerCase()} is trying to come through. <strong>The work isn’t to get rid of the shadow. It’s to notice it in your body and let the gift move.</strong></div>
 
           <h3 style="margin-top:2rem">Purpose: Gene Key ${s.gkPurpose}</h3>
           <p>${gkP.theme}</p>
@@ -2069,13 +2075,17 @@ function renderReport() {
     <div class="synthesis-section energy-synthesis" id="section-synthesis">
       <div class="section-watermark" style="opacity:0.02;font-size:20rem;right:-40px">&#x2726;</div>
       <h2>${sectionGlyph('synthesis')}The Synthesis</h2>
-      <div class="subtitle">What all five systems are saying together</div>
-      <div class="display-quote"><p><span class="glow-text">Five different systems. One territory. Your soul.</span></p></div>
+      <div class="subtitle">What all five systems say about your soul's purpose</div>
 
       <p>${firstName}, here is what your body already knows but your mind hasn't organized yet:</p>
-      <p>Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> tells us your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}. Your <strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that mission: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}. Your <strong>North Node in ${s.nnSign}</strong> points to where your soul is growing: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}. Your <strong>Gene Key ${s.geneKey}</strong> maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>. And your <strong>${s.hdType}</strong> design tells your body how to move through all of it: ${s.hdStrategy.toLowerCase()}. One thread. Five confirmations.</p>
+      <p style="margin-bottom:0.3rem">Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> &mdash; your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}.</p>
+      <p style="margin-bottom:0.3rem">Your <strong>Destiny Number ${s.destinyNum}</strong> &mdash; shows how you fulfill that: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}.</p>
+      <p style="margin-bottom:0.3rem">Your <strong>North Node in ${s.nnSign}</strong> &mdash; your opportunity for spiritual growth: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}.</p>
+      <p style="margin-bottom:0.3rem">Your <strong>Gene Key ${s.geneKey}</strong> &mdash; maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>.</p>
+      <p style="margin-bottom:0.3rem">Your <strong>${s.hdType}</strong> &mdash; tells how your body moves through all of it: ${s.hdStrategy.toLowerCase()}.</p>
+      <p style="margin-top:1rem"><strong>One common theme. Five confirmations.</strong></p>
 
-      <p>None of these systems invented something about you. They named what was already running. The pattern was there before you had language for it — in the decisions you made without knowing why, in the things that kept bothering you that you couldn’t explain, in the way your body responded to certain situations long before your mind caught up.</p>
+      <p>None of these systems invented something about you. They shed light on the programs you couldn\’t name. In the decisions you made without knowing why. In the way your body responded long before your mind caught up.</p>
 
       <p style="color:var(--accent);font-family:’DM Serif Display’,serif;font-size:1.15rem;margin:1.8rem 0 0.6rem">What is your soul’s purpose?</p>
       <div class="purpose-statement">${(function() {
@@ -2085,7 +2095,7 @@ function renderReport() {
         return 'You are here ' + lpPurposeFirst + ', and to share your gift of ' + gkGift + '.';
       })()}</div>
 
-      <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. You are so close to it that it feels normal. The people around you can see it. You are the last to name it.' : 'There is a part of you that you cannot yet see clearly because you are standing inside it. It feels so normal that it looks like air. The people around you can see it. You are the last to name it.'}</p>
+      <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. It feels so normal that it looks like air. The people around you can see it. You are the last one who can name it.' : 'There is a part of you that you can\'t see clearly because you are standing in the middle of your patterns. It feels so normal that it looks like air. The people around you can see it. You are the last one who can name it.'}</p>
 
       <p>${(function() {
         var hasBuild = essenceData.coreDrives.some(function(d) { return ['structuring','creating'].indexOf(d.driveKey) !== -1; });
@@ -2094,16 +2104,17 @@ function renderReport() {
         var hasGuide = essenceData.coreDrives.some(function(d) { return ['guiding','structuring','understanding'].indexOf(d.driveKey) !== -1; });
 
         if (hasHeal) return 'Your purpose most resembles the helper-transformer path. You do orient toward what is broken and you do feel the pull to restore it. But your version is not self-sacrificing. ' + (hasBuild ? 'It is powered by a structural engine that most helpers lack. You do not just hold space. You see what is actually wrong and build something to address it.' : hasCreate ? 'It runs through a creative channel that most transformers never access. You do not just hold space. You make things that carry the transformation forward without you in the room.' : 'It is diagnostic, not devotional. You name the fracture before you address it.');
-        if (hasCreate) return 'Your purpose most resembles the creative-artist path. You do need to make things, and suppressing that need produces real distress. But your creativity is not self-referential. ' + (hasGuide ? 'It is in service of transmission. You create as a vehicle for something else: understanding, recognition, reorganization.' : 'It has a function beyond aesthetics. What you build carries information. The art is a vessel, not the destination.');
-        if (hasBuild) return 'Your purpose most resembles the builder-founder path. You do build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the container your soul\'s work requires. The business is the vehicle, not the destination.';
-        return 'Your purpose most resembles the high-achiever path. You have genuine capacity for output and follow-through. But your version of achievement is not about metrics or recognition. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would leave you productive but hollow.';
+        if (hasCreate) return 'Your purpose most resembles the creative-artist path. You need to make things, and shutting that down causes real distress. But your creativity is not about you. It\'s in service to something bigger. ' + (hasGuide ? 'You create as a vehicle for something else: understanding, recognition, reorganization.' : 'What you build carries information. The art is a vessel, not the destination.');
+        if (hasBuild) return 'Your purpose most resembles the builder-founder path. You build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the space your soul\'s work requires. The business is the vehicle, not the destination.';
+        return 'Your purpose most resembles the high-achiever path. You can produce and follow through. But your version of achievement is not about numbers or being seen. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would keep you productive but hollow.';
       })()}</p>
 
-      <div class="insight" style="margin:1.5rem 0">This report synthesizes astrology, human design, numerology, gene keys, and ikigai as a starting point for self-inquiry, not as a fixed definition of who you are.</div>
+      <div class="insight" style="margin:1.5rem 0">This report is a starting point, not a fixed definition of who you are.</div>
 
       <h3 style="margin-top:1.5rem">Professions & Industries Aligned With Your Blueprint</h3>
-      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}. ${combo ? 'Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.' : ''}</p>
-      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}${nn.careers ? '. Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
+      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
+      ${combo ? '<p style="margin-top:0.5rem">Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.</p>' : ''}
+      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}. ${nn.careers ? 'Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') + '.' : ''}</p>
     </div>
   `);
 
@@ -2112,8 +2123,9 @@ function renderReport() {
     <div class="report-slide energy-cta" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:70vh">
       <div class="cta-box" style="max-width:600px">
         <h3>Your Blueprint Is the Beginning</h3>
-        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is where <span class="glow-text">resistance</span> shows up. Where your nervous system is vetoing what your soul is asking for.</p>
-        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is a six-stage method for closing that gap. It starts with the <strong>Clearing Breath</strong>: a technique for moving your awareness out of your head and into the place where you can actually hear what’s true.</p>
+        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is what keeps you stuck.</p>
+        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is for closing that gap.</p>
+        <p style="margin-top:0.8rem">It starts with the <strong>Clearing Breath</strong>. In seconds, this technique moves your awareness out of your head and into the place where you can actually hear your soul.</p>
         <p style="margin-top:0.8rem;color:var(--accent)">If you feel seen by this blueprint, the work that created it goes deeper.</p>
         <a href="https://www.briannabomi.com" target="_blank" class="btn" style="display:inline-block;margin-top:1rem;text-decoration:none">Explore the Sovereign Arc</a>
       </div>

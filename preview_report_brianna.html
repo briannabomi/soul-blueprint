@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Blueprint — Brianna Bomi Lee</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0d; --card: #181818; --accent: #c9a96e; --accent2: #e8d5a3;
+  --white: #f0ece4; --muted: #8a8578; --text: #e0dcd4; --glow: rgba(201,169,110,0.15);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.75; }
+h2 { font-family:'DM Serif Display',serif; color:var(--accent); font-size:1.5rem; margin-bottom:0.5rem; }
+h3 { font-family:'DM Serif Display',serif; color:var(--accent); font-size:1.15rem; margin-top:1.5rem; }
+strong { font-weight:500; color:var(--white); }
+em { color:var(--accent2); }
+.report { max-width:760px; margin:0 auto; padding:2rem 1.5rem; }
+
+/* Cover */
+.cover { text-align:center; min-height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:3rem 1rem; }
+.cover h1 { font-family:'DM Serif Display',serif; font-size:2.2rem; color:var(--accent); letter-spacing:0.04em; }
+.cover .name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--white); margin-top:1rem; }
+.cover .date { color:var(--muted); font-size:0.85rem; margin-top:0.4rem; }
+.cover .brand { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:2rem; }
+
+/* Coord grid */
+.coord-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:0.8rem; margin:1.5rem 0; }
+.coord-card { background:var(--card); border:1px solid rgba(201,169,110,0.15); border-radius:3px; padding:1rem; text-align:center; cursor:pointer; transition:border-color 0.3s; }
+.coord-card:hover { border-color:var(--accent); }
+.coord-card .sys { font-size:0.55rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); }
+.coord-card .val { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--accent); margin:0.3rem 0; }
+.coord-card .gloss { font-size:0.75rem; color:var(--muted); }
+
+/* Sections */
+.section { margin:3rem 0; padding:2rem 0; border-top:1px solid rgba(201,169,110,0.08); }
+.subtitle { font-family:'Cormorant Garamond',serif; color:var(--muted); font-size:0.95rem; margin-bottom:1rem; letter-spacing:0.02em; }
+
+/* Insight boxes */
+.insight { background:rgba(201,169,110,0.06); border-left:2px solid var(--accent); padding:1rem 1.2rem; border-radius:0 3px 3px 0; font-size:0.9rem; margin:1.5rem 0; }
+
+/* Gene Key spectrum */
+.spectrum { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin:1.2rem 0; flex-wrap:wrap; }
+.spectrum .node { background:var(--card); border:1px solid rgba(201,169,110,0.2); border-radius:3px; padding:0.6rem 1.2rem; text-align:center; }
+.spectrum .node .label { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.2rem; }
+.spectrum .node .value { color:var(--accent); font-family:'DM Serif Display',serif; }
+.spectrum .arrow { color:var(--accent); font-size:1.2rem; }
+
+/* HD type card */
+.hd-card { background:var(--card); border:1px solid var(--accent); border-radius:3px; padding:1.5rem; margin:1rem 0; }
+.hd-card .type-name { font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--accent); }
+.hd-card .detail { font-size:0.9rem; margin-top:0.4rem; }
+
+/* Ikigai */
+.ikigai-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin:1rem 0; }
+.ikigai-card { background:var(--card); border:1px solid rgba(201,169,110,0.1); border-radius:3px; padding:1rem; }
+.ikigai-card h4 { font-family:'DM Serif Display',serif; color:var(--accent); font-size:0.95rem; margin-bottom:0.4rem; }
+
+/* Purpose statement */
+.purpose-statement { font-family:'DM Serif Display',serif; font-size:1.15rem; color:var(--accent); text-align:center; margin:1rem 0; padding:1rem; border:1px solid rgba(201,169,110,0.2); border-radius:3px; }
+
+/* Display quote */
+.display-quote { text-align:center; font-family:'DM Serif Display',serif; font-size:1.2rem; color:var(--accent); margin:1rem 0; }
+
+/* Definition callout */
+.definition-callout { background:rgba(201,169,110,0.05); padding:1rem 1.2rem; border-radius:3px; font-size:0.9rem; margin:1rem 0; }
+
+/* CTA */
+.cta { text-align:center; padding:3rem 1rem; min-height:50vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.cta .btn { display:inline-block; background:var(--accent); color:var(--bg); padding:0.8rem 2rem; border-radius:3px; text-decoration:none; font-weight:500; margin-top:1rem; }
+.glow-text { color:var(--accent); }
+
+p { margin-bottom:0.8rem; }
+</style>
+</head>
+<body>
+<div class="report">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="brand">Brianna Bomi &bull; Sovereign Arc</div>
+  <h1>Your Soul Blueprint</h1>
+  <div class="name">Brianna Bomi Lee</div>
+  <div class="date">August 1, 1994 &bull; 3:01 AM &bull; Newport, RI</div>
+  <div style="margin-top:2rem;display:flex;gap:1rem;font-size:1.5rem;color:var(--accent);font-family:'DM Serif Display',serif">
+    <span title="Leo">&#x264C;</span>
+    <span title="Scorpio NN">&#x264F;</span>
+  </div>
+</div>
+
+<!-- BLUEPRINT SUMMARY -->
+<div class="section">
+  <h2>Your Blueprint at a Glance</h2>
+  <div class="subtitle">The coordinates your soul chose before you arrived</div>
+  <div class="coord-grid">
+    <div class="coord-card"><div class="sys">Numerology</div><div class="val">Life Path 5</div><div class="gloss">The Freedom Seeker</div></div>
+    <div class="coord-card"><div class="sys">Numerology</div><div class="val">Destiny 3</div><div class="gloss">Creative expression</div></div>
+    <div class="coord-card"><div class="sys">Astrology</div><div class="val">Sun in Leo</div><div class="gloss">8&deg; Leo</div></div>
+    <div class="coord-card"><div class="sys">Astrology</div><div class="val">North Node</div><div class="gloss">Scorpio</div></div>
+    <div class="coord-card"><div class="sys">Gene Keys</div><div class="val">Gene Key 33</div><div class="gloss">Mindfulness</div></div>
+    <div class="coord-card"><div class="sys">Human Design</div><div class="val">Manifesting Generator</div><div class="gloss">Profile 2/2</div></div>
+  </div>
+</div>
+
+<!-- NUMEROLOGY -->
+<div class="section">
+  <h2>&#x2731; Your Numerology</h2>
+  <h3>Life Path 5 — The Freedom Seeker</h3>
+  <p>To embrace adventure, change, and new experiences. You are here to break free from limitations and help others expand beyond comfort zones.</p>
+
+  <h3>Destiny Number 3</h3>
+  <p>Through creativity, self-expression, and communication. You shine when you share your gifts, entertain, and uplift others.</p>
+
+  <div class="insight">Your Life Path + Destiny combination: A magnetic entertainer who uses storytelling, creativity, and charm to inspire.</div>
+</div>
+
+<!-- ASTROLOGY -->
+<div class="section">
+  <h2>&#x2609; Your Astrology</h2>
+  <h3>Sun in Leo (8&deg;)</h3>
+  <p>Your Sun sign represents your core identity and conscious self.</p>
+
+  <h3>North Node in Scorpio — Mastering Depth &amp; Power</h3>
+  <p><strong>Soul growth direction:</strong> Embracing depth, intensity, and rebirth.</p>
+  <p><strong>Growth edge:</strong> Releasing control, moving into spirituality, reorganizing limitations.</p>
+  <p><strong>South Node (comfort zone):</strong> Taurus: Attachment to comfort, resistance to change, materialism.</p>
+</div>
+
+<!-- GENE KEYS -->
+<div class="section">
+  <h2>&#x2726; Your Gene Keys</h2>
+  <h3 style="color:var(--accent);margin-top:0.3rem;margin-bottom:0.5rem">Your Growth Spectrum to Your Best Life</h3>
+
+  <p style="margin:0.8rem 0 0.3rem">The Life&rsquo;s Work gene key maps the journey from shadow to gift to siddhi.</p>
+  <p style="margin:0.3rem 0">The shadow is the unconscious pattern you&rsquo;re here to transform.</p>
+  <p style="margin:0.3rem 0">The gift frequency is what emerges as you transmute the shadow.</p>
+  <p style="margin:0.3rem 0">The siddhi is the super power, the highest potential expression.</p>
+  <p style="margin:0.3rem 0 1.2rem">Think of it as a spectrum you move along, not a fixed identity.</p>
+
+  <h3>Life&rsquo;s Work: Gene Key 33</h3>
+  <p>Remembering what matters. You&rsquo;re here to pay exquisite attention to the lessons life offers and share those revelations with others.</p>
+  <div class="spectrum">
+    <div class="node"><div class="label">Shadow</div><div class="value">Forgetting</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><div class="label">Gift</div><div class="value">Mindfulness</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><div class="label">Siddhi</div><div class="value">Revelation</div></div>
+  </div>
+
+  <div class="insight">The journey from forgetting to mindfulness is not a self-improvement project. Your body already knows this spectrum. The shadow shows up when your gift gets compressed by your nervous system &mdash; it&rsquo;s the distorted version of the same energy.<br><br>Every time you feel forgetting, that&rsquo;s not a problem. It&rsquo;s a signal. Your gift of mindfulness is trying to come through. <strong>The work isn&rsquo;t to get rid of the shadow. It&rsquo;s to notice it in your body and let the gift move.</strong></div>
+
+  <h3 style="margin-top:2rem">Purpose: Gene Key 2</h3>
+  <p>Finding your true direction in life. You&rsquo;re here to trust your inner compass and help others orient toward their authentic path, even when the terrain is unfamiliar.</p>
+  <div class="spectrum">
+    <div class="node"><div class="label">Shadow</div><div class="value">Dislocation</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><div class="label">Gift</div><div class="value">Orientation</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="node"><div class="label">Siddhi</div><div class="value">Unity</div></div>
+  </div>
+
+  <div class="insight">Your Purpose Key is what you naturally embody when you stop performing. When you&rsquo;re living in orientation, people feel it before you say a word. <strong>This isn&rsquo;t a skill you develop &mdash; it&rsquo;s something you stop suppressing.</strong></div>
+</div>
+
+<!-- HUMAN DESIGN -->
+<div class="section">
+  <h2>&#x2B21; Your Human Design</h2>
+  <div class="subtitle">Manifesting Generator | Profile 2/2 | The Personal Destiny</div>
+
+  <div class="hd-card">
+    <div class="type-name">Manifesting Generator</div>
+    <div class="detail"><strong>Strategy:</strong> Wait to respond, then inform</div>
+    <div class="detail"><strong>Authority:</strong> Sacral</div>
+    <div class="detail"><strong>Not-Self Theme:</strong> Frustration & Anger</div>
+    <div class="detail"><strong>Profile:</strong> 2/2</div>
+  </div>
+
+  <h3 style="margin-top:1.5rem">Your Incarnation Cross: The Personal Destiny</h3>
+  <p>Gates 33/19 | 2/1</p>
+  <div class="definition-callout">Your Incarnation Cross is a Right Angle Cross, which means you are on a deeply personal journey. Your life theme is individual-focused growth. You learn about yourself by navigating the world based on your unique design. While deeply personal, your path serves as an example for others.</div>
+  <div class="insight" style="margin:1.5rem 0">You are not meant to live for others. You thrive when you follow your own inner guidance. Your personal destiny, when fully expressed, naturally encourages those around you to embrace their own truth.</div>
+  <p><strong>Key themes:</strong> Individual-focused growth. Self-discovery that inspires others. Natural leadership and pioneering.</p>
+</div>
+
+<!-- IKIGAI -->
+<div class="section">
+  <h2>&#x2609; Your Ikigai</h2>
+  <div class="subtitle">Where purpose meets practicality</div>
+  <div class="definition-callout"><strong>Ikigai</strong> is a Japanese concept meaning &ldquo;reason for being.&rdquo; The intersection of what you love, what you&rsquo;re good at, what the world needs, and what you can be paid for. When all four overlap, purpose has infrastructure.</div>
+
+  <div class="ikigai-grid">
+    <div class="ikigai-card"><h4>What You Love</h4><p><em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em></p></div>
+    <div class="ikigai-card"><h4>What You&rsquo;re Good At</h4><p><em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em></p></div>
+    <div class="ikigai-card"><h4>What the World Needs</h4><p><em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em></p></div>
+    <div class="ikigai-card"><h4>What You Can Be Paid For</h4><p><em style="color:var(--muted)">Still blooming. Add more when the time feels right.</em></p></div>
+  </div>
+
+  <h3 style="margin-top:1.5rem;text-align:center;color:var(--accent)">Your Ikigai</h3>
+  <div class="purpose-statement">Your Ikigai is still taking shape. The more honestly you answer, the clearer it gets.</div>
+
+  <div class="insight" style="margin-top:1rem">If you feel resistance around what emerged here, that&rsquo;s normal. It&rsquo;s not the truth, it&rsquo;s the part of you that prefers the familiar. The Ikigai sits at the center of all four quadrants, and yours is starting to take shape.</div>
+</div>
+
+<!-- SYNTHESIS -->
+<div class="section" style="border-top:none">
+  <h2>&#x2726; The Synthesis</h2>
+  <div class="subtitle">What all five systems are saying together</div>
+  <div class="display-quote"><span class="glow-text">Five different systems. One territory. Your soul.</span></div>
+
+  <p>Brianna, here is what your body already knows but your mind hasn&rsquo;t organized yet:</p>
+
+  <p style="margin-bottom:0.3rem">Your <strong>Life Path 5 (The Freedom Seeker)</strong> &mdash; your soul came here to embrace adventure, change, and new experiences.</p>
+  <p style="margin-bottom:0.3rem">Your <strong>Destiny Number 3</strong> &mdash; shows how you fulfill that: through creativity, self-expression, and communication.</p>
+  <p style="margin-bottom:0.3rem">Your <strong>North Node in Scorpio</strong> &mdash; your opportunity for spiritual growth: embracing depth, intensity, and rebirth.</p>
+  <p style="margin-bottom:0.3rem">Your <strong>Gene Key 33</strong> &mdash; maps the frequency you are here to embody, from <em>forgetting</em> into <em>mindfulness</em>.</p>
+  <p style="margin-bottom:0.3rem">Your <strong>Manifesting Generator</strong> &mdash; tells how your body moves through all of it: wait to respond, then inform.</p>
+  <p style="margin-top:1rem"><strong>One common theme. Five confirmations.</strong></p>
+
+  <p style="margin-top:1.5rem">None of these systems invented something about you. They shed light on the programs you couldn&rsquo;t name. In the decisions you made without knowing why. In the way your body responded long before your mind caught up.</p>
+
+  <p style="color:var(--accent);font-family:'DM Serif Display',serif;font-size:1.15rem;margin:1.8rem 0 0.6rem">What is your soul&rsquo;s purpose?</p>
+  <div class="purpose-statement">You are here to embrace adventure, change, and new experiences, and to share your gift of mindfulness.</div>
+
+  <p style="margin-top:1.5rem">There is a part of you that you cannot yet see clearly because you are standing inside it. It feels so normal that it looks like air. The people around you can see it. You are the last to name it.</p>
+
+  <p>Your purpose most resembles the creative-artist path. You need to make things, and shutting that down causes real distress. But your creativity is not about you. It&rsquo;s in service to something bigger. You create as a vehicle for something else: understanding, recognition, reorganization.</p>
+
+  <div class="insight" style="margin:1.5rem 0">This report is a starting point, not a fixed definition of who you are.</div>
+
+  <h3 style="margin-top:1.5rem">Professions &amp; Industries Aligned With Your Blueprint</h3>
+  <p style="margin-top:1rem"><strong>Roles:</strong> Travel guide, explorer, public speaker, educator, depth coaching, spiritual practice, transformation, psychology, investing.</p>
+  <p style="margin-top:0.5rem"><strong>Industries:</strong> Tourism, media, entertainment, startups.</p>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div style="max-width:600px">
+    <h3>Your Blueprint Is the Beginning</h3>
+    <p style="margin-top:1rem">Knowing your purpose and <em>living</em> it are two different things. The gap between them is what keeps you stuck.</p>
+    <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is for closing that gap.</p>
+    <p style="margin-top:0.8rem">It starts with the <strong>Clearing Breath</strong>. In seconds, this technique moves your awareness out of your head and into the place where you can actually hear your soul.</p>
+    <p style="margin-top:0.8rem;color:var(--accent)">If you feel seen by this blueprint, the work that created it goes deeper.</p>
+    <a href="https://www.briannabomi.com" target="_blank" class="btn">Explore the Sovereign Arc</a>
+  </div>
+  <div style="margin-top:2.5rem;color:var(--muted);font-size:0.75rem">
+    <p>Generated by the Soul Blueprint Experience &bull; <span style="color:var(--accent)">Brianna Bomi</span> &bull; Sovereign Arc</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
