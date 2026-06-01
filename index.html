@@ -179,10 +179,16 @@ body{background:#fff!important;color:#2a2520!important;-webkit-print-color-adjus
 #section-humandesign{page-break-before:always}
 #section-ikigai{page-break-before:always}
 .synthesis-section{page-break-before:always}
-.report-slide[style*="min-height:80vh"]{min-height:0!important;padding:3rem 0!important;text-align:center;page-break-after:always}
-.report-slide[style*="min-height:80vh"] h1{font-size:2.4rem!important;color:#2a2520!important}
-.report-slide[style*="min-height:80vh"] .name{color:#c9956b!important;font-size:1.3rem!important}
-.report-slide[style*="min-height:80vh"] .brand,.report-slide[style*="min-height:80vh"] .shimmer-accent{color:#c9956b!important;-webkit-text-fill-color:#c9956b!important;animation:none!important}
+.report-cover{display:flex!important;min-height:0!important;background:#1a1714!important;color:#f5f0eb!important;padding:2.5rem 0!important;page-break-after:always;break-after:page;border-radius:0!important}
+.report-cover .cover-left{flex:1!important;display:flex!important;flex-direction:column!important;justify-content:center!important;padding:2rem 2.5rem!important}
+.report-cover .cover-sidebar{width:140px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;padding:1.5rem 0.8rem!important;gap:1.2rem!important;border-left:0.5px solid rgba(201,149,107,0.3)!important;background:rgba(201,149,107,0.04)!important}
+.report-cover h1{font-size:2.6rem!important;color:#f5f0eb!important;line-height:1.05!important;margin-bottom:0.3rem!important}
+.report-cover h1 span{color:#c9956b!important}
+.report-cover .name{color:#f5f0eb!important;font-size:1.3rem!important}
+.report-cover .brand,.report-cover .shimmer-accent{color:#c9956b!important;-webkit-text-fill-color:#c9956b!important;animation:none!important}
+.report-cover p{color:#a89e94!important;font-size:0.8rem!important}
+.report-cover .cover-sidebar div[style*="font-size:2rem"],.report-cover .cover-sidebar div[style*="font-size:1.3rem"]{color:rgba(201,149,107,0.6)!important}
+.report-cover .cover-sidebar div[style*="letter-spacing"]{color:#a89e94!important}
 h1,h2{color:#2a2520!important}
 h3{color:#3a3530!important}
 .report-slide h2,.accordion-body-inner h2,.synthesis-section h2{font-size:1.6rem!important;color:#2a2520!important;margin-bottom:0.3rem!important}
@@ -210,7 +216,9 @@ p{color:#2a2520!important;font-size:0.82rem!important;line-height:1.75!important
 .cta-box h3{color:#2a2520!important}
 .cta-box p{color:#4a4540!important}
 svg{max-width:100%!important;height:auto!important;max-height:180px!important}
+#section-astrology svg{max-height:220px!important;overflow:visible!important}
 .ikigai-diagram svg,.ikigai-container svg{max-height:280px!important}
+.report-cover svg{max-height:none!important}
 .section-glyph{width:22px!important;height:22px!important}
 .section-watermark{display:none!important}
 .energy-numerology,.energy-northnode,.energy-genekeys,.energy-humandesign,.energy-ikigai,.energy-synthesis{background:none!important}
@@ -1589,11 +1597,32 @@ function renderReport() {
 
   // === HEADER (always visible, not collapsible) ===
   sections.push(`
-    <div class="report-slide energy-numerology" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:80vh">
-      <div class="brand" style="margin-bottom:1.5rem"><span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</div>
-      <h1 style="font-size:2.8rem;margin-bottom:0.5rem">Your Soul Blueprint</h1>
-      <div class="name" style="font-size:1.6rem;margin-bottom:1rem">${s.name}</div>
-      <p style="color:var(--muted);font-size:0.85rem">${dateNice} &bull; ${s.timeStr} &bull; ${s.place || 'Location not specified'}</p>
+    <div class="report-cover" style="display:flex;min-height:80vh;background:var(--bg)">
+      <div class="cover-left" style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:3rem clamp(2rem,5vw,4rem)">
+        <div class="brand" style="margin-bottom:1.5rem;font-size:0.55rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--accent)"><span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</div>
+        <h1 style="font-size:clamp(2.4rem,6vw,3.2rem);margin-bottom:0.3rem;line-height:1.05;color:var(--white)">Your Soul<br><span style="color:var(--accent);font-style:italic">Blueprint</span></h1>
+        <div style="width:50px;height:2px;background:var(--accent);margin:1.5rem 0"></div>
+        <div class="name" style="font-size:1.3rem;margin-bottom:0.5rem;color:var(--white);font-family:'DM Serif Display',serif">${s.name}</div>
+        <p style="color:var(--muted);font-size:0.8rem;margin:0">${dateNice} &bull; ${s.timeStr} &bull; ${s.place || 'Location not specified'}</p>
+      </div>
+      <div class="cover-sidebar" style="width:160px;background:rgba(201,149,107,0.04);border-left:0.5px solid rgba(201,149,107,0.15);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem 1rem;gap:1.5rem">
+        <div style="text-align:center">
+          <div style="font-size:2rem;color:rgba(201,149,107,0.45);font-family:serif">${ZODIAC_SYMBOLS[s.sunSign] || ''}</div>
+          <div style="font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem">${s.sunSign} Sun</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2rem;color:rgba(201,149,107,0.45);font-family:serif">${ZODIAC_SYMBOLS[s.nnSign] || ''}</div>
+          <div style="font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem">${s.nnSign} North Node</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;color:rgba(201,149,107,0.45);font-family:'Cormorant Garamond',serif">${s.lifePath}</div>
+          <div style="font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem">Life Path</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;color:rgba(201,149,107,0.45);font-family:'Cormorant Garamond',serif">${s.geneKey}</div>
+          <div style="font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem">Gene Key</div>
+        </div>
+      </div>
     </div>
   `);
 
