@@ -1840,16 +1840,15 @@ function renderReport() {
           <div class="section-watermark" style="opacity:0.025;font-size:22rem;right:-50px">${s.lifePath}</div>
           <div class="subtitle">Life Path ${s.lifePath} + Destiny ${s.destinyNum}</div>
 
+          <p>Your Life Path Number is <em>why</em> you’re here and the core lesson your soul chose to learn in this lifetime. Your Destiny Number is <em>how</em> you fulfill that purpose.</p>
+
           <h3>Life Path ${s.lifePath}: ${lp.name}</h3>
           <p>${lp.purpose}</p>
-          <p>This isn't a personality label. It's the instruction your soul encoded into your birth date. Your body has been living this pattern for years. What's new is that now you have language for it.</p>
 
-          <h3 style="margin-top:1.5rem">Destiny Number ${s.destinyNum}: How You Fulfill Your Purpose</h3>
+          <h3 style="margin-top:1.5rem">Destiny Number ${s.destinyNum}</h3>
           <p>${dn}</p>
-          <p>You already know this about yourself. Someone describes this pattern and you nod — but there's a deeper layer you haven't named yet. Your Destiny Number isn't what you do. It's how your soul moves through the world when you stop performing.</p>
 
-          ${combo ? '<div class="insight"><strong>Your Unique Combination:</strong> You are ' + combo.charAt(0).toLowerCase() + combo.slice(1) + '.</div>' : ''}
-          <p>Your Life Path tells you <em>why</em> you’re here. Your Destiny Number tells you <em>how</em>.</p>
+          ${combo ? ‘<div class="insight"><strong>Your Unique Purpose:</strong> You are ‘ + combo.charAt(0).toLowerCase() + combo.slice(1) + ‘.</div>’ : ‘’}
           <p>If you feel tension between the two, that’s not confusion, it’s the creative friction that keeps you growing.</p>
         </div>
       </div>
@@ -2074,64 +2073,119 @@ function renderReport() {
   sections.push(`
     <div class="synthesis-section energy-synthesis" id="section-synthesis">
       <div class="section-watermark" style="opacity:0.02;font-size:20rem;right:-40px">&#x2726;</div>
-      <h2>${sectionGlyph('synthesis')}The Synthesis</h2>
-      <div class="subtitle">What all five systems say about your soul's purpose</div>
+      <h2>${sectionGlyph(‘synthesis’)}The Pattern Beneath It All</h2>
 
-      <p>${firstName}, here is what your body already knows but your mind hasn't organized yet:</p>
-      <p style="margin-bottom:0.3rem">Your <strong>Life Path ${s.lifePath} (${lp.name})</strong> &mdash; your soul came here to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split('.')[0]}.</p>
-      <p style="margin-bottom:0.3rem">Your <strong>Destiny Number ${s.destinyNum}</strong> &mdash; shows how you fulfill that: ${dn.charAt(0).toLowerCase() + dn.slice(1).split('.')[0]}.</p>
-      <p style="margin-bottom:0.3rem">Your <strong>North Node in ${s.nnSign}</strong> &mdash; your opportunity for spiritual growth: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split('.')[0]}.</p>
-      <p style="margin-bottom:0.3rem">Your <strong>Gene Key ${s.geneKey}</strong> &mdash; maps the frequency you are here to embody, from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>.</p>
-      <p style="margin-bottom:0.3rem">Your <strong>${s.hdType}</strong> &mdash; tells how your body moves through all of it: ${s.hdStrategy.toLowerCase()}.</p>
-      <p style="margin-top:1rem"><strong>One common theme. Five confirmations.</strong></p>
+      <p style="margin-top:1.2rem">Hey ${firstName},</p>
+      <p>Five different systems looked at your blueprint.</p>
+      <p style="margin-top:0.8rem">Different methodologies.<br>One message.</p>
+      <p style="margin-top:0.8rem">If this felt uncomfortably accurate, that\’s because each system was observing the same underlying pattern.</p>
+      <p style="margin-top:0.6rem;color:var(--muted)">A program you\’ve been living your entire life.</p>
 
-      <p>None of these systems invented something about you. They shed light on the programs you couldn\’t name. In the decisions you made without knowing why. In the way your body responded long before your mind caught up.</p>
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
 
-      <p style="color:var(--accent);font-family:’DM Serif Display’,serif;font-size:1.15rem;margin:1.8rem 0 0.6rem">What is your soul’s purpose?</p>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">What is your soul\’s purpose?</div>
+      </div>
+
       <div class="purpose-statement">${(function() {
         if (s.synthesizedPurpose) return s.synthesizedPurpose;
-        var lpPurposeFirst = lp.purpose.split('.')[0].toLowerCase();
+        var lpPurposeFirst = lp.purpose.split(‘.’)[0].toLowerCase();
         var gkGift = gk.gift.toLowerCase();
-        return 'You are here ' + lpPurposeFirst + ', and to share your gift of ' + gkGift + '.';
+        return ‘You are here ‘ + lpPurposeFirst + ‘, and to share your gift of ‘ + gkGift + ‘.’;
       })()}</div>
 
-      <p>${essenceData.coreDrives.length > 0 ? 'You already know you are someone who says ' + essenceData.coreDrives[0].surface.toLowerCase() + '. But there is a deeper layer you may not see yet: ' + essenceData.coreDrives[0].deeper.split('.')[0].toLowerCase() + '. It feels so normal that it looks like air. The people around you can see it. You are the last one who can name it.' : 'There is a part of you that you can\'t see clearly because you are standing in the middle of your patterns. It feels so normal that it looks like air. The people around you can see it. You are the last one who can name it.'}</p>
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
+
+      <div style="text-align:center;margin-bottom:1.8rem">
+        <div style="font-family:’DM Serif Display’,serif;font-size:1.3rem;color:var(--accent)">Your purpose most closely aligns with</div>
+        <div style="font-family:’DM Serif Display’,serif;font-size:clamp(1.6rem,4vw,2.2rem);color:var(--white);margin-top:0.4rem">${(function() {
+          var hasBuild = essenceData.coreDrives.some(function(d) { return [‘structuring’,’creating’].indexOf(d.driveKey) !== -1; });
+          var hasHeal = essenceData.coreDrives.some(function(d) { return [‘healing’,’connecting’,’liberating’].indexOf(d.driveKey) !== -1; });
+          var hasCreate = essenceData.coreDrives.some(function(d) { return [‘creating’,’expressing’].indexOf(d.driveKey) !== -1; });
+          if (hasHeal) return ‘The Helper-Transformer Path’;
+          if (hasCreate) return ‘The Creative-Artist Path’;
+          if (hasBuild) return ‘The Builder-Founder Path’;
+          return ‘The High-Achiever Path’;
+        })()}</div>
+      </div>
 
       <p>${(function() {
-        var hasBuild = essenceData.coreDrives.some(function(d) { return ['structuring','creating'].indexOf(d.driveKey) !== -1; });
-        var hasHeal = essenceData.coreDrives.some(function(d) { return ['healing','connecting','liberating'].indexOf(d.driveKey) !== -1; });
-        var hasCreate = essenceData.coreDrives.some(function(d) { return ['creating','expressing'].indexOf(d.driveKey) !== -1; });
-        var hasGuide = essenceData.coreDrives.some(function(d) { return ['guiding','structuring','understanding'].indexOf(d.driveKey) !== -1; });
+        var hasBuild = essenceData.coreDrives.some(function(d) { return [‘structuring’,’creating’].indexOf(d.driveKey) !== -1; });
+        var hasHeal = essenceData.coreDrives.some(function(d) { return [‘healing’,’connecting’,’liberating’].indexOf(d.driveKey) !== -1; });
+        var hasCreate = essenceData.coreDrives.some(function(d) { return [‘creating’,’expressing’].indexOf(d.driveKey) !== -1; });
+        var hasGuide = essenceData.coreDrives.some(function(d) { return [‘guiding’,’structuring’,’understanding’].indexOf(d.driveKey) !== -1; });
 
-        if (hasHeal) return 'Your purpose most resembles the helper-transformer path. You do orient toward what is broken and you do feel the pull to restore it. But your version is not self-sacrificing. ' + (hasBuild ? 'It is powered by a structural engine that most helpers lack. You do not just hold space. You see what is actually wrong and build something to address it.' : hasCreate ? 'It runs through a creative channel that most transformers never access. You do not just hold space. You make things that carry the transformation forward without you in the room.' : 'It is diagnostic, not devotional. You name the fracture before you address it.');
-        if (hasCreate) return 'Your purpose most resembles the creative-artist path. You need to make things, and shutting that down causes real distress. But your creativity is not about you. It\'s in service to something bigger. ' + (hasGuide ? 'You create as a vehicle for something else: understanding, recognition, reorganization.' : 'What you build carries information. The art is a vessel, not the destination.');
-        if (hasBuild) return 'Your purpose most resembles the builder-founder path. You build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the space your soul\'s work requires. The business is the vehicle, not the destination.';
-        return 'Your purpose most resembles the high-achiever path. You can produce and follow through. But your version of achievement is not about numbers or being seen. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would keep you productive but hollow.';
+        if (hasHeal) return ‘You do orient toward what is broken and you do feel the pull to restore it. But your version is not self-sacrificing. ‘ + (hasBuild ? ‘It is powered by a structural engine that most helpers lack. You do not just hold space. You see what is actually wrong and build something to address it.’ : hasCreate ? ‘It runs through a creative channel that most transformers never access. You do not just hold space. You make things that carry the transformation forward without you in the room.’ : ‘It is diagnostic, not devotional. You name the fracture before you address it.’);
+        if (hasCreate) return ‘You need to make things, and shutting that down causes real distress. But your creativity is not about you. It\’s in service to something bigger. ‘ + (hasGuide ? ‘You create as a vehicle for something else: understanding, recognition, reorganization.’ : ‘What you build carries information. The art is a vessel, not the destination.’);
+        if (hasBuild) return ‘You build things, and your nervous system requires the act of construction. But your building is not about scale or exit or market capture. It is about creating the space your soul\’s work requires. The business is the vehicle, not the destination.’;
+        return ‘You can produce and follow through. But your version of achievement is not about numbers or being seen. It is about whether the work reorganizes something that was broken. Pure achievement without soul-sourced purpose would keep you productive but hollow.’;
       })()}</p>
 
-      <div class="insight" style="margin:1.5rem 0">This report is a starting point, not a fixed definition of who you are.</div>
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
 
-      <h3 style="margin-top:1.5rem">Professions & Industries Aligned With Your Blueprint</h3>
-      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(', ')}${nn.careers ? ', ' + nn.careers.split(',').slice(0, 3).map(function(c) { return c.trim(); }).join(', ') : ''}.</p>
-      ${combo ? '<p style="margin-top:0.5rem">Your Life Path + Destiny Number combination points specifically to: ' + combo.toLowerCase() + '.</p>' : ''}
-      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(', ')}. ${nn.careers ? 'Your North Node also aligns with: ' + nn.careers.split(',').slice(0, 2).map(function(c) { return c.trim(); }).join(', ') + '.' : ''}</p>
+      <h3 style="font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem">How The Systems Connect</h3>
+
+      <p style="margin-bottom:0.6rem"><strong>Life Path ${s.lifePath}</strong> reveals your soul\’s desire to ${lp.purpose.charAt(0).toLowerCase() + lp.purpose.slice(1).split(‘.’)[0]}.</p>
+      <p style="margin-bottom:0.6rem"><strong>Destiny Number ${s.destinyNum}</strong> shows how you fulfill that purpose &mdash; ${dn.charAt(0).toLowerCase() + dn.slice(1).split(‘.’)[0]}.</p>
+      <p style="margin-bottom:0.6rem"><strong>North Node in ${s.nnSign}</strong> points toward the growth your soul is here to embrace: ${nn.purpose.charAt(0).toLowerCase() + nn.purpose.slice(1).split(‘.’)[0]}.</p>
+      <p style="margin-bottom:0.6rem"><strong>Gene Key ${s.geneKey}</strong> reveals the energy you\’re here to embody &mdash; moving from <em>${gk.shadow.toLowerCase()}</em> into <em>${gk.gift.toLowerCase()}</em>.</p>
+      <p style="margin-bottom:0"><strong>${s.hdType}</strong> shows your body moves through all of it: ${s.hdStrategy.toLowerCase()}.</p>
+
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
+
+      <p>There is a part of you that you can\’t see clearly because you\’re standing in the middle of your patterns.</p>
+      <p style="margin-top:0.8rem">It\’s like trying to read the label from inside the bottle.<br>You\’re too close to the thing you\’re trying to understand.</p>
+      <p style="margin-top:0.8rem">The people around you can often see it.<br>You\’re usually the last one to name it.</p>
+      <p style="margin-top:1.2rem">This blueprint didn\’t create your purpose.<br>It revealed what was already there.</p>
+
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
+
+      <h3 style="font-family:’DM Serif Display’,serif;font-size:1.15rem;margin-bottom:1rem">What This Means</h3>
+
+      <p>Your purpose isn\’t about becoming someone else.</p>
+      <p style="margin-top:0.6rem">It\’s about becoming more fully yourself.</p>
+      <p style="margin-top:1rem">The strongest parts of your blueprint appear when you stop chasing who you think you\’re supposed to be and start trusting the way your soul naturally moves.</p>
+      <p style="margin-top:1rem">Not every opportunity is meant for you.<br>Not every path is yours to walk.</p>
+      <p style="margin-top:1rem">The more aligned you become with your design, the easier it becomes to recognize what deserves your energy &mdash; and what doesn\’t.</p>
+
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
+
+      <h3 style="margin-top:1.5rem">Professions &amp; Industries Aligned With Your Blueprint</h3>
+      <p style="margin-top:1rem"><strong>Roles:</strong> ${lpCareers.slice(0, 4).join(‘, ‘)}${nn.careers ? ‘, ‘ + nn.careers.split(‘,’).slice(0, 3).map(function(c) { return c.trim(); }).join(‘, ‘) : ‘’}.</p>
+      ${combo ? ‘<p style="margin-top:0.5rem"><strong>Life Path + Destiny Number points to:</strong> ‘ + combo.toLowerCase() + ‘.</p>’ : ‘’}
+      <p style="margin-top:0.5rem"><strong>Industries:</strong> ${lpIndustries.join(‘, ‘)}. ${nn.careers ? ‘Your North Node also aligns with: ‘ + nn.careers.split(‘,’).slice(0, 2).map(function(c) { return c.trim(); }).join(‘, ‘) + ‘.’ : ‘’}</p>
     </div>
   `);
 
   // === CTA + SAVE (bottom) ===
   sections.push(`
-    <div class="report-slide energy-cta" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:70vh">
-      <div class="cta-box" style="max-width:600px">
-        <h3>Your Blueprint Is the Beginning</h3>
-        <p>Knowing your purpose and <em>living</em> it are two different things. The gap between them is what keeps you stuck.</p>
-        <p style="margin-top:0.8rem">The <strong>Sovereign Arc</strong> is for closing that gap.</p>
-        <p style="margin-top:0.8rem">It starts with the <strong>Clearing Breath</strong>. In seconds, this technique moves your awareness out of your head and into the place where you can actually hear your soul.</p>
-        <p style="margin-top:0.8rem;color:var(--accent)">If you feel seen by this blueprint, the work that created it goes deeper.</p>
-        <a href="https://www.briannabomi.com" target="_blank" class="btn" style="display:inline-block;margin-top:1rem;text-decoration:none">Explore the Sovereign Arc</a>
+    <div class="synthesis-section energy-synthesis" style="text-align:center">
+      <h3 style="font-family:’DM Serif Display’,serif;font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:1.2rem">Your Blueprint Is The Beginning</h3>
+      <p>Knowing your purpose and living your purpose are two completely different experiences.</p>
+      <p style="margin-top:1rem">Most people spend years collecting awareness.</p>
+      <p style="margin-top:1rem;color:var(--muted)">Another book.<br>Another podcast.<br>Another personality test.<br>Another moment where they think:</p>
+      <p style="margin-top:1rem;font-family:’DM Serif Display’,serif;font-size:1.05rem;color:var(--white);font-style:italic">&ldquo;Wow. That explains so much.&rdquo;</p>
+      <p style="margin-top:1.2rem">The self-help industry is very good at helping people understand themselves.</p>
+      <p style="margin-top:0.6rem">It\’s not nearly as good at helping them become themselves.</p>
+      <p style="margin-top:1rem">Because awareness isn\’t transformation.<br><strong>Embodiment is.</strong></p>
+      <p style="margin-top:1rem">The gap between knowing and becoming is where most people stay stuck.</p>
+
+      <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:2.5rem 0"></div>
+
+      <div class="cta-box" style="max-width:600px;margin:0 auto">
+        <h3>The Sovereign Arc Was Created To Close That Gap</h3>
+        <p>Not with endless self-analysis.</p>
+        <p style="margin-top:0.6rem">Through practice and embodiment.</p>
+        <p style="margin-top:1rem">Learning how to hear the wisdom that\’s already inside you instead of constantly looking outside yourself for answers.</p>
+        <p style="margin-top:1rem">It begins with the <strong>Clearing Breath</strong> &mdash; a simple practice that shifts your awareness out of your head and back into your body, where your deepest truth has been waiting all along.</p>
+        <p style="margin-top:1.2rem;font-style:italic">Because your soul has never stopped speaking.<br>Most people have forgotten how to listen.</p>
+        <p style="margin-top:1.2rem;color:var(--accent)">If this blueprint resonated with you, you\’re only seeing the first layer.<br>The work that created it goes much deeper.</p>
+        <a href="https://www.briannabomi.com" target="_blank" class="btn" style="display:inline-block;margin-top:1.5rem;text-decoration:none">Explore The Sovereign Arc</a>
       </div>
+
       <div style="margin-top:2.5rem">
         <button class="btn" onclick="window.print()">Save / Print Your Blueprint</button>
-        <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;font-family:'Cormorant Garamond',serif;letter-spacing:0.02em">Save this. You’ll want to come back to it.</p>
+        <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;font-family:’Cormorant Garamond’,serif;letter-spacing:0.02em">Save this. You’ll want to come back to it.</p>
       </div>
       <div style="margin-top:2rem;color:var(--muted);font-size:0.75rem">
         <p>Generated by the Soul Blueprint Experience &bull; <span class="shimmer-accent">Brianna Bomi</span> &bull; Sovereign Arc</p>

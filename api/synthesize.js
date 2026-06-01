@@ -12,7 +12,7 @@ Inputs:
 Rules:
 - Exactly ONE sentence.
 - Maximum 22 words.
-- 1st grade reading level (simple words a 6-year-old would know).
+- 5th grade reading level (simple, clear words a 10-year-old would understand).
 - No motivational language, no jargon, no filler ("powerful," "unique," "embrace your truth," etc.).
 - Calm, clear, plain. Not poetic.
 - Weave the Life Path purpose together with the Gene Key gift into a single coherent meaning.
